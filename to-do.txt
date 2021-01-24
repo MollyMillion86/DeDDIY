@@ -1,0 +1,16 @@
+DISTRUGGERE NON MORTI
+iniziativa d20 + 2 (bonus des)
+danno 1d6
+2 volte giorno
+
+ARMATURA MAGICA
++ 4 ca 
+2 ore
+
+PERGAMENA SCASSINARE
+apre qualunque porta
+
+PERGAMENA FRECCIA ACIDA DI MELF
+iniziativa 1d20 + 2 (bonus des)
+ignora armatura magica
+danno (1d6 + 2) round corrente + (1d6 + 2) round successivo

@@ -1,0 +1,147 @@
+<?php
+
+	// ini_set('display_errors', 1);
+	// error_reporting(E_ALL);
+
+	ob_start();
+	
+	include_once("../prova1/include/db2.php");
+	include_once("class/INTERAGIRE.class.php");
+
+	
+	
+	if ($_POST) {
+
+		
+		
+		
+		$param = array(
+			'db' => $db2,
+			// 'giocatore' => isset($_SESSION['giocatore']['id']) && !empty($_SESSION['giocatore']['id']) ? $_SESSION['giocatore']['id'] : $_POST['data']
+			'giocatore' => isset($_POST['data']) ? $_POST['data'] : ''
+		);
+
+		$action = new INTERAGIRE($param);
+		
+		
+		
+		switch ($_POST['action']) {
+			
+			
+			case 'logout':
+				session_start();
+				$action->logout();
+				break;
+			// btn LOGIN
+			
+			case 'login':
+				print_r($action->login());
+				// print_r($_SESSION);
+				break;
+			// btn APRI FINESTRA ATTACCO
+			
+			case 'start':
+				session_start();
+				print_r($action->start());
+				// print_r($_SESSION);
+				break;
+				
+			case 'annullaAttacco':
+				$action->annullaAttacco();
+			// btn PERSONAGGIO x ATTACCO
+			
+			case 'scegliNemico':
+				session_start();
+				$nemicoStats = $action->caricaPersonaggio($param['giocatore']);
+				print_r($nemicoStats);
+				// print_r($_SESSION);
+				break;
+			// btn AZIONE x ATTACCO	
+			
+			case 'scegliOggetto':
+			// 'data' -> 'armi'||'incantesimi'
+				session_start();
+				$oggettoStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, $_POST['data']);
+				print_r($oggettoStats);
+				// print_r($_POST['data']);
+				break;
+			
+			
+			case 'scegliAbilita':
+			// session_start();
+				// $abilitaStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, $_POST['data']);
+				$abilitaStats = $action->caricaAbilitaDaGiocatore($_SESSION['data']['giocatore']['id'], true, $tipoOggetto = false, $armaScelta = false);
+				print_r($abilitaStats);
+				// print_r($_POST['data']);
+				break;
+				
+			
+			case 'caricaArmi':
+			// case 'caricaArmi':
+				session_start();
+				$oggettoStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, false, $_POST['data']);
+				print_r($_SESSION);
+				break;
+				
+			case 'scegliArma':
+				session_start();
+				// $oggettoStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, false, $_POST['data']);
+				$oggettoStats = $action->caricaOggetto($_POST['data']);
+				$oggetto = json_decode($oggettoStats, true);
+				$test = $action->updateSessionData($_POST['data'], 'manoDestra', $oggetto['id']);
+				
+				print_r($oggettoStats);
+				
+				
+				
+				print_r($_SESSION);				
+				
+				break;
+					
+			case 'inserisciOggetto':
+				session_start();
+				$oggettoStats = $action->inserisciDM("oggetto", $_POST['data']);
+				// print_r($oggettoStats);
+				print_r($oggettoStats);
+				break;
+				case 'inserisciPersonaggio':
+				session_start();
+				$personaggioStats = $action->inserisciDM("personaggio", $_POST['data']);
+				print_r($personaggioStats);
+				break;
+			
+			case 'modifica':
+				session_start();
+				$modifica = array();
+				$modifica['personaggi'] = $action->caricaPersonaggi(true);
+				$modifica['oggetti'] = $action->caricaOggetti(true);
+				
+				$modificaJSON = json_encode($modifica);
+				
+				// print_r($action->caricaPersonaggi(true));
+				print_r($modificaJSON);
+
+				break;
+			// attacco
+			case 'attacca':
+				session_start();
+				$attacca = $action->attacca();
+				print_r($attacca);
+				break;
+			
+			// case TEST
+			case "test": 
+				session_start();
+				// $test = $action->login();
+				print_r($_SESSION);
+				break;
+		}
+		
+		
+	}
+	
+	
+	
+	
+
+?>

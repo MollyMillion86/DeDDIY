@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+<!--	<link href="../css/style.css" rel="stylesheet" type="text/css">-->
+
+	<script src="../js/jquery-3.4.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
+	
+	<!-- <script src="../js/bootstrap.js"></script> -->
+	<script src="../js/functions.js"></script>
+
+
+	
+</head>
+<body>
+	<!--
+	NOMENCLATURA
+	
+	
+	* ===========> azione/riferimento
+	link-* ======> collegamento all'azione/riferimento
+	modal-*	=====> modale che apre il contenitore del pulsante/input di azione/riferimento
+	text-* ======> input per azione/riferimento
+	lista-* ======> lista riferimento
+	-->
+	
+	
+	
+	<!-- DASHBOARD -->
+	
+	<div id="dashboard" class="column mb-10">
+	
+		<div id="top" class="row mb-20 justify-content-between no-dm">
+			
+			<!-- BARRA STATS NERA -->
+			<div class="row left width-450">
+			
+				<span id="giocatore"></span>
+				<span id="id"></span>
+				<span id="nome"></span>
+				<span id="razza"></span>
+				<span id="classe"></span>
+			
+			</div>
+			
+			
+			<!-- TASTO LOGIN -->
+			<div>
+				<span class="cursor-pointer" id="link-login" onclick="showModal('login');">LOGIN</span>
+			</div>
+			
+			
+			
+			<!-- BARRA STATS NERA -->
+			<div class="row right">
+			
+				<span class="text-danger">LIVELLO <span id="livello"></span></span>
+				<span class="text-danger">PF <span id="pf"></span></span>
+				<span class="text-danger">CA <span id="ca"></span></span>
+				<span class="text-danger">PE <span id="pe"></span></span>
+				
+
+			
+			</div>
+		
+		</div>
+		
+		<!-- BOTTONI INTERAZIONE -->
+		<div id="bottom" class="row justify-content-between">
+		
+			<div class="column left width-450">
+			
+				<div class="row left mb-10">
+			
+					<button type="button" id="link-attacca" onclick="showModal('attacca');">ATTACCA</button>
+					<button type="button" id="link-raccogli">RACCOGLI</button>
+					<button type="button" id="link-interagisci">INTERAGISCI</button>
+				
+				</div>
+				
+				<div class="row left dm">
+				
+					<button type="button" id="link-inserisci" onclick="showModal('inserisci');">INSERISCI</button>
+					<button type="button" id="test">TEST</span>
+					<button type="button" id="link-modifica" onclick="showModal('modifica');">MODIFICA</button>
+				
+				</div>
+				
+				
+			
+			</div>
+			
+			
+			
+			<!-- STATISTICHE e OGGETTI -->
+			<div class="row right">
+			
+				<div class="row right">
+				
+					<div class="column right mr-10">
+					
+						<button type="button" id="link-armi" onclick="showModal('armi');">ARMI</button>
+						<button type="button" id="link-incantesimi" onclick="showModal('incantesimi');">INCANTESIMI</button>
+						<button type="button" id="link-abilita" onclick="showModal('abilita');">ABILITA'</button>
+						<button type="button" id="link-equipaggiamento" onclick="showModal('equipaggiamento');">EQUIPAGGIAMENTO</button>
+					
+					
+					</div>
+				
+					<div class="column right text-right">
+					
+						<p>FORZA <span id="for"></span> +<span id="bonus-for">0</span></p>
+						<p>DESTREZZA <span id="des"></span> +<span id="bonus-des">0</span></p>
+						<p>COSTITUZIONE <span id="cos"></span> +<span id="bonus-cos">0</span></p>
+						<p>CARISMA <span id="car"></span> +<span id="bonus-car">0</span></p>
+						<p>INTELLIGENZA <span id="int"></span> +<span id="bonus-int">0</span></p>
+						<p>SAGGEZZA <span id="sag"></span> +<span id="bonus-sag">0</span></p>
+					
+					
+					</div>
+					
+				</div>
+			
+			
+			</div>
+		
+		</div>
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	<!-- PLAYER1 -->
+	<a href="#" class="elem player" id="player1">
+		<label for="coord1">P1</label>
+		<input type="text" id="coord1" placeholder="casella?">
+		<button id="btn1" type="button" onclick="move(this, 'player');">OK</button>
+	</a>
+	
+	<!-- PLAYER2 -->
+	<a href="#" class="elem player" id="player2">
+		<label for="coord2">P2</label>
+		<input type="text" id="coord2" placeholder="casella?">
+		<button id="btn2" type="button" onclick="move(this, 'player');">OK</button>
+	</a>
+	
+	<!-- PLAYER3 -->
+	<a href="#" class="elem player" id="player3">
+		<label for="coord3">P3</label>
+		<input type="text" id="coord3" placeholder="casella?">
+		<button id="btn3" type="button" onclick="move(this, 'player');">OK</button>
+	</a>
+	
+	<!-- PLAYER4 -->
+	<a href="#" class="elem player" id="player4">
+		<label for="coord4">P4</label>
+		<input type="text" id="coord4" placeholder="casella?">
+		<button id="btn4" type="button" onclick="move(this, 'player');">OK</button>
+	</a>
+	
+	
+	
+	<!-- NPC -->
+	<a href="#" class="elem npc enemy" id="npc5">
+		<label for="coord5">NPC1</label>
+		<input type="text" id="coord5" placeholder="casella?">
+		<button id="btn5" type="button" onclick="move(this, 'npc');">OK</button>
+	</a>
+	
+	<a href="#" class="elem npc enemy" id="npc7">
+		<label for="coord7">NPC2</label>
+		<input type="text" id="coord7" placeholder="casella?">
+		<button id="btn7" type="button" onclick="move(this, 'npc');">OK</button>
+	</a>
+	
+	
+	<!-- EXE -->
+	<a href="#" class="elem exe" id="exe6">
+		<label for="coord6">LEVA</label>
+		<input type="text" id="coord6" placeholder="casella?">
+		<button id="btn6" type="button" onclick="move(this, 'exe');">OK</button>
+	</a>
+	
+	
+	
+	
+	<!-- mappa -->
+	<img id="map" src="../img/skull-entrance-map.jpg" alt="Workplace" usemap="#workmap">
+
+	<map name="workmap"> <!-- RIGA CORRETTA -->
+		<area shape="rect" coords="0,0,60,60" alt="A1" href="#">
+		<area shape="rect" coords="60,0,120,60" alt="A2" href="#">
+		<area shape="rect" coords="120,0,180,60" alt="A3" href="#">
+		<area shape="rect" coords="180,0,240,60" alt="A4" href="#">
+		<area shape="rect" coords="240,0,300,60" alt="A5" href="#">
+		<area shape="rect" coords="300,0,360,60" alt="A6" href="#">
+		<area shape="rect" coords="360,0,420,60" alt="A7" href="#">
+		<area shape="rect" coords="420,0,480,60" alt="A8" href="#">
+		<area shape="rect" coords="480,0,640,60" alt="A9" href="#">
+		<area shape="rect" coords="540,0,700,60" alt="A10" href="#">
+		<area shape="rect" coords="600,0,760,60" alt="A11" href="#">
+		<area shape="rect" coords="660,0,820,60" alt="A12" href="#">
+		<area shape="rect" coords="720,0,880,60" alt="A13" href="#">
+		<area shape="rect" coords="780,0,940,60" alt="A14" href="#">
+		<area shape="rect" coords="840,0,1000,60" alt="A15" href="#">
+		<area shape="rect" coords="900,0,1060,60" alt="A16" href="#">
+		
+		<area shape="rect" coords="0,60,60,120" alt="B1" href="#">
+		<area shape="rect" coords="60,60,120,120" alt="B2" href="#">
+		<area shape="rect" coords="120,60,180,120" alt="B3" href="#">
+		<area shape="rect" coords="180,60,240,120" alt="B4" href="#">
+		<area shape="rect" coords="240,60,300,120" alt="B5" href="#">
+		<area shape="rect" coords="300,60,360,120" alt="B6" href="#">
+		<area shape="rect" coords="360,60,420,120" alt="B7" href="#">
+		<area shape="rect" coords="420,60,480,120" alt="B8" href="#">
+		<area shape="rect" coords="540,60,600,120" alt="B9" href="#">
+		<area shape="rect" coords="600,60,660,120" alt="B10" href="#">
+		<area shape="rect" coords="660,60,720,120" alt="B11" href="#">
+		<area shape="rect" coords="720,60,780,120" alt="B12" href="#">
+		<area shape="rect" coords="780,60,840,120" alt="B13" href="#">
+		<area shape="rect" coords="840,60,900,120" alt="B14" href="#">
+		<area shape="rect" coords="900,60,960,120" alt="B15" href="#">
+		<area shape="rect" coords="960,60,1020,120" alt="B16" href="#">
+		
+		<area shape="rect" coords="0,120,60,180" alt="C1" href="#">
+		<area shape="rect" coords="60,120,120,180" alt="C2" href="#">
+		<area shape="rect" coords="120,120,180,180" alt="C3" href="#">
+		<area shape="rect" coords="180,120,240,180" alt="C4" href="#">
+		<area shape="rect" coords="240,120,300,180" alt="C5" href="#">
+		<area shape="rect" coords="300,120,360,180" alt="C6" href="#">
+		<area shape="rect" coords="360,120,420,180" alt="C7" href="#">
+		<area shape="rect" coords="420,120,480,180" alt="C8" href="#">
+		<area shape="rect" coords="540,120,600,180" alt="C9" href="#">
+		<area shape="rect" coords="600,120,660,180" alt="C10" href="#">
+		<area shape="rect" coords="660,120,720,180" alt="C11" href="#">
+		<area shape="rect" coords="720,120,780,180" alt="C12" href="#">
+		<area shape="rect" coords="780,120,840,180" alt="C13" href="#">
+		<area shape="rect" coords="840,120,900,180" alt="C14" href="#">
+		<area shape="rect" coords="900,120,960,180" alt="C15" href="#">
+		<area shape="rect" coords="960,120,1020,180" alt="C16" href="#">
+		
+		<area shape="rect" coords="0,180,60,240" alt="D1" href="#">
+		<area shape="rect" coords="60,180,120,240" alt="D2" href="#">
+		<area shape="rect" coords="120,180,180,240" alt="D3" href="#">
+		<area shape="rect" coords="180,180,240,240" alt="D4" href="#">
+		<area shape="rect" coords="240,180,300,240" alt="D5" href="#">
+		<area shape="rect" coords="300,180,360,240" alt="D6" href="#">
+		<area shape="rect" coords="360,180,420,240" alt="D7" href="#">
+		<area shape="rect" coords="420,180,480,240" alt="D8" href="#">
+		<area shape="rect" coords="540,180,600,240" alt="D9" href="#">
+		<area shape="rect" coords="600,180,660,240" alt="D10" href="#">
+		<area shape="rect" coords="660,180,720,240" alt="D11" href="#">
+		<area shape="rect" coords="720,180,780,240" alt="D12" href="#">
+		<area shape="rect" coords="780,180,840,240" alt="D13" href="#">
+		<area shape="rect" coords="840,180,900,240" alt="D14" href="#">
+		<area shape="rect" coords="900,180,960,240" alt="D15" href="#">
+		<area shape="rect" coords="960,180,1020,240" alt="D16" href="#">
+		
+		<area shape="rect" coords="0,240,60,300" alt="E1" href="#">
+		<area shape="rect" coords="60,240,120,300" alt="E2" href="#">
+		<area shape="rect" coords="120,240,180,300" alt="E3" href="#">
+		<area shape="rect" coords="180,240,240,300" alt="E4" href="#">
+		<area shape="rect" coords="240,240,300,300" alt="E5" href="#">
+		<area shape="rect" coords="300,240,360,300" alt="E6" href="#">
+		<area shape="rect" coords="360,240,420,300" alt="E7" href="#">
+		<area shape="rect" coords="420,240,480,300" alt="E8" href="#">
+		<area shape="rect" coords="540,240,600,300" alt="E9" href="#">
+		<area shape="rect" coords="600,240,660,300" alt="E10" href="#">
+		<area shape="rect" coords="660,240,720,300" alt="E11" href="#">
+		<area shape="rect" coords="720,240,780,300" alt="E12" href="#">
+		<area shape="rect" coords="780,240,840,300" alt="E13" href="#">
+		<area shape="rect" coords="840,240,900,300" alt="E14" href="#">
+		<area shape="rect" coords="900,240,960,300" alt="E15" href="#">
+		<area shape="rect" coords="960,240,1020,300" alt="E16" href="#">
+		
+		<area shape="rect" coords="0,300,60,360" alt="F1" href="#">
+		<area shape="rect" coords="60,300,120,360" alt="F2" href="#">
+		<area shape="rect" coords="120,300,180,360" alt="F3" href="#">
+		<area shape="rect" coords="180,300,240,360" alt="F4" href="#">
+		<area shape="rect" coords="240,300,300,360" alt="F5" href="#">
+		<area shape="rect" coords="300,300,360,360" alt="F6" href="#">
+		<area shape="rect" coords="360,300,420,360" alt="F7" href="#">
+		<area shape="rect" coords="420,300,480,360" alt="F8" href="#">
+		<area shape="rect" coords="540,300,600,360" alt="F9" href="#">
+		<area shape="rect" coords="600,300,660,360" alt="F10" href="#">
+		<area shape="rect" coords="660,300,720,360" alt="F11" href="#">
+		<area shape="rect" coords="720,300,780,360" alt="F12" href="#">
+		<area shape="rect" coords="780,300,840,360" alt="F13" href="#">
+		<area shape="rect" coords="840,300,900,360" alt="F14" href="#">
+		<area shape="rect" coords="900,300,960,360" alt="F15" href="#">
+		<area shape="rect" coords="960,300,1020,360" alt="F16" href="#">
+
+		<area shape="rect" coords="0,360,60,400" alt="G1" href="#">
+		<area shape="rect" coords="60,360,120,400" alt="G2" href="#">
+		<area shape="rect" coords="120,360,180,400" alt="G3" href="#">
+		<area shape="rect" coords="180,360,240,400" alt="G4" href="#">
+		<area shape="rect" coords="240,360,300,400" alt="G5" href="#">
+		<area shape="rect" coords="300,360,360,400" alt="G6" href="#">
+		<area shape="rect" coords="360,360,420,400" alt="G7" href="#">
+		<area shape="rect" coords="420,360,480,400" alt="G8" href="#">
+		<area shape="rect" coords="540,360,600,400" alt="G9" href="#">
+		<area shape="rect" coords="600,360,660,400" alt="G10" href="#">
+		<area shape="rect" coords="660,360,720,400" alt="G11" href="#">
+		<area shape="rect" coords="720,360,780,400" alt="G12" href="#">
+		<area shape="rect" coords="780,360,840,400" alt="G13" href="#">
+		<area shape="rect" coords="840,360,900,400" alt="G14" href="#">
+		<area shape="rect" coords="900,360,960,400" alt="G15" href="#">
+		<area shape="rect" coords="960,360,1020,400" alt="G16" href="#">
+		
+		<area shape="rect" coords="0,400,60,460" alt="H1" href="#">
+		<area shape="rect" coords="60,400,120,460" alt="H2" href="#">
+		<area shape="rect" coords="120,400,180,460" alt="H3" href="#">
+		<area shape="rect" coords="180,400,240,460" alt="H4" href="#">
+		<area shape="rect" coords="240,400,300,460" alt="H5" href="#">
+		<area shape="rect" coords="300,400,360,460" alt="H6" href="#">
+		<area shape="rect" coords="360,400,420,460" alt="H7" href="#">
+		<area shape="rect" coords="420,400,480,460" alt="H8" href="#">
+		<area shape="rect" coords="540,400,600,460" alt="H9" href="#">
+		<area shape="rect" coords="600,400,660,360" alt="H10" href="#">
+		<area shape="rect" coords="660,400,720,460" alt="H11" href="#">
+		<area shape="rect" coords="720,400,780,460" alt="H12" href="#">
+		<area shape="rect" coords="780,400,840,360" alt="H13" href="#">
+		<area shape="rect" coords="840,400,900,460" alt="H14" href="#">
+		<area shape="rect" coords="900,400,960,460" alt="H15" href="#">
+		<area shape="rect" coords="960,400,1020,460" alt="H16" href="#">
+
+		<area shape="rect" coords="0,460,60,520" alt="I1" href="#">
+		<area shape="rect" coords="60,460,120,520" alt="I2" href="#">
+		<area shape="rect" coords="120,460,180,520" alt="I3" href="#">
+		<area shape="rect" coords="180,460,240,520" alt="I4" href="#">
+		<area shape="rect" coords="240,460,300,520" alt="I5" href="#">
+		<area shape="rect" coords="300,460,360,520" alt="I6" href="#">
+		<area shape="rect" coords="360,460,420,520" alt="I7" href="#">
+		<area shape="rect" coords="420,460,480,520" alt="I8" href="#">
+		<area shape="rect" coords="540,460,600,520" alt="I9" href="#">
+		<area shape="rect" coords="600,460,660,520" alt="I10" href="#">
+		<area shape="rect" coords="660,460,720,520" alt="I11" href="#">
+		<area shape="rect" coords="720,460,780,520" alt="I12" href="#">
+		<area shape="rect" coords="780,460,840,520" alt="I13" href="#">
+		<area shape="rect" coords="840,460,900,520" alt="I14" href="#">
+		<area shape="rect" coords="900,460,960,520" alt="I15" href="#">
+		<area shape="rect" coords="960,460,1020,520" alt="I16" href="#">
+
+		<area shape="rect" coords="0,520,60,580" alt="L1" href="#">
+		<area shape="rect" coords="60,520,120,580" alt="L2" href="#">
+		<area shape="rect" coords="120,520,180,580" alt="L3" href="#">
+		<area shape="rect" coords="180,520,240,580" alt="L4" href="#">
+		<area shape="rect" coords="240,520,300,580" alt="L5" href="#">
+		<area shape="rect" coords="300,520,360,580" alt="L6" href="#">
+		<area shape="rect" coords="360,520,420,580" alt="L7" href="#">
+		<area shape="rect" coords="420,520,480,580" alt="L8" href="#">
+		<area shape="rect" coords="540,520,600,580" alt="L9" href="#">
+		<area shape="rect" coords="600,520,660,580" alt="L10" href="#">
+		<area shape="rect" coords="660,520,720,580" alt="L11" href="#">
+		<area shape="rect" coords="720,520,780,580" alt="L12" href="#">
+		<area shape="rect" coords="780,520,840,580" alt="L13" href="#">
+		<area shape="rect" coords="840,520,900,580" alt="L14" href="#">
+		<area shape="rect" coords="900,520,960,580" alt="L15" href="#">
+		<area shape="rect" coords="960,520,1020,580" alt="L16" href="#">
+		
+		<area shape="rect" coords="0,660,60,720" alt="M1" href="#">
+		<area shape="rect" coords="60,660,120,720" alt="M2" href="#">
+		<area shape="rect" coords="120,660,180,720" alt="M3" href="#">
+		<area shape="rect" coords="180,660,240,720" alt="M4" href="#">
+		<area shape="rect" coords="240,660,300,720" alt="M5" href="#">
+		<area shape="rect" coords="300,660,360,720" alt="M6" href="#">
+		<area shape="rect" coords="360,660,420,720" alt="M7" href="#">
+		<area shape="rect" coords="420,660,480,720" alt="M8" href="#">
+		<area shape="rect" coords="540,660,600,720" alt="M9" href="#">
+		<area shape="rect" coords="600,660,660,720" alt="M10" href="#">
+		<area shape="rect" coords="660,660,720,720" alt="M11" href="#">
+		<area shape="rect" coords="720,660,780,720" alt="M12" href="#">
+		<area shape="rect" coords="780,660,840,720" alt="M13" href="#">
+		<area shape="rect" coords="840,660,900,720" alt="M14" href="#">
+		<area shape="rect" coords="900,660,960,720" alt="M15" href="#">
+		<area shape="rect" coords="960,660,1020,720" alt="M16" href="#">
+		
+		<area shape="rect" coords="0,720,60,780" alt="N1" href="#">
+		<area shape="rect" coords="60,720,120,780" alt="N2" href="#">
+		<area shape="rect" coords="120,720,180,780" alt="N3" href="#">
+		<area shape="rect" coords="180,720,240,780" alt="N4" href="#">
+		<area shape="rect" coords="240,720,300,780" alt="N5" href="#">
+		<area shape="rect" coords="300,720,360,780" alt="N6" href="#">
+		<area shape="rect" coords="360,720,420,780" alt="N7" href="#">
+		<area shape="rect" coords="420,720,480,780" alt="N8" href="#">
+		<area shape="rect" coords="540,720,600,780" alt="N9" href="#">
+		<area shape="rect" coords="600,720,660,780" alt="N10" href="#">
+		<area shape="rect" coords="660,720,720,780" alt="N11" href="#">
+		<area shape="rect" coords="720,720,780,780" alt="N12" href="#">
+		<area shape="rect" coords="780,720,840,780" alt="N13" href="#">
+		<area shape="rect" coords="840,720,900,780" alt="N14" href="#">
+		<area shape="rect" coords="900,720,960,780" alt="N15" href="#">
+		<area shape="rect" coords="960,720,1020,780" alt="N16" href="#">
+		
+		<area shape="rect" coords="0,780,60,840" alt="O1" href="#">
+		<area shape="rect" coords="60,780,120,840" alt="O2" href="#">
+		<area shape="rect" coords="120,780,180,840" alt="O3" href="#">
+		<area shape="rect" coords="180,780,240,840" alt="O4" href="#">
+		<area shape="rect" coords="240,780,300,840" alt="O5" href="#">
+		<area shape="rect" coords="300,780,360,840" alt="O6" href="#">
+		<area shape="rect" coords="360,780,420,840" alt="O7" href="#">
+		<area shape="rect" coords="420,780,480,840" alt="O8" href="#">
+		<area shape="rect" coords="540,780,600,840" alt="O9" href="#">
+		<area shape="rect" coords="600,780,660,840" alt="O10" href="#">
+		<area shape="rect" coords="660,780,720,840" alt="O11" href="#">
+		<area shape="rect" coords="720,780,780,840" alt="O12" href="#">
+		<area shape="rect" coords="780,780,840,840" alt="O13" href="#">
+		<area shape="rect" coords="840,780,900,840" alt="O14" href="#">
+		<area shape="rect" coords="900,780,960,840" alt="O15" href="#">
+		<area shape="rect" coords="960,780,1020,840" alt="O16" href="#">
+		
+		<area shape="rect" coords="0,840,60,900" alt="P1" href="#">
+		<area shape="rect" coords="60,840,120,900" alt="P2" href="#">
+		<area shape="rect" coords="120,840,180,900" alt="P3" href="#">
+		<area shape="rect" coords="180,840,240,900" alt="P4" href="#">
+		<area shape="rect" coords="240,840,300,900" alt="P5" href="#">
+		<area shape="rect" coords="300,840,360,900" alt="P6" href="#">
+		<area shape="rect" coords="360,840,420,900" alt="P7" href="#">
+		<area shape="rect" coords="420,840,480,900" alt="P8" href="#">
+		<area shape="rect" coords="540,840,600,900" alt="P9" href="#">
+		<area shape="rect" coords="600,840,660,900" alt="P10" href="#">
+		<area shape="rect" coords="660,840,720,900" alt="P11" href="#">
+		<area shape="rect" coords="720,840,780,900" alt="P12" href="#">
+		<area shape="rect" coords="780,840,840,900" alt="P13" href="#">
+		<area shape="rect" coords="840,840,900,900" alt="P14" href="#">
+		<area shape="rect" coords="900,840,960,900" alt="P15" href="#">
+		<area shape="rect" coords="960,840,1020,900" alt="P16" href="#">
+
+		<area shape="rect" coords="0,900,60,960" alt="Q1" href="#">
+		<area shape="rect" coords="60,900,120,960" alt="Q2" href="#">
+		<area shape="rect" coords="120,900,180,960" alt="Q3" href="#">
+		<area shape="rect" coords="180,900,240,960" alt="Q4" href="#">
+		<area shape="rect" coords="240,900,300,960" alt="Q5" href="#">
+		<area shape="rect" coords="300,900,360,960" alt="Q6" href="#">
+		<area shape="rect" coords="360,900,420,960" alt="Q7" href="#">
+		<area shape="rect" coords="420,900,480,960" alt="Q8" href="#">
+		<area shape="rect" coords="540,900,600,960" alt="Q9" href="#">
+		<area shape="rect" coords="600,900,660,960" alt="Q10" href="#">
+		<area shape="rect" coords="660,900,720,960" alt="Q11" href="#">
+		<area shape="rect" coords="720,900,780,960" alt="Q12" href="#">
+		<area shape="rect" coords="780,900,840,960" alt="Q13" href="#">
+		<area shape="rect" coords="840,900,900,960" alt="Q14" href="#">
+		<area shape="rect" coords="900,900,960,960" alt="Q15" href="#">
+		<area shape="rect" coords="960,900,1020,960" alt="Q16" href="#">
+		
+		<area shape="rect" coords="0,960,60,1020" alt="R1" href="#">
+		<area shape="rect" coords="60,960,120,1020" alt="R2" href="#">
+		<area shape="rect" coords="120,960,180,1020" alt="R3" href="#">
+		<area shape="rect" coords="180,960,240,1020" alt="R4" href="#">
+		<area shape="rect" coords="240,960,300,1020" alt="R5" href="#">
+		<area shape="rect" coords="300,960,360,1020" alt="R6" href="#">
+		<area shape="rect" coords="360,960,420,1020" alt="R7" href="#">
+		<area shape="rect" coords="420,960,480,1020" alt="R8" href="#">
+		<area shape="rect" coords="540,960,600,1020" alt="R9" href="#">
+		<area shape="rect" coords="600,960,660,1020" alt="R10" href="#">
+		<area shape="rect" coords="660,960,720,1020" alt="R11" href="#">
+		<area shape="rect" coords="720,960,780,1020" alt="R12" href="#">
+		<area shape="rect" coords="780,960,840,1020" alt="R13" href="#">
+		<area shape="rect" coords="840,960,900,1020" alt="R14" href="#">
+		<area shape="rect" coords="900,960,960,1020" alt="R15" href="#">
+		<area shape="rect" coords="960,960,1020,1020" alt="R16" href="#">
+
+		<area shape="rect" coords="0,1020,60,1080" alt="S1" href="#">
+		<area shape="rect" coords="60,1020,120,1080" alt="S2" href="#">
+		<area shape="rect" coords="120,1020,180,1080" alt="S3" href="#">
+		<area shape="rect" coords="180,1020,240,1080" alt="S4" href="#">
+		<area shape="rect" coords="240,1020,300,1080" alt="S5" href="#">
+		<area shape="rect" coords="300,1020,360,1080" alt="S6" href="#">
+		<area shape="rect" coords="360,1020,420,1080" alt="S7" href="#">
+		<area shape="rect" coords="420,1020,480,1080" alt="S8" href="#">
+		<area shape="rect" coords="540,1020,600,1080" alt="S9" href="#">
+		<area shape="rect" coords="600,1020,660,1080" alt="S10" href="#">
+		<area shape="rect" coords="660,1020,720,1080" alt="S11" href="#">
+		<area shape="rect" coords="720,1020,780,1080" alt="S12" href="#">
+		<area shape="rect" coords="780,1020,840,1080" alt="S13" href="#">
+		<area shape="rect" coords="840,1020,900,1080" alt="S14" href="#">
+		<area shape="rect" coords="900,1020,960,1080" alt="S15" href="#">
+		<area shape="rect" coords="960,1020,1020,1080" alt="S16" href="#">
+
+		<area shape="rect" coords="0,1080,60,1140" alt="T1" href="#">
+		<area shape="rect" coords="60,1080,120,1140" alt="T2" href="#">
+		<area shape="rect" coords="120,1080,180,1140" alt="T3" href="#">
+		<area shape="rect" coords="180,1080,240,1140" alt="T4" href="#">
+		<area shape="rect" coords="240,1080,300,1140" alt="T5" href="#">
+		<area shape="rect" coords="300,1080,360,1140" alt="T6" href="#">
+		<area shape="rect" coords="360,1080,420,1140" alt="T7" href="#">
+		<area shape="rect" coords="420,1080,480,1140" alt="T8" href="#">
+		<area shape="rect" coords="540,1080,600,1140" alt="T9" href="#">
+		<area shape="rect" coords="600,1080,660,1140" alt="T10" href="#">
+		<area shape="rect" coords="660,1080,720,1140" alt="T11" href="#">
+		<area shape="rect" coords="720,1080,780,1140" alt="T12" href="#">
+		<area shape="rect" coords="780,1080,840,1140" alt="T13" href="#">
+		<area shape="rect" coords="840,1080,900,1140" alt="T14" href="#">
+		<area shape="rect" coords="900,1080,960,1140" alt="T15" href="#">
+		<area shape="rect" coords="960,1080,1020,1140" alt="T16" href="#">
+
+		<area shape="rect" coords="0,1140,60,1200" alt="U1" href="#">
+		<area shape="rect" coords="60,1140,120,1200" alt="U2" href="#">
+		<area shape="rect" coords="120,1140,180,1200" alt="U3" href="#">
+		<area shape="rect" coords="180,1140,240,1200" alt="U4" href="#">
+		<area shape="rect" coords="240,1140,300,1200" alt="U5" href="#">
+		<area shape="rect" coords="300,1140,360,1200" alt="U6" href="#">
+		<area shape="rect" coords="360,1140,420,1200" alt="U7" href="#">
+		<area shape="rect" coords="420,1140,480,1200" alt="U8" href="#">
+		<area shape="rect" coords="540,1140,600,1200" alt="U9" href="#">
+		<area shape="rect" coords="600,1140,660,1200" alt="U10" href="#">
+		<area shape="rect" coords="660,1140,720,1200" alt="U11" href="#">
+		<area shape="rect" coords="720,1140,780,1200" alt="U12" href="#">
+		<area shape="rect" coords="780,1140,840,1200" alt="U13" href="#">
+		<area shape="rect" coords="840,1140,900,1200" alt="U14" href="#">
+		<area shape="rect" coords="900,1140,960,1200" alt="U15" href="#">
+		<area shape="rect" coords="960,1140,1020,1200" alt="U16" href="#">
+
+		<area shape="rect" coords="0,1200,60,1260" alt="V1" href="#">
+		<area shape="rect" coords="60,1200,120,1260" alt="V2" href="#">
+		<area shape="rect" coords="120,1200,180,1260" alt="V3" href="#">
+		<area shape="rect" coords="180,1200,240,1260" alt="V4" href="#">
+		<area shape="rect" coords="240,1200,300,1260" alt="V5" href="#">
+		<area shape="rect" coords="300,1200,360,1260" alt="V6" href="#">
+		<area shape="rect" coords="360,1200,420,1260" alt="V7" href="#">
+		<area shape="rect" coords="420,1200,480,1260" alt="V8" href="#">
+		<area shape="rect" coords="540,1200,600,1260" alt="V9" href="#">
+		<area shape="rect" coords="600,1200,660,1260" alt="V10" href="#">
+		<area shape="rect" coords="660,1200,720,1260" alt="V11" href="#">
+		<area shape="rect" coords="720,1200,780,1260" alt="V12" href="#">
+		<area shape="rect" coords="780,1200,840,1260" alt="V13" href="#">
+		<area shape="rect" coords="840,1200,900,1260" alt="V14" href="#">
+		<area shape="rect" coords="900,1200,960,1260" alt="V15" href="#">
+		<area shape="rect" coords="960,1200,1020,1260" alt="V16" href="#">
+	</map>
+	
+	
+	
+	<!-- LOGIN -->
+	<div id="modal-login" class="hide">
+		<span class="chiudi" onclick="closeModal('login')">X</span>
+		<p>Nome giocatore</p>
+		<input type="text" id="text-login" name="login">
+		<button type="button" id="login" onclick="closeModal('login');">Entra</button>
+		<button type="button" id="logout" onclick="closeModal('login');">Esci</button>
+	</div>
+	
+	
+	
+	<!-- ATTACCA -->
+	<div id="modal-attacca" class="width-450 hide">
+		<div class="d-flex flex-row justify-content-end">
+			<span class="chiudi" onclick="closeModal('attacca')">X</span>
+			<p class="text-center text-danger mb-20">ATTACCA</p>
+			
+			<div id="container-icone-personaggi" class="row left mb-20">
+				<!-- <a href="#" class="npc enemy" id="link-attacca-npc5">
+					<label for="coord5">NPC1</label>
+				</a>
+				<a href="#" class="player" id="link-attacca-player1">
+					<label for="link-attacca-player1">P1</label>
+				</a> -->
+			</div>
+			
+			<div class="row mb-20">
+			
+				<div class="column mr-10">
+					<button type="button" id="link-attacca-armi" onclick="showModal('armi');">ARMI</button>
+					<button type="button" id="link-attacca-incantesimi" onclick="showModal('incantesimi');">INCANTESIMI</button>
+					<button type="button" id="link-attacca-equipaggiamento" onclick="showModal('equipaggiamento');">EQUIPAGGIAMENTO</button></button>
+					<button type="button" id="link-attacca-abilita" onclick="showModal('abilita');">ABILITA'</button></button>
+				</div>
+				
+				<div class="column mr-10">
+					<div id="attacca-party-stats" class="mb-10">
+						<!-- <p class="text-party">PARTY</p> -->
+						<p id="attacca-party-stats-text"></p>
+						<input type="hidden" id="attacca-party-stats-weapon">
+					</div>
+					<!-- <div id="attacca-nemico-stats">
+						<p class="text-danger">NEMICI</p>
+						<p id="attacca-nemico-stats-text"></p>
+						<input type="hidden" id="attacca-nemico-stats-weapon">
+					</div> -->
+				</div>
+				
+				<div class="column">
+					<div>
+						<p class="text-danger text-center">RISULTATO</p>
+						<p id="attacca-risultato-text"></p>
+					</div>
+				</div>
+			
+			</div>
+			
+			<div class="row justify-content-between mb-20">
+				<button type="button" class="text-white bg-danger width-200" id="attacca"><b>ATTACCA</b></button>
+				<button type="button" class="width-200" id="passa">FAI...</button>
+			</div>
+			
+			<div class="row justify-content-center">
+				<button type="button" class="text-danger text-center font-weight-bold" id="attacca-annulla">ANNULLA ATTACCO</button>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	
+	<!-- DIALOGO -->
+	<div id="modal-dialogo" class="hide">
+		<span class="chiudi" onclick="closeModal('dialogo')">X</span>
+		<p>DOMANDA DI PROVA</p>
+		<p>RISPOSTA DI PROVA</p>
+	</div>
+	
+	
+	<!-- ARMI -->
+	<div id="modal-armi" class="hide">
+		<span class="chiudi" onclick="closeModal('armi')">X</span>
+		<p class="text-danger">ARMI</p>
+		<div id ="lista-armi"></div>
+	</div>
+	
+	<!-- INCANTESIMI -->
+	<div id="modal-incantesimi" class="hide">
+		<span class="chiudi" onclick="closeModal('incantesimi')">X</span>
+		<p class="text-danger">INCANTESIMI</p>
+		<div id="lista-incantesimi"></div>
+	</div>
+	
+	<!-- ABILITA' -->
+	<div id="modal-abilita" class="hide">
+		<span class="chiudi" onclick="closeModal('abilita')">X</span>
+		<p class="text-danger">ABILITA'</p>
+		<div id="lista-abilita"></div>
+		<div id="risultato-abilita"></div>
+	</div>
+	
+	<!-- EQUIPAGGIAMENTO -->
+	<div id="modal-equipaggiamento" class="hide">
+		<span class="chiudi" onclick="closeModal('equipaggiamento')">X</span>
+		<p class="text-danger">EQUIPAGGIAMENTO</p>
+		<div id="lista-equipaggiamento"></div>
+	</div>
+	
+	<!-- SCHEGLI CHI ATTACCARE -->
+	<div id="modal-nemico" class="hide">
+		<span class="chiudi" onclick="closeModal('nemico')">X</span>
+		<p class="text-danger">CHI VUOI ATTACCARE?</p>
+		<div id="lista-nemico"></div>
+	</div>
+	
+	<!-- INSERISCI -->
+	<div id="modal-inserisci" class="w-60 hide">
+		<span class="chiudi" onclick="closeModal('inserisci')">X</span>
+		<p class="text-danger">INSERISCI</p>
+		<form id="lista-inserisci" method="post">
+			<div class="d-flex column">
+			
+				<fieldset>
+					<legend>Cosa vuoi caricare?</legend>
+					<div class="row">
+						<div class="row">
+							<label for="inserisci-tipo-Oggetti">Oggetti</label>
+							<input type="radio" name="inserisci-tipo" value="Oggetti" id="inserisci-tipo-Oggetti" onchange="showModal('inserisci-Oggetto');closeModal('inserisci-Personaggio');">
+						</div>
+						<div class="row">
+							<label for="inserisci-tipo-Personaggi">Personaggi</label>
+							<input type="radio" name="inserisci-tipo" value="Personaggi" id="inserisci-tipo-Personaggi" onchange="showModal('inserisci-Personaggio');closeModal('inserisci-Oggetto');">
+						</div>
+					</div>
+				</fieldset>
+				
+				<fieldset id="modal-inserisci-Oggetto" class="hide">
+					<legend>Carica Oggetto</legend>
+					<p class="mb-10">* obbligatori.</p>
+					
+					<fieldset class="row mb-10">
+						<legend>Tipo di oggetto *</legend>
+						<div class="row">
+							<select name="inserisci-oggetto-azione" class="required">
+								<option value="arma">Arma</option>
+								<option value="incantesimo">Incantesimo</option>
+								<option value="pergamena">Pergamena</option>
+								<option value="pozione">Pozione</option>
+								<option value="libro">Libro</option>
+								<option value="abilita">Abilità</option>
+							</select>
+						</div>
+					</fieldset>
+					
+					<div class="mb-10">
+						<div class="row">
+							<label for="inserisci-Oggetti-nome">Nome *</label>
+							<input type="input" name="inserisci-oggetto-nome" class="required" id="inserisci-Oggetti-nome" maxlength="16">
+							
+						</div>
+						<div class="row">
+							<label for="inserisci-Oggetti-proprietario">Proprietario *</label>
+							<input type="number" name="inserisci-oggetto-proprietario" class="required" id="inserisci-Oggetti-proprietario" max="255">
+							
+						</div>
+					</div>	
+					
+					<div class="mb-10">
+						<p>Presente sulla mappa? *</p>
+						<div class="row">
+							<div class="row">
+								<label for="inserisci-Oggetti-presente-si">Sì</label>
+								<input type="radio" name="inserisci-oggetto-presente" class="required" id="inserisci-Oggetti-presente-si" value="1">
+								
+							</div>
+							<div class="row">
+								<label for="inserisci-Oggetti-presente-no">No</label>
+								<input type="radio" name="inserisci-oggetto-presente" class="required" id="inserisci-Oggetti-presente-no" value="0">
+								
+							</div>
+						</div>
+					</div>
+					
+					
+					<fieldset class="column mb-10">
+						<legend>Danno</legend>
+						<div class="row">
+							<label for="inserisci-Oggetti-numero-quantita">Numero di dadi?</label>
+							<input type="number" name="inserisci-oggetto-numero-quantita" id="inserisci-Oggetti-numero-quantita" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Oggetti-numero-dadi">Facce del dado?</label>
+							<input type="number" name="inserisci-oggetto-numero-dadi" id="inserisci-Oggetti-numero-dadi" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Oggetti-bonus_tiro">Bonus tiro?</label>
+							<input type="number" name="inserisci-oggetto-bonus_tiro" id="inserisci-Oggetti-bonus_tiro" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Oggetti-gittata">Gittata?</label>
+							<input type="number" name="inserisci-oggetto-gittata" id="inserisci-Oggetti-gittata" max="100">
+						</div>
+					</fieldset>
+
+					<div class="row justify-content-between">
+						<button type="button" id="inserisci-Oggetto-svuota" onclick="emptyForm('modal-inserisci-Oggetto');">Svuota</button>
+						<button type="button" id="inserisci-Oggetto-ok">Inserisci</button>
+					</div>
+				</fieldset>
+				
+	
+				<fieldset id="modal-inserisci-Personaggio" class="hide">
+					<legend>Carica Personaggio</legend>
+					
+					<p class="mb-10">* obbligatori.</p>
+					<fieldset class="column mb-10">
+						<legend>Razza</legend>
+						<div class="row">
+							<select name="inserisci-personaggio-razza" class="required">
+								<option value="Umano" selected>Umano</option>
+								<option value="Elfo">Elfo</option>
+								<option value="Mezzelfo">Mezzelfo</option>
+								<option value="Mezzorco">Mezzorco</option>
+								<option value="Nano">Nano</option>
+								<option value="Gnomo">Gnomo</option>
+								<option value="Halfling">Umano</option>
+							</select>
+						</div>
+					</fieldset>
+					
+					<fieldset class="row mb-10">
+						<legend>Classe</legend>
+						<div class="row">
+							<select name="inserisci-personaggio-classe" class="required">
+								<option value="Barbaro">Barbaro</option>
+								<option value="Bardo">Bardo</option>
+								<option value="Chierico">Chierico</option>
+								<option value="Druido">Druido</option>
+								<option value="Druido">Druido</option>
+								<option value="Guerriero">Guerriero</option>
+								<option value="Ladro">Ladro</option>
+								<option value="Mago">Mago</option>
+								<option value="Monaco">Monaco</option>
+								<option value="Paladino">Paladino</option>
+								<option value="Ranger">Ranger</option>
+								<option value="Stregone">Stregone</option>
+								<option value="Altro">Altro</option>
+							</select>
+						</div>
+					</fieldset>
+					
+					<div class="column mb-10">
+						<div class="column mb-10">
+							<div class="row">
+								<label for="inserisci-Personaggi-giocatore">Username *</label>
+								<input type="input" name="inserisci-personaggio-giocatore" id="inserisci-Personaggi-Giocatore" max="16">
+							</div>
+							<p>Se inserisci <cite>npc</cite> creerai un PERSONAGGIO NON GIOCANTE</p>
+							<p>Se inserisci <cite>dm</cite> creerai un NUOVO DUNGEON MASTER</p>
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-nome">Nome *</label>
+							<input type="input" name="inserisci-personaggio-nome" id="inserisci-Personaggi-nome" max="16">
+						</div>
+					</div>
+					
+					<div class="mb-10">
+						<p>Presente sulla mappa? *</p>
+						<div class="row">
+							<div class="row">
+								<label for="inserisci-Personaggi-presente-si">Sì</label>
+								<input type="radio" name="inserisci-personaggio-presente" class="required" id="inserisci-Personaggi-presente-si" value="1">	
+							</div>
+							<div class="row">
+								<label for="inserisci-Personaggi-presente-no">No</label>
+								<input type="radio" name="inserisci-personaggio-presente" class="required" id="inserisci-Personaggi-presente-no" value="0">	
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<label for="inserisci-Personaggi-livello">Livello?</label>
+						<input type="number" name="inserisci-personaggio-livello" id="inserisci-Personaggi-livello" max="100">
+					</div>
+					
+					<fieldset class="column mb-10">
+						<legend>Caratteristiche</legend>
+						<div class="row">
+							<label for="inserisci-Personaggi-caratteristiche-forza">Forza</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-forza" id="inserisci-Personaggi-caratteristiche-Forza" max="100" >
+							<label for="inserisci-Personaggi-caratteristiche-bonus-forza">Bonus forza</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-forza" id="inserisci-Personaggi-caratteristiche-bonus-Forza" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-caratteristiche-destrezza">Destrezza</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-destrezza" id="inserisci-Personaggi-caratteristiche-Destrezza" max="100">
+							<label for="inserisci-Personaggi-caratteristiche-bonus-destrezza">Bonus destrezza</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-destrezza" id="inserisci-Personaggi-caratteristiche-bonus-Destrezza" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-caratteristiche-costituzione">Costituzione</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-costituzione" id="inserisci-Personaggi-caratteristiche-Costituzione" max="100">
+							<label for="inserisci-Personaggi-caratteristiche-bonus-costituzione">Bonus costituzione</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-costituzione" id="inserisci-Personaggi-caratteristiche-bonus-Costituzione" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-caratteristiche-carisma">Carisma</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-carisma" id="inserisci-Personaggi-caratteristiche-Carisma" max="100">
+							<label for="inserisci-Personaggi-caratteristiche-bonus-carisma">Bonus carisma</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-carisma" id="inserisci-Personaggi-caratteristiche-bonus-Carisma" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-caratteristiche-intelligenza">Intelligenza</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-intelligenza" id="inserisci-Personaggi-caratteristiche-Intelligenza" max="100">
+							<label for="inserisci-Personaggi-caratteristiche-bonus-intelligenza">Bonus intelligenza</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-intelligenza" id="inserisci-Personaggi-caratteristiche-bonus-Intelligenza" max="100">
+						</div>
+						<div class="row mb-10">
+							<label for="inserisci-Personaggi-caratteristiche-saggezza">Saggezza</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-saggezza" id="inserisci-Personaggi-caratteristiche-Saggezza" max="100">
+							<label for="inserisci-Personaggi-caratteristiche-bonus-saggezza">Bonus saggezza</label>
+							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-saggezza" id="inserisci-Personaggi-caratteristiche-bonus-Saggezza" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-iniziativa">Iniziativa?</label>
+							<input type="number" name="inserisci-personaggio-iniziativa" id="inserisci-Personaggi-Iniziativa" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-ca">Classe Armatura? *</label>
+							<input type="number" name="inserisci-personaggio-ca" class="required" id="inserisci-Personaggi-CA" max="100">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-pf">Punti Ferita? *</label>
+							<input type="number" name="inserisci-personaggio-pf" class="required" id="inserisci-Personaggi-PF" maxlength="255">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-pe">Punti Esperienza?</label>
+							<input type="number" name="inserisci-personaggio-pe" id="inserisci-Personaggi-PE" maxlength="255">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-denaro">Denaro?</label>
+							<input type="number" name="inserisci-personaggio-denaro" id="inserisci-Personaggi-Denaro" maxlength="255">
+						</div>
+
+					</fieldset>
+					<fieldset class="mb-10">
+						<legend>Oggetti</legend>
+						<p class="mb-10">Inserire ID degli oggetti separati da virgole</p>
+						<div class="row">
+							<label for="inserisci-Personaggi-armi">Armi?</label>
+							<input type="input" name="inserisci-personaggio-armi" id="inserisci-Personaggi-Armi">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-incantesimi">Incantesimi?</label>
+							<input type="input" name="inserisci-personaggio-incantesimi" id="inserisci-Personaggi-Incantesimi">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-abilita">Abilità?</label>
+							<input type="input" name="inserisci-personaggio-abilita" id="inserisci-Personaggi-Abilita">
+						</div>
+						<div class="row">
+							<label for="inserisci-Personaggi-equipaggiamento">Equipaggiamento?</label>
+							<input type="input" name="inserisci-personaggio-equipaggiamento" id="inserisci-Personaggi-Equipaggiamento">
+						</div>
+					</fieldset>
+					<div class="row justify-content-between">
+						<button type="button" id="inserisci-Personaggio-svuota" onclick="emptyForm('modal-inserisci-Personaggio');">Svuota</button>
+						<button type="button" id="inserisci-Personaggio-ok">Inserisci</button>
+					</div>
+					
+				</fieldset>
+			
+			
+				<fieldset id="modal-inserisci-risultato">
+					
+				</fieldset>
+				
+			</div>	
+			
+		</form>
+	</div>
+	
+	<!-- MODIFICA -->
+	<div id="modal-modifica" class="w-80 hide">
+		<span class="chiudi" onclick="closeModal('modifica')">X</span>
+		<p class="text-danger">MODIFICA</p>
+		<form id="lista-modifica" method="post">
+			<div class="d-flex column">
+		
+				<fieldset>
+					<legend>Cosa vuoi modificare?</legend>
+					<div id="lista-modifica">
+						
+					</div>
+					<div class="row">
+						<div class="row">
+							<label for="modifica-tipo-Oggetti">Oggetti</label>
+							<!-- <input type="radio" name="modifica-tipo" value="Oggetti" id="modifica-tipo-Oggetti" onchange="showModal('modifica-Oggetto');closeModal('modifica-Personaggio');"> -->
+							<input type="radio" name="modifica-tipo" value="Oggetti" id="modifica-tipo-Oggetti" onchange="showModal('modifica-Oggetto');showModal('lista-modifica-Oggetto');closeModal('modifica-Personaggio');closeModal('lista-modifica-Personaggio');">
+						</div>
+						<div class="row">
+							<label for="modifica-tipo-Personaggi">Personaggi</label>
+							<!-- <input type="radio" name="modifica-tipo" value="Personaggi" id="modifica-tipo-Personaggi" onchange="showModal('modifica-Personaggio');closeModal('modifica-Oggetto');"> -->
+							<input type="radio" name="modifica-tipo" value="Personaggi" id="modifica-tipo-Personaggi" onchange="showModal('modifica-Personaggio');showModal('lista-modifica-Personaggio');closeModal('modifica-Oggetto');closeModal('lista-modifica-Oggetto');">
+						</div>
+					</div>
+				</fieldset>
+			
+				<fieldset id="modal-modifica-Oggetto" class="hide">
+					<div id="modal-lista-modifica-Oggetto" class="w-100 hide"></div>
+					<div id="modal-modifica-dati-Oggetto" class="hide">
+						<legend>Carica Oggetto</legend>
+						<p class="mb-10">* obbligatori.</p>
+						
+						<fieldset class="row mb-10">
+							<legend>Tipo di oggetto *</legend>
+							<div class="row">
+								<select name="modifica-oggetto-azione" class="required">
+									<option value="arma">Arma</option>
+									<option value="incantesimo">Incantesimo</option>
+									<option value="pergamena">Pergamena</option>
+									<option value="pozione">Pozione</option>
+									<option value="libro">Libro</option>
+									<option value="abilita">Abilità</option>
+								</select>
+							</div>
+						</fieldset>
+						
+						<div class="mb-10">
+							<div class="row">
+								<label for="modifica-Oggetti-nome">Nome *</label>
+								<input type="input" name="modifica-oggetto-nome" class="required" id="modifica-Oggetti-nome" maxlength="16">
+								
+							</div>
+							<div class="row">
+								<label for="modifica-Oggetti-proprietario">Proprietario *</label>
+								<input type="number" name="modifica-oggetto-proprietario" class="required" id="modifica-Oggetti-proprietario" max="255">
+								
+							</div>
+						</div>	
+						
+						<div class="mb-10">
+							<p>Presente sulla mappa? *</p>
+							<div class="row">
+								<div class="row">
+									<label for="modifica-Oggetti-presente-si">Sì</label>
+									<input type="radio" name="modifica-oggetto-presente" class="required" id="modifica-Oggetti-presente-si" value="1">
+									
+								</div>
+								<div class="row">
+									<label for="modifica-Oggetti-presente-no">No</label>
+									<input type="radio" name="modifica-oggetto-presente" class="required" id="modifica-Oggetti-presente-no" value="0">
+									
+								</div>
+							</div>
+						</div>
+						
+						
+						<fieldset class="column mb-10">
+							<legend>Danno</legend>
+							<div class="row">
+								<label for="modifica-Oggetti-numero-quantita">Numero di dadi?</label>
+								<input type="number" name="modifica-oggetto-numero-quantita" id="modifica-Oggetti-numero-quantita" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Oggetti-numero-dadi">Facce del dado?</label>
+								<input type="number" name="modifica-oggetto-numero-dadi" id="modifica-Oggetti-numero-dadi" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Oggetti-bonus_tiro">Bonus tiro?</label>
+								<input type="number" name="modifica-oggetto-bonus_tiro" id="modifica-Oggetti-bonus_tiro" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Oggetti-gittata">Gittata?</label>
+								<input type="number" name="modifica-oggetto-gittata" id="modifica-Oggetti-gittata" max="100">
+							</div>
+						</fieldset>
+
+						<div class="row justify-content-between">
+							<button type="button" id="modifica-Oggetto-svuota" onclick="emptyForm('modal-modifica-Oggetto');">Svuota</button>
+							<button type="button" id="modifica-Oggetto-ok">Inserisci</button>
+						</div>
+					</div>
+				</fieldset>
+			
+
+				<fieldset id="modal-modifica-Personaggio" class="hide">
+					<div id="modal-lista-modifica-Personaggio" class="w-100 hide"></div>
+					<div id="modal-modifica-dati-Personaggio" class="hide">
+						<legend>Carica Personaggio</legend>
+						
+						<p class="mb-10">* obbligatori.</p>
+						<fieldset class="column mb-10">
+							<legend>Razza</legend>
+							<div class="row">
+								<select name="modifica-personaggio-razza" class="required">
+									<option value="Umano" selected>Umano</option>
+									<option value="Elfo">Elfo</option>
+									<option value="Mezzelfo">Mezzelfo</option>
+									<option value="Mezzorco">Mezzorco</option>
+									<option value="Nano">Nano</option>
+									<option value="Gnomo">Gnomo</option>
+									<option value="Halfling">Umano</option>
+								</select>
+							</div>
+						</fieldset>
+						
+						<fieldset class="row mb-10">
+							<legend>Classe</legend>
+							<div class="row">
+								<select name="modifica-personaggio-classe" class="required">
+									<option value="Barbaro">Barbaro</option>
+									<option value="Bardo">Bardo</option>
+									<option value="Chierico">Chierico</option>
+									<option value="Druido">Druido</option>
+									<option value="Druido">Druido</option>
+									<option value="Guerriero">Guerriero</option>
+									<option value="Ladro">Ladro</option>
+									<option value="Mago">Mago</option>
+									<option value="Monaco">Monaco</option>
+									<option value="Paladino">Paladino</option>
+									<option value="Ranger">Ranger</option>
+									<option value="Stregone">Stregone</option>
+									<option value="Altro">Altro</option>
+								</select>
+							</div>
+						</fieldset>
+						
+						<div class="column mb-10">
+							<div class="column mb-10">
+								<div class="row">
+									<label for="modifica-Personaggi-giocatore">Username *</label>
+									<input type="input" name="modifica-personaggio-giocatore" id="modifica-Personaggi-Giocatore" max="16">
+								</div>
+								<p>Se modifica <cite>npc</cite> creerai un PERSONAGGIO NON GIOCANTE</p>
+								<p>Se modifica <cite>dm</cite> creerai un NUOVO DUNGEON MASTER</p>
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-nome">Nome *</label>
+								<input type="input" name="modifica-personaggio-nome" id="modifica-Personaggi-nome" max="16">
+							</div>
+						</div>
+						
+						<div class="mb-10">
+							<p>Presente sulla mappa? *</p>
+							<div class="row">
+								<div class="row">
+									<label for="modifica-Personaggi-presente-si">Sì</label>
+									<input type="radio" name="modifica-personaggio-presente" class="required" id="modifica-Personaggi-presente-si" value="1">	
+								</div>
+								<div class="row">
+									<label for="modifica-Personaggi-presente-no">No</label>
+									<input type="radio" name="modifica-personaggio-presente" class="required" id="modifica-Personaggi-presente-no" value="0">	
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<label for="modifica-Personaggi-livello">Livello?</label>
+							<input type="number" name="modifica-personaggio-livello" id="modifica-Personaggi-livello" max="100">
+						</div>
+						
+						<fieldset class="column mb-10">
+							<legend>Caratteristiche</legend>
+							<div class="row">
+								<label for="modifica-Personaggi-caratteristiche-forza">Forza</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-forza" id="modifica-Personaggi-caratteristiche-Forza" max="100" >
+								<label for="modifica-Personaggi-caratteristiche-bonus-forza">Bonus forza</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-bonus-forza" id="modifica-Personaggi-caratteristiche-bonus-Forza" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-caratteristiche-destrezza">Destrezza</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-destrezza" id="modifica-Personaggi-caratteristiche-Destrezza" max="100">
+								<label for="modifica-Personaggi-caratteristiche-bonus-destrezza">Bonus destrezza</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-bonus-destrezza" id="modifica-Personaggi-caratteristiche-bonus-Destrezza" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-caratteristiche-costituzione">Costituzione</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-costituzione" id="modifica-Personaggi-caratteristiche-Costituzione" max="100">
+								<label for="modifica-Personaggi-caratteristiche-bonus-costituzione">Bonus costituzione</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-bonus-costituzione" id="modifica-Personaggi-caratteristiche-bonus-Costituzione" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-caratteristiche-carisma">Carisma</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-carisma" id="modifica-Personaggi-caratteristiche-Carisma" max="100">
+								<label for="modifica-Personaggi-caratteristiche-bonus-carisma">Bonus carisma</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-bonus-carisma" id="modifica-Personaggi-caratteristiche-bonus-Carisma" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-caratteristiche-intelligenza">Intelligenza</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-intelligenza" id="modifica-Personaggi-caratteristiche-Intelligenza" max="100">
+								<label for="modifica-Personaggi-caratteristiche-bonus-intelligenza">Bonus intelligenza</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-bonus-intelligenza" id="modifica-Personaggi-caratteristiche-bonus-Intelligenza" max="100">
+							</div>
+							<div class="row mb-10">
+								<label for="modifica-Personaggi-caratteristiche-saggezza">Saggezza</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-saggezza" id="modifica-Personaggi-caratteristiche-Saggezza" max="100">
+								<label for="modifica-Personaggi-caratteristiche-bonus-saggezza">Bonus saggezza</label>
+								<input type="number" name="modifica-personaggio-caratteristiche-bonus-saggezza" id="modifica-Personaggi-caratteristiche-bonus-Saggezza" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-iniziativa">Iniziativa?</label>
+								<input type="number" name="modifica-personaggio-iniziativa" id="modifica-Personaggi-Iniziativa" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-ca">Classe Armatura? *</label>
+								<input type="number" name="modifica-personaggio-ca" class="required" id="modifica-Personaggi-CA" max="100">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-pf">Punti Ferita? *</label>
+								<input type="number" name="modifica-personaggio-pf" class="required" id="modifica-Personaggi-PF" maxlength="255">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-pe">Punti Esperienza?</label>
+								<input type="number" name="modifica-personaggio-pe" id="modifica-Personaggi-PE" maxlength="255">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-denaro">Denaro?</label>
+								<input type="number" name="modifica-personaggio-denaro" id="modifica-Personaggi-Denaro" maxlength="255">
+							</div>
+
+						</fieldset>
+						<fieldset class="mb-10">
+							<legend>Oggetti</legend>
+							<p class="mb-10">Inserire ID degli oggetti separati da virgole</p>
+							<div class="row">
+								<label for="modifica-Personaggi-armi">Armi?</label>
+								<input type="input" name="modifica-personaggio-armi" id="modifica-Personaggi-Armi">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-incantesimi">Incantesimi?</label>
+								<input type="input" name="modifica-personaggio-incantesimi" id="modifica-Personaggi-Incantesimi">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-abilita">Abilità?</label>
+								<input type="input" name="modifica-personaggio-abilita" id="modifica-Personaggi-Abilita">
+							</div>
+							<div class="row">
+								<label for="modifica-Personaggi-equipaggiamento">Equipaggiamento?</label>
+								<input type="input" name="modifica-personaggio-equipaggiamento" id="modifica-Personaggi-Equipaggiamento">
+							</div>
+						</fieldset>
+						<div class="row justify-content-between">
+							<button type="button" id="modifica-Personaggio-svuota" onclick="emptyForm('modal-modifica-Personaggio');">Svuota</button>
+							<button type="button" id="modifica-Personaggio-ok">Inserisci</button>
+						</div>
+					</div>
+				</fieldset>
+		
+		<!-- 
+				<fieldset id="modal-modifica-risultato">
+					
+				</fieldset>
+			 -->
+			</div>	
+			
+		</form>
+	</div>
+	
+	
+</body>
+</html>

@@ -1,0 +1,257 @@
+p {
+	margin: 0;
+}
+
+
+
+
+/* FLEXBOX */
+.column, .row {
+	display: flex !important;;
+}
+
+.column {
+	flex-direction: column !important;;
+}
+
+.row {
+	flex-direction: row !important;;
+}
+
+.justify-content-between {
+	justify-content: space-between !important;;
+}
+
+.justify-content-center {
+	justify-content: center !important;;
+}
+
+.justify-content-end {
+	justify-content: flex-end !important;
+}
+
+
+/* DASHBOARD */
+#dashboard span {
+	color: white;
+}
+
+#dashboard {
+	background-color: grey;
+	height: 210px;
+}
+
+#top {
+	background-color: black;
+}
+
+#top span {
+	margin: 4px 8px;
+}
+
+.left, .right {
+	justify-content: space-between;
+}
+
+.left {
+	padding-left: 6px;
+}
+
+.right {
+	padding-right: 6px;
+}
+
+div[id^='modal-'] {
+	background-color: lightblue;
+	position: absolute;
+	top: 30%;
+	left: 20%;
+	width: 200px;
+	/* height: 200px; */
+	padding: 20px;
+	box-shadow: 4px 4px 4px grey;
+}
+
+#modal-modifica, #modal-inserisci, div[id^='modal-lista'] {
+	left: 5%;
+	font-size: 13px;
+	border: 3px solid #a1c6d2;
+}
+
+div[id^='modal-lista'] {
+	left: 0;
+}
+
+/* MAPPA */ 
+#map {
+	width: 1020px;
+	height: 1260px;
+}
+
+.elem {
+	color: white;
+	position: absolute;
+}
+
+.player, .npc, .exe {
+	width: 60px;
+	height: 60px;
+}
+
+.npc {
+	background-color: black;
+}
+
+.exe {
+	background-color: #6d3700;
+}
+
+input[id^='coord'] {
+	width: 56px;
+}
+
+
+.bg-danger {
+	background-color: red !important;
+}
+
+.bg-black {
+	background-color: black !important;
+}
+
+
+/* PLAYER */
+/* aggiunti 220px al top per ognuno */
+#player1 {
+	background-color: red;
+	left: 8px;
+	top: 228px;
+}
+
+#player2 {
+	background-color: green;
+	left: 68px;
+	top: 228px;
+}
+
+#player3 {
+	background-color: blue;
+	left: 128px;
+	top: 228px;
+}
+
+#player4 {
+	background-color: orange;
+	left: 188px;
+	top: 228px;
+}
+
+#npc5 {
+	left: 728px;
+	top: 228px;
+}
+
+#exe6 {
+	left: 8px;
+	top: 408px;
+}
+#link-attacca-player1 {
+	background-color: red;
+}
+
+
+
+
+/* MARGINI */
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.mr-10 {
+	margin-right: 10px;
+}
+
+.chiudi {
+	margin-left: 95%;
+	cursor: pointer;
+}
+
+
+
+
+/* WIDTH */
+.width-450 {
+	width: 450px !important;
+}
+
+.width-200 {
+	width: 200px !important;
+}
+
+.w-100 {
+	width: 100% !important;
+}
+
+.w-80 {
+	width: 80% !important;
+}
+
+.w-90 {
+	width: 90% !important;
+}
+
+.w-60 {
+	width: 60% !important;
+}
+
+/* TESTO */
+.text-right, .text-right * {
+	text-align: right;
+}
+
+.text-center, .text-center * {
+	text-align: center;
+}
+
+.text-danger {
+	color: red !important;
+}
+
+.text-party {
+	color: blue !important;
+}
+
+.text-white {
+	color: white !important;
+}
+
+.font-weight-bold {
+	font-weight: bolder !important;
+}
+
+
+
+/* MISCELLANEA */
+.hide {
+	display: none !important;
+}
+
+.hide-all, .hide-all * {
+	display: none !important;
+}
+
+.show {
+	display: block !important;
+}
+
+.show-all, .show-all * {
+	display: block !important;
+}
+
+.cursor-pointer {
+	cursor: pointer !important;
+}
