@@ -178,7 +178,7 @@ $(document).ready(function() {
 			// BUTTON ATTACCA
 			if (buttonID == 'attacca') {
 				
-				showModal("attacca");
+				showModal("nemico");
 				
 				/* 
 				$.post("../dispatcher.php", {
@@ -482,8 +482,39 @@ function emptyForm(form) {
 
 
 
+/**
+* Al click sul link di un personaggio, se è contenuto in un contenitore che contiene "nemico" come id
+* invialo per inserirlo come nemico in sessione
+*/
+function selezionaPG(id, tipo) {
+	
+	switch (tipo) {
+		
+		case 'nemico': 
+			
+		
+		
+				$.post("../dispatcher.php", {
 
+				"action" : 'nemico',
+				
+				"data" : id
+				
+				}, function(ret) {
 
+					console.log(ret);
+					
+				});
+			
+		break;
+	}
+	
+	
+	
+	
+	
+	
+}
 
 
 /*

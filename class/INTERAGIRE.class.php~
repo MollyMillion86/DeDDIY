@@ -341,14 +341,21 @@
 			} else $result = 'Combattimento non in esecuzione';
 			
 			
+			if ($result == 'Combattimento non in esecuzione') {
+				
+				return $result;
+				
+			} else {
+				
+				$nemico = $_SESSION['data']['interazione']['nemico']['id'];	
 			
-			// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
-			$result = $_SESSION['data'];
-			
-			// player di riga 1 fa TIRO PER COLPIRE 1d20
+				// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
 			
 			
-			// se pf nemico > 0
+				// player di riga 1 fa TIRO PER COLPIRE 1d20 (nemici comandati da DM)
+			
+			
+				// se pf nemico > 0
 			
 			
 				// se TIRO X COLPIRE >= CA attaccato
@@ -363,9 +370,9 @@
 				// copia dati riga 1, inserisci nuova riga come riga 1 e cancella riga 1 da attacco_tmp
 			
 			
-			// altrimenti elimina riga 1
+				// altrimenti elimina riga 1
 			
-			
+			}
 			
 			
 			
@@ -1163,8 +1170,8 @@
 						
 					$count++;
 
-//					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="' . $index4 . '">
-					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="seleziona(' . $index4 . ')">
+
+					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="selezionaPG(' . $index4 . ', \'nemico\')">
 							<label for="' . $index4 . '">' . $nome[$count] . '</label>
 						</a>';
 		

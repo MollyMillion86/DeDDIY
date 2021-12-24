@@ -301,6 +301,7 @@ $(document).ready(function() {
 				"data" : infoID */
 				// manca 'data' ???
 				}, function(ret) {
+                    console.log(ret);
 					// metti risultato visibile
 					$("#lista-nemico").html(ret);
 					$("#container-icone-personaggi").html(ret);
@@ -482,8 +483,27 @@ function emptyForm(form) {
 
 
 
+/**
+* Al click sul link di un personaggio, se è contenuto in un contenitore che contiene "nemico" come id
+* invialo per inserirlo come nemico in sessione
+*/
+function selezionaPG(id, tipo) {
 
+	$.post("../dispatcher.php", {
 
+		"action" : tipo,
+				
+		"data" : id
+				
+	}, function(ret) {
+
+		console.log(ret);
+					
+	});
+			
+
+	
+}
 
 
 /*

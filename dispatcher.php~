@@ -94,7 +94,7 @@
 				
 				
 				
-				print_r($_SESSION);				
+//				print_r($_SESSION);				
 				
 				break;
 					
@@ -127,6 +127,7 @@
 				session_start();
 				$attacca = $action->attacca();
 				print_r($attacca);
+				// print_r($_SESSION);
 				break;
 			
 			// case TEST
@@ -135,6 +136,14 @@
 				// $test = $action->login();
 				print_r($_SESSION);
 				break;
+				
+			case "nemico":
+				
+				$_SESSION['data']['interazione']['nemico']['id'] = $_POST['data'];				
+				
+				print_r($_SESSION);
+			
+			break;
 		}
 		
 		

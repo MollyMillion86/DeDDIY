@@ -132,7 +132,7 @@
 				$attaccoTmp = array(); $param = array(); $prova = array();
 				
 				// calcolo INIZIATIVA
-				$return = array(); $nomi = array(); $iniziativaR = array(); $caratteristiche = array(); $giro = array();
+				$return = array(); $nomi = array(); $id = array(); $iniziativaR = array(); $caratteristiche = array(); $giro = array();
 				
 				// personaggi senza GIRO
 				$personaggi = $return['personaggi'] = $this->caricaPersonaggi();
@@ -151,6 +151,7 @@
 						if ($index2 == 'caratteristiche') $caratteristiche[] = (!empty($value2)) ? json_decode($value2, JSON_OBJECT_AS_ARRAY) : '';
 						if ($index2 == 'iniziativa') $iniziativa[] = $value2;
 						if ($index2 == 'nome') $nomi[] = $value2;
+						if ($index2 == 'id') $id[] = $value2;
 
 					}
 					
@@ -271,6 +272,7 @@
 				// butta dentro tabella tmp in ordine desc di iniziativa
 				foreach ($test as $index => $value) {
 					$prova = $this->pianoDiAttaccoBuffer($value);
+
 				}
 				
 				
@@ -341,14 +343,21 @@
 			} else $result = 'Combattimento non in esecuzione';
 			
 			
+			if ($result == 'Combattimento non in esecuzione') {
+				
+				return $result;
+				
+			} else {
+				
+				$nemico = $_SESSION['data']['interazione']['nemico']['id'];	
 			
-			// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
-			$result = $_SESSION['data'];
-			
-			// player di riga 1 fa TIRO PER COLPIRE 1d20
+				// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
 			
 			
-			// se pf nemico > 0
+				// player di riga 1 fa TIRO PER COLPIRE 1d20 (nemici comandati da DM)
+			
+			
+				// se pf nemico > 0
 			
 			
 				// se TIRO X COLPIRE >= CA attaccato
@@ -363,9 +372,9 @@
 				// copia dati riga 1, inserisci nuova riga come riga 1 e cancella riga 1 da attacco_tmp
 			
 			
-			// altrimenti elimina riga 1
+				// altrimenti elimina riga 1
 			
-			
+			}
 			
 			
 			
@@ -1162,12 +1171,14 @@
 				foreach ($param['giro'] as $index4 => $value4) {
 						
 					$count++;
-
-//					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="' . $index4 . '">
-					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="selezionaPG(' . $index4 . ')">
+					
+// 					$htmlPlayer .= $index4 . " " . $value4;					
+					
+					
+					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="selezionaPG(' . $index4 . ', \'nemico\')">
 							<label for="' . $index4 . '">' . $nome[$count] . '</label>
 						</a>';
-		
+                    
 				}
 				
 			}
@@ -1280,8 +1291,8 @@
 				$return = 'false';
 				
 				
-				$Query = 'INSERT INTO attacco_tmp (nome, giocatore, caratteristiche, iniziativa, iniziativa_giro, ca, pf, armi, incantesimi, abilita, equipaggiamento) 
-							VALUES (:nome, :giocatore, :caratteristiche, :iniziativa, :iniziativa_giro, :ca, :pf, :armi, :incantesimi, :abilita, :equipaggiamento)';
+				$Query = 'INSERT INTO attacco_tmp (id_giocatore, nome, giocatore, caratteristiche, iniziativa, iniziativa_giro, ca, pf, armi, incantesimi, abilita, equipaggiamento) 
+							VALUES (id_giocatore, :nome, :giocatore, :caratteristiche, :iniziativa, :iniziativa_giro, :ca, :pf, :armi, :incantesimi, :abilita, :equipaggiamento)';
 							
 							
 				try {
@@ -1289,6 +1300,7 @@
 					$stmt = $this->db->prepare($Query);
 
 					
+					$stmt->bindParam(':id_giocatore', $param['id_giocatore'], PDO::PARAM_STR);
 					$stmt->bindParam(':nome', $param['nome'], PDO::PARAM_STR);
 					$stmt->bindParam(':giocatore', $param['giocatore'], PDO::PARAM_STR);
 					$stmt->bindParam(':caratteristiche', $param['caratteristiche'], PDO::PARAM_STR);
@@ -1737,6 +1749,24 @@
 			
 			
 			
+		}
+		
+		
+		
+		/**
+		* 
+		*/ 
+		public function test() {
+            
+            
+            
+            
+//             $return = $this->start();
+            
+            
+            
+            return "PROVA";
+            
 		}
 		
 		
