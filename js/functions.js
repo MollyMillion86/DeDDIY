@@ -73,7 +73,7 @@ $(document).ready(function() {
 					
 				}, function(ret) {
 				
-					console.log("return LOGIN: " + ret);
+					// console.log("return LOGIN: " + ret);
 					
 					var decodedArray = JSON.parse(ret);
 					
@@ -98,7 +98,7 @@ $(document).ready(function() {
 							
 						} else {
 							
-							console.log("CASO NON ['caratteristiche']");
+							// console.log("CASO NON ['caratteristiche']");
 							$("#" + i).text(v);
 						}
 						
@@ -120,7 +120,7 @@ $(document).ready(function() {
 					
 				}, function(ret) {
 					
-					console.log(ret);
+					// console.log(ret);
 					
 				});
 			}
@@ -151,7 +151,7 @@ $(document).ready(function() {
 					"data" : $("#modal-" + modal + " input, #modal-" + modal + " select").serializeArray()
 				}, function(ret) {
 					$("#modal-inserisci-risultato").empty().html(ret);
-					console.log(ret);
+					// console.log(ret);
 				}, );
 				
 			}
@@ -169,7 +169,7 @@ $(document).ready(function() {
 					"data" : $("#modal-" + modal + " input, #modal-" + modal + " select").serializeArray()
 				}, function(ret) {
 					$("#modal-modifica-risultato").empty().html(ret);
-					console.log(ret);
+					// console.log(ret);
 				}, );
 				
 			}
@@ -207,7 +207,7 @@ $(document).ready(function() {
 			if ((buttonID == 'link-attacca-armi') | (buttonID == 'link-attacca-incantesimi')) {
 				
 				var tipo = buttonID.replace("link-attacca-", "");
-				console.log(tipo);
+				// console.log(tipo);
 				$.post("../dispatcher.php", {
 
 				"action" : 'scegliOggetto',
@@ -292,7 +292,7 @@ $(document).ready(function() {
 			// btn FINESTRA ATTACCA
 			if (buttonID == 'link-attacca') {
 				
-				console.log(buttonID);
+				// console.log(buttonID);
 				
 				
 				$.post("../dispatcher.php", {
@@ -301,7 +301,7 @@ $(document).ready(function() {
 				"data" : infoID */
 				// manca 'data' ???
 				}, function(ret) {
-                    console.log(ret);
+                    // console.log(ret);
 					// metti risultato visibile
 					$("#lista-nemico").html(ret);
 					$("#container-icone-personaggi").html(ret);
@@ -441,7 +441,7 @@ function move(player, type) {
 * 
 */
 function showModal(modal) {
-	console.log($("#modal-" + modal).html());
+	// console.log($("#modal-" + modal).html());
 	if ((modal.match('attacca')) || 
 		(modal.match('inserisci')) || 
 		(modal.match('modifica')) || 

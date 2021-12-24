@@ -123,7 +123,7 @@
 		public function start() {
 	
 			$tabella = $this->leggiPianoDiAttacco();
-			// return $tabella;die();
+			
 			if ($tabella == "Combattimento non in esecuzione") {
 
 				
@@ -268,6 +268,8 @@
 
 				
 				krsort($test);
+				
+			
 				
 				// butta dentro tabella tmp in ordine desc di iniziativa
 				foreach ($test as $index => $value) {
@@ -744,11 +746,9 @@
 				$stringa .= '<th scope="col">AZIONE</th></tr></thead><tbody>';
 			}
 			
-			// test
-			// $stringa .= print_r($param);
-			
+
 			if (!is_string($param)) {
-				
+				// print_r($param);die();
 				foreach ($param as $index => $value) {
 
 					
@@ -1292,50 +1292,30 @@
 				
 				
 				$Query = 'INSERT INTO attacco_tmp (id_giocatore, nome, giocatore, caratteristiche, iniziativa, iniziativa_giro, ca, pf, armi, incantesimi, abilita, equipaggiamento) 
-							VALUES (id_giocatore, :nome, :giocatore, :caratteristiche, :iniziativa, :iniziativa_giro, :ca, :pf, :armi, :incantesimi, :abilita, :equipaggiamento)';
+							VALUES (:id_giocatore, :nome, :giocatore, :caratteristiche, :iniziativa, :iniziativa_giro, :ca, :pf, :armi, :incantesimi, :abilita, :equipaggiamento)';
 							
-							
-				try {
-					
-					$stmt = $this->db->prepare($Query);
+
+				$stmt = $this->db->prepare($Query);
 
 					
-					$stmt->bindParam(':id_giocatore', $param['id_giocatore'], PDO::PARAM_STR);
-					$stmt->bindParam(':nome', $param['nome'], PDO::PARAM_STR);
-					$stmt->bindParam(':giocatore', $param['giocatore'], PDO::PARAM_STR);
-					$stmt->bindParam(':caratteristiche', $param['caratteristiche'], PDO::PARAM_STR);
-					$stmt->bindParam(':iniziativa', $param['iniziativa'], PDO::PARAM_STR);
-					$stmt->bindParam(':iniziativa_giro', $param['iniziativa_giro'], PDO::PARAM_STR);
-					$stmt->bindParam(':ca', $param['ca'], PDO::PARAM_STR);
-					$stmt->bindParam(':pf', $param['pf'], PDO::PARAM_STR);
-					$stmt->bindParam(':armi', $param['armi'], PDO::PARAM_STR);
-					$stmt->bindParam(':incantesimi', $param['incantesimi'], PDO::PARAM_STR);
-					$stmt->bindParam(':abilita', $param['abilita'], PDO::PARAM_STR);
-					$stmt->bindParam(':equipaggiamento', $param['equipaggiamento'], PDO::PARAM_STR);
-					
-					
-					$stmt->execute();
-					
-					$query = $this->db->query($Query);
-					
-					$return = 'true';
-					
-				} catch (Exception $e) {
-					
-					$return = "ERRORE 25 " . $e->getMessage();
-					
-				}
+				$stmt->bindParam(':id_giocatore', $param['id'], PDO::PARAM_INT);
+				$stmt->bindParam(':nome', $param['nome'], PDO::PARAM_STR);
+				$stmt->bindParam(':giocatore', $param['giocatore'], PDO::PARAM_STR);
+				$stmt->bindParam(':caratteristiche', $param['caratteristiche'], PDO::PARAM_STR);
+				$stmt->bindParam(':iniziativa', $param['iniziativa'], PDO::PARAM_STR);
+				$stmt->bindParam(':iniziativa_giro', $param['iniziativa_giro'], PDO::PARAM_STR);
+				$stmt->bindParam(':ca', $param['ca'], PDO::PARAM_STR);
+				$stmt->bindParam(':pf', $param['pf'], PDO::PARAM_STR);
+				$stmt->bindParam(':armi', $param['armi'], PDO::PARAM_STR);
+				$stmt->bindParam(':incantesimi', $param['incantesimi'], PDO::PARAM_STR);
+				$stmt->bindParam(':abilita', $param['abilita'], PDO::PARAM_STR);
+				$stmt->bindParam(':equipaggiamento', $param['equipaggiamento'], PDO::PARAM_STR);
 				
-			
-			
-			
-			
-				/* if ($stmt->rowCount() > 0) {
 
-					$return = 'true';
-					
-				} */
 				
+				$return = ($stmt->execute()) ? "true" : $this->db->errorCode();
+			
+
 				return $return;
 				
 				

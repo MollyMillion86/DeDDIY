@@ -80,7 +80,7 @@
 			// case 'caricaArmi':
 				session_start();
 				$oggettoStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, false, $_POST['data']);
-				print_r($_SESSION);
+				// print_r($_SESSION);
 				break;
 				
 			case 'scegliArma':
@@ -141,7 +141,7 @@
 				session_start();
 				$_SESSION['data']['interazione']['nemico']['id'] = $_POST['data'];				
 				
-				print_r($_SESSION);
+				// print_r($_SESSION);
 			
 			break;
 		}
