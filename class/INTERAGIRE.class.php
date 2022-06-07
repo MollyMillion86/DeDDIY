@@ -331,50 +331,74 @@
 			// identifica NEMICO
 			
 			
-			// preleva dati riga 1 da attacco_tmp
-			$Query = 'SELECT * from attacco_tmp LIMIT 1';
+			// preleva dati da attacco_tmp
+			// $Query = 'SELECT * from attacco_tmp LIMIT 1';
+			$Query = 'SELECT * from attacco_tmp';
 			
 			$stmt = $this->db->prepare($Query);
+				
 			$stmt->execute();			
+
+			
 			
 			if ($stmt->rowCount() > 0) {
+				
+				$result = array();
+				$count = -1;
+				
+				
+				$rtn = $stmt->fetchAll(PDO::FETCH_ASSOC);	
+				
+				foreach ($rtn as $row => $rows) {
+					
+					$count++;
 
-				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				// $return = 'true';
+					$result[$count] = $rows;
+	
+				};
 				
 			} else $result = 'Combattimento non in esecuzione';
 			
 			
-			if ($result == 'Combattimento non in esecuzione') {
+			if ($result !== 'Combattimento non in esecuzione') {
+
+			
 				
-				return $result;
-				
-			} else {
-				
-				$nemico = $_SESSION['data']['interazione']['nemico']['id'];	
+				// dati nemico da click utente
+				// $nemico = $_SESSION['data']['interazione']['nemico'];	
 			
 				// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
-			
+				$giocatoreID = $_SESSION['data']['giocatore'];
+				
 			
 				// player di riga 1 fa TIRO PER COLPIRE 1d20 (nemici comandati da DM)
+				// Arma da mischia:
+				// 1d20 + (bonus attacco base + mod Forza + mod taglia)
+				// arma a distanza:
+				// 1d20 + (bonus attacco base + mod Des + mod taglia + penalità gittata)
+				// incantesimi:
+				// nessun TxC se non espressamente richiesto dall'incantesimo
+			
 			
 			
 				// se pf nemico > 0
 			
 			
-				// se TIRO X COLPIRE >= CA attaccato
-				
-					// COLPITO!
-				
-					// ferita = $caratAttacked['pf'] - diceRoll(armaAttacker[danno])
-				
-					// $this->aggiornaStats(attaccato, pf, ferita);
-				
-				
-				// copia dati riga 1, inserisci nuova riga come riga 1 e cancella riga 1 da attacco_tmp
+					// se (TIRO X COLPIRE >= CA attaccato) || (TxC non richiesto)
+					
+						// COLPITO!
+					
+						// ferita = $caratAttacked['pf'] - diceRoll(armaAttacker[danno])
+						
+						// aggiorna statistiche attaccato in attacco_tmp
+						// $this->aggiornaStats(attaccato, pf, ferita);
+						// se pf attaccato <= 0 elimina riga
+					
+					// copia dati riga 1 in ultima riga e cancella riga 1 da attacco_tmp
 			
-			
-				// altrimenti elimina riga 1
+				
+				
+				// altrimenti elimina riga 1 - nemico ucciso
 			
 			}
 			
@@ -1174,8 +1198,8 @@
 					
 // 					$htmlPlayer .= $index4 . " " . $value4;					
 					
-					
-					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="selezionaPG(' . $index4 . ', \'nemico\')">
+					// 'attacca' al posto di 'nemico'
+					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="selezionaPG(' . $index4 . ', \'attacca\');closeModal(\'nemico\');">
 							<label for="' . $index4 . '">' . $nome[$count] . '</label>
 						</a>';
                     

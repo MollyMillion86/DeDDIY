@@ -179,9 +179,8 @@ $(document).ready(function() {
 			if (buttonID == 'attacca') {
 				
 				showModal("nemico");
-				
-				/* 
-				$.post("../dispatcher.php", {
+
+				/* $.post("../dispatcher.php", {
 					"action" : 'attacca',
 					"data" : ""
 				}, function(ret) {
@@ -189,10 +188,10 @@ $(document).ready(function() {
 					// mostra personaggi
 					
 					// attacco vero e proprio
-					// $("#attacca-risultato-text").html(ret);
-					
-				});
-				 */
+					$("#attacca-risultato-text").html(ret);
+					console.log(ret);
+				}); */
+				
 			}
 			
 			
@@ -492,15 +491,15 @@ function selezionaPG(id, tipo) {
 	$.post("../dispatcher.php", {
 
 		"action" : tipo,
-				
 		"data" : id
-				
+	
 	}, function(ret) {
 
+		$("#" + tipo + "-risultato-text").html(ret);
 		console.log(ret);
-					
+	
 	});
-			
+	
 
 	
 }

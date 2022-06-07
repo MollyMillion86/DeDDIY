@@ -92,10 +92,7 @@
 				
 				print_r($oggettoStats);
 				
-				
-				
-//				print_r($_SESSION);				
-				
+			
 				break;
 					
 			case 'inserisciOggetto':
@@ -137,13 +134,13 @@
 				// print_r($_SESSION);
 				break;
 				
-			case "nemico":
+			/* case "nemico":
 				session_start();
 				$_SESSION['data']['interazione']['nemico']['id'] = $_POST['data'];				
 				
-				// print_r($_SESSION);
+				
 			
-			break;
+			break; */
 		}
 		
 		
