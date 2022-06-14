@@ -1147,9 +1147,9 @@
 								}
 
 
-								$stringa .= '<tr>
+								$stringa = '<tr>
 											<td>' . $id[$index2] . '</td>
-											<td>' . $nomeOgetto[$index2] . '</td>
+											<td>' . $nomeOggetto[$index2] . '</td>
 											<td>' . $proprietario[$index2] . '</td>
 											<td>' . $presente[$index2] . '</td>
 											<td>' . $tipo[$index2] . '</td>
