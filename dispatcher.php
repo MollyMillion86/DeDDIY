@@ -122,9 +122,9 @@
 			// attacco
 			case 'attacca':
 				session_start();
-				$attacca = $action->attacca();
+				$attacca = $action->attacca($_POST['action']);
 				print_r($attacca);
-				// print_r($_SESSION);
+				print_r($_SESSION);
 				break;
 			
 			// case TEST
