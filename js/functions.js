@@ -133,6 +133,9 @@ $(document).ready(function() {
 					"action" : 'annullaAttacco'
 				}, function() {
 					$("#container-icone-personaggi").empty();
+					
+					//test
+					$('#attacca-risultato-text').empty();
 				});
 				
 			}
