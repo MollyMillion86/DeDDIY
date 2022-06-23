@@ -330,7 +330,7 @@
 			
 			
 			// identifica NEMICO - se !empty(nemico) è selezione del nemico
-			if ($nemico == '') {
+			if ($nemicoID == '') {
 				
 				$result = "Nemico selezionato";
 				
@@ -412,6 +412,7 @@
 						$giocatoreArmaDX = $_SESSION['data']['giocatore']['manoDestra'];
 						
 						
+						
 						// calcola TIRO X COLPIRE (TxC)
 						$gittata = $bonus = $danno = $nemicoArmaID = $nemicoBonus = $nemicoDanno = '';
 						
@@ -444,10 +445,21 @@
 						
 						// Arma da mischia:
 						// 1d20 + (bonus attacco base + mod Forza + mod taglia)
-						// arma a distanza:
-						// 1d20 + (bonus attacco base + mod Des + mod taglia + penalità gittata)
+						if ($gittata == '') {
+							
+							// calcola mod Forza
+							$forzaObject = json_decode($_SESSION['data']['giocatore']['caratteristiche']);
+							$modForza = $forzaObject->for->base;
+							
+							$tiroPerColpire = diceroll(20) + $_SESSION['data']['giocatore']['attacco_base'] + $modForza;
+							
+						} else {
+							// arma a distanza:
+							// 1d20 + (bonus attacco base + mod Des + mod taglia + penalità gittata)
+						}
 						
 						
+						$result = $tiroPerColpire;
 	
 						
 						
@@ -824,7 +836,7 @@
 		
 		
 		
-		/* INTERFACCIE */
+		
 		
 		
 		public function getAbilityScore($json, $name, $type) {
@@ -1109,7 +1121,7 @@
 
 									}
 									
-									)
+									
 									
 								}
 

@@ -1,0 +1,93 @@
+SESSIONE DI ESEMPIO:
+
+(
+    [data] => Array
+        (
+            [giro] => Array
+                (
+                    [20] => Erbin
+                    [18] => Troll
+                    [9] => Morgan
+                    [6] => Troll semplice
+                )
+
+            [giocatore] => Array
+                (
+                    [id] => 1
+                    [nome] => Alhandra
+                    [giocatore] => molly
+                    [presente] => 1
+                    [classe] => Guerriero
+                    [razza] => Umano
+                    [livello] => 3
+                    [caratteristiche] => {"for":{"base":"17","bonus":"3"},"des":{"base":"15","bonus":"2"},"cos":{"base":"14","bonus":"2"},"car":{"base":"15","bonus":"2"},"int":{"base":"14","bonus":"2"},"sag":{"base":"13","bonus":"1"}}
+                    [iniziativa] => 
+                    [ca] => 17
+                    [pf] => 18
+                    [pe] => 4820
+                    [attacco_base] => 3
+                    [denaro] => 100
+                    [armi] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [id] => 1
+                                    [nome] => Spada lunga
+                                    [proprietario] => 1
+                                    [presente] => 1
+                                    [azione] => armi
+                                    [bonus_tiro] => 5
+                                    [danno] => {"quantita":"1","dado":"8"}
+                                    [gittata] => 
+                                )
+
+                            [1] => Array
+                                (
+                                    [id] => 3
+                                    [nome] => Arco lungo
+                                    [proprietario] => 1
+                                    [presente] => 1
+                                    [azione] => armi
+                                    [bonus_tiro] => 4
+                                    [danno] => {"quantita":"1","dado":"8"}
+                                    [gittata] => 40
+                                )
+
+                        )
+
+                    [incantesimi] => 
+                    [abilita] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [id] => 4
+                                    [nome] => Concentrazione
+                                    [proprietario] => 1
+                                    [descrizione] => Viene effettuata una prova di concentrazione quando rischia di essere distratto mentre è impegnato in un'azione che richiede attenzione.
+                                    [modificatore_caratteristica] => cos
+                                    [prova_contrapposta] => 
+                                    [cd] => [{"cd":"5","azione":"Tempo atmosferico vigoroso"},{"cd":"10","azione":"Subire un danno o tempo atmosferico violento"},{"cd":"10","azione":"Subire un danno ripetuto"},{"cd":"10","azione":"Movimento vigoroso es. su una cavalcatura in movimento"},{"cd":"15","azione":"Movimento violento es. su una cavalcatura al galoppo, intralciato"},{"cd":"20","azione":"In lotta o immobilizzato"},{"cd":"0","azione":"Lottatore (prova contrapposta)"}]
+                                    [condizioni_aggiuntive] => [{"cd":"x","azione":"Danno subito"},{"cd":"x\/2","azione":"Danni subiti"}]
+                                )
+
+                            [1] => Array
+                                (
+                                    [id] => 5
+                                    [nome] => Osservare
+                                    [proprietario] => 1
+                                    [descrizione] => Individuare personaggi e creature che si nascondono
+                                    [modificatore_caratteristica] => sag
+                                    [prova_contrapposta] => ["Nascondersi", "Camuffare"]
+                                    [cd] => [{"cd":"-1","azione":"Ogni 3 metri di distanza"},{"cd":"-5","azione":"Osservatore distratto"}]
+                                    [condizioni_aggiuntive] => 
+                                )
+
+                        )
+
+                    [equipaggiamento] => 
+                )
+
+        )
+
+    [ID] => 7a93a0991cb2cee4415e762d5a18b5ccaa4ffecc733b08986f9d92497fab73093e53e2d716ef0cf682e84f3efa9d23b7f45f05a4802e0d5594bad6cdb0fde6a0
+)
