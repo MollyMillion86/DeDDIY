@@ -88,7 +88,8 @@
 				// $oggettoStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, false, $_POST['data']);
 				$oggettoStats = $action->caricaOggetto($_POST['data']);
 				$oggetto = json_decode($oggettoStats, true);
-				$test = $action->updateSessionData($_POST['data'], 'manoDestra', $oggetto['id']);
+				$test = $action->updateSessionData($_POST['data'], 'tipoManoDestra', "armi");
+				$test = $action->updateSessionData($_POST['data'], 'manoDestra', $_POST['data']);
 				
 				print_r($oggettoStats);
 				
@@ -122,9 +123,9 @@
 			// attacco
 			case 'attacca':
 				session_start();
-				$attacca = $action->attacca($_POST['action']);
+				$attacca = $action->attacca($_POST['data']);
 				print_r($attacca);
-				print_r($_SESSION);
+				// print_r($_SESSION);
 				break;
 			
 			// case TEST
