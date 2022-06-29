@@ -328,6 +328,8 @@
 		// public function attacca($attacked) {
 		public function attacca($nemicoID) {
 			
+			$result = '';
+			
 			
 			// identifica NEMICO - se !empty(nemico) è selezione del nemico
 			if ($nemicoID == '') {
@@ -357,7 +359,7 @@
 	
 					// id arma del nemico (sempre singola)
 					$nemicoArmaID = preg_replace("/[^0-9]+/", "", $resultPGs[0]['armi']);
-
+					$nemicoNome = $resultPGs[0]['nome'];
 					
 					// preleva armi/incantesimi/oggetti
 					$nemicoGittata = $nemicoBonus = $gittata = $bonus = ''; $danno = $nemicoDanno = array();
@@ -371,6 +373,7 @@
 					
 					// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
 					$giocatoreID = $_SESSION['data']['giocatore']['id'];
+					$nome = $_SESSION['data']['giocatore']['nome'];
 					
 					// player di riga 1 fa TIRO PER COLPIRE 1d20 (nemici comandati da DM)
 					$giocatoreArmaDX = $_SESSION['data']['giocatore']['manoDestra'];
@@ -399,165 +402,106 @@
 					}
 					
 
-					// return $giocatoreArmaDX;die();
+					// TIRO PER COLPIRE NON SERVE CON INCANTESIMI
 
 					// calcola TIRO X COLPIRE (TxC)
 					$carattObject = json_decode($_SESSION['data']['giocatore']['caratteristiche']);
 					
 					
+					// arma da mischia (mod FOR) o a distanza (mod DES)
+					$carattMod = ($gittata == '') ? $carattObject->for->bonus : $desMod = $carattObject->des->bonus;
+
+					$tiroPerColpire = $this->diceroll(20) + $_SESSION['data']['giocatore']['attacco_base'] + $carattMod;
+	
+					$nemicoCA = (int)$resultPGs[0]['ca'];
+
+					$compar = ($tiroPerColpire >= (int)$nemicoCA) ? "maggiore" : "minore";
 					
-					if ($gittata == '') {
+					
+					
+					// TxC andato a segno
+					if ($tiroPerColpire >= (int)$nemicoCA) {
 						
-						// Arma da mischia:
-						// 1d20 + (bonus attacco base + mod Forza + mod taglia)
-						$forMod = $carattObject->for->bonus;
+
+						// COLPITO!
+						$danni = $this->diceroll($danno->dado, $danno->quantita) + (int)$carattMod;
 						
-						$tiroPerColpire = $this->diceroll(20) + $_SESSION['data']['giocatore']['attacco_base'] + $forMod;
+						$nuoviPF = $resultPGs[0]['pf'] - $danni;
+						
+						
+						// se pf attaccato <= 0 elimina riga altrimenti prosegui
+						if ($nuoviPF <= 0) {
+							
+							return "$nome uccide $nemicoNome";die();
+							
+							
+							$Query = "DELETE from attacco_tmp where id = :id_nemico";
+				
+							$stmt = $this->db->prepare($Query);
+							
+							$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
+							
+							$stmt->execute();
+							
+							
+						} else {
+							
+							
+							return "$nemicoNome subisce $danni punti di danno da $nome";die();
+							
+							
+							/* // copia dati riga 1 in ultima riga e cancella riga 1 da attacco_tmp
+							$Query = "SELECT id from attacco_tmp ORDER BY id DESC LIMIT 1;";
+							
+							$stmt = $this->db->prepare($Query);
+							
+							$stmt->execute();
+							
+							if ($stmt->rowCount() > 0) {
+					
+								$lastID = $stmt->fetch(PDO::FETCH_ASSOC);
+							
+							} */
+							
+							// aggiorna statistiche attaccato in attacco_tmp
+							$Query = "UPDATE attacco_tmp SET pf = :pf where id = :id_nemico;";
+							
+							
+							// $Query .= "UPDATE attacco_tmp SET id = :id where id_giocatore = :id_giocatore;";
+							
+							$stmt = $this->db->prepare($Query);
+							
+							$stmt->bindParam(":pf", $nuoviPF, PDO::PARAM_STR);
+							$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
+							// $stmt->bindParam(":id", $nemicoID, PDO::PARAM_STR);
+							// $stmt->bindParam(":id_giocatore", $$giocatoreID, PDO::PARAM_STR);
+							
+							$stmt->execute();
+							
+							
+							
+							
+							
+						}	
+						
+						
+						// aggiorna giro di iniziativa su schermo in tempo reale
+						
 						
 					} else {
-						// arma a distanza:
-						// 1d20 + (bonus attacco base + mod Des + mod taglia + penalità gittata)
-						$desMod = $carattObject->des->bonus;
 						
-						$tiroPerColpire = $this->diceroll(20) + $_SESSION['data']['giocatore']['attacco_base'] + $desMod;
+						$result = "<b>Mancato!</b><br>$tiroPerColpire $compar di $nemicoCA";
+						
 					}
 					
 					
-					$result = $tiroPerColpire;
-
 					
 					
-	
-					
-					
-					
-					
-					
-					// se pf nemico > 0
-				
-				
-						// se (TIRO X COLPIRE >= CA attaccato) || (TxC non richiesto es. incantesimo)
-						
-							// COLPITO!
-						
-							// ferita = $caratAttacked['pf'] - diceRoll(armaAttacker[danno])
-							
-							// aggiorna statistiche attaccato in attacco_tmp
-							// $this->aggiornaStats(attaccato, pf, ferita);
-							// se pf attaccato <= 0 elimina riga
-						
-						// copia dati riga 1 in ultima riga e cancella riga 1 da attacco_tmp
-				
-					
-					
-					// altrimenti elimina riga 1 - nemico ucciso
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					/* // dati ATTACCANTE e ATTACCATO
-					$statsAttacker = !empty($giocatore) ? $this->caricaPersonaggio($giocatore) : $this->caricaPersonaggio($this->giocatore);
-					$statsAttacked = $this->caricaPersonaggio($attacked); */
-					
-					/* $caratAttacker = json_decode($statsAttacker['caratteristiche']);
-					$caratAttacked = json_decode($statsAttacked['caratteristiche']); */
-					
-					/* $abilAttacker = json_decode($statsAttacker['abilita']);
-					$abilAttacked = json_decode($statsAttacked['abilita']); */
-
-					
-					// carica armaAttacker e armaAttacked
-			
-					// tiroAttacker = diceRoll(20) + armaAttacker[bonus_tiro]
-
-					/* if (tiroAttacker >= $caratAttacked['ca']) {
-						
-						// COLPITO!
-						
-						ferita = $caratAttacked['pf'] - diceRoll(armaAttacker[danno])
-						
-						$this->aggiornaStats(attaccato, pf, ferita);
-						
-					} */
 					
 					
 				} else $result = 'Combattimento non in esecuzione';
 				
 				
-				// if ($result !== 'Combattimento non in esecuzione') {
-
-				
-					
-					// dati nemico da click utente
-					// $nemico = $_SESSION['data']['interazione']['nemico'];	
-				
-					// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
-					// $giocatoreID = $_SESSION['data']['giocatore'];
-					
-				
-					// player di riga 1 fa TIRO PER COLPIRE 1d20 (nemici comandati da DM)
-					// Arma da mischia:
-					// 1d20 + (bonus attacco base + mod Forza + mod taglia)
-					// arma a distanza:
-					// 1d20 + (bonus attacco base + mod Des + mod taglia + penalità gittata)
-					// incantesimi:
-					// nessun TxC se non espressamente richiesto dall'incantesimo
-				
-				
-				
-					// se pf nemico > 0
-				
-				
-						// se (TIRO X COLPIRE >= CA attaccato) || (TxC non richiesto)
-						
-							// COLPITO!
-						
-							// ferita = $caratAttacked['pf'] - diceRoll(armaAttacker[danno])
-							
-							// aggiorna statistiche attaccato in attacco_tmp
-							// $this->aggiornaStats(attaccato, pf, ferita);
-							// se pf attaccato <= 0 elimina riga
-						
-						// copia dati riga 1 in ultima riga e cancella riga 1 da attacco_tmp
-				
-					
-					
-					// altrimenti elimina riga 1 - nemico ucciso
-				
-				// }
-				
-				
-				
-				/* // dati ATTACCANTE e ATTACCATO
-				$statsAttacker = !empty($giocatore) ? $this->caricaPersonaggio($giocatore) : $this->caricaPersonaggio($this->giocatore);
-				$statsAttacked = $this->caricaPersonaggio($attacked); */
-				
-				/* $caratAttacker = json_decode($statsAttacker['caratteristiche']);
-				$caratAttacked = json_decode($statsAttacked['caratteristiche']); */
-				
-				/* $abilAttacker = json_decode($statsAttacker['abilita']);
-				$abilAttacked = json_decode($statsAttacked['abilita']); */
-
-				
-				// carica armaAttacker e armaAttacked
-		
-				// tiroAttacker = diceRoll(20) + armaAttacker[bonus_tiro]
-
-				/* if (tiroAttacker >= $caratAttacked['ca']) {
-					
-					// COLPITO!
-					
-					ferita = $caratAttacked['pf'] - diceRoll(armaAttacker[danno])
-					
-					$this->aggiornaStats(attaccato, pf, ferita);
-					
-				} */
 			}
 
 
