@@ -338,170 +338,184 @@
 				
 			} else {
 				
-			
-			
-			
-				// preleva dati nemico da attacco_tmp
-				$Query = "SELECT * from attacco_tmp where id = :id_nemico";
 				
-				$stmt = $this->db->prepare($Query);
-				
-				$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
-				
-				$stmt->execute();			
-
-				
-				
-				if ($stmt->rowCount() > 0) {
-					
-					$resultPGs = $stmt->fetchAll(PDO::FETCH_ASSOC);	
-
-	
-					// id arma del nemico (sempre singola)
-					$nemicoArmaID = preg_replace("/[^0-9]+/", "", $resultPGs[0]['armi']);
-					$nemicoNome = $resultPGs[0]['nome'];
-					
-					// preleva armi/incantesimi/oggetti
-					$nemicoGittata = $nemicoBonus = $gittata = $bonus = ''; $danno = $nemicoDanno = array();
-					
-					$QueryOggetti = 'SELECT * from oggetti';
-					$stmtOggetti = $this->db->prepare($QueryOggetti);
-					$stmtOggetti->execute();
-
-					$resultOggetti = $stmtOggetti->fetchAll(PDO::FETCH_ASSOC);
+				if (!isset($_SESSION['data']['giocatore']['manoDestra'])) {
 					
 					
-					// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
-					$giocatoreID = $_SESSION['data']['giocatore']['id'];
-					$nome = $_SESSION['data']['giocatore']['nome'];
+					$result = 'Non hai impugnato niente in mano!';
 					
-					// player di riga 1 fa TIRO PER COLPIRE 1d20 (nemici comandati da DM)
-					$giocatoreArmaDX = $_SESSION['data']['giocatore']['manoDestra'];
+				} else {
+					
+					// preleva dati nemico da attacco_tmp
+					$Query = "SELECT * from attacco_tmp where id = :id_nemico";
+					
+					$stmt = $this->db->prepare($Query);
+					
+					$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
+					
+					$stmt->execute();			
 
 					
-					foreach ($resultOggetti as $index => $value) {
+					
+					if ($stmt->rowCount() > 0) {
 						
-						// preleva dati arma nemico
-						if ($value['id'] == $nemicoArmaID) {
-							
-							$nemicoGittata = $value['gittata'];
-							$nemicoBonus = $value['bonus_tiro'];
-							$nemicoDanno = json_decode($value['danno']);
-							
-						}
-						
-						// preleva dati arma giocatore
-						if ($value['id'] == $giocatoreArmaDX) {
-							
-							$gittata = $value['gittata'];
-							$bonus = $value['bonus_tiro'];
-							$danno = json_decode($value['danno']);
-							
-						}
-						
-					}
-					
-
-					// TIRO PER COLPIRE NON SERVE CON INCANTESIMI
-
-					// calcola TIRO X COLPIRE (TxC)
-					$carattObject = json_decode($_SESSION['data']['giocatore']['caratteristiche']);
-					
-					
-					// arma da mischia (mod FOR) o a distanza (mod DES)
-					$carattMod = ($gittata == '') ? $carattObject->for->bonus : $desMod = $carattObject->des->bonus;
-
-					$tiroPerColpire = $this->diceroll(20) + $_SESSION['data']['giocatore']['attacco_base'] + $carattMod;
-	
-					$nemicoCA = (int)$resultPGs[0]['ca'];
-
-					$compar = ($tiroPerColpire >= (int)$nemicoCA) ? "maggiore" : "minore";
-					
-					
-					
-					// TxC andato a segno
-					if ($tiroPerColpire >= (int)$nemicoCA) {
-						
-
-						// COLPITO!
-						$danni = $this->diceroll($danno->dado, $danno->quantita) + (int)$carattMod;
-						
-						$nuoviPF = $resultPGs[0]['pf'] - $danni;
+						$resultPGs = $stmt->fetchAll(PDO::FETCH_ASSOC);	
 						
 						
-						// se pf attaccato <= 0 elimina riga altrimenti prosegui
-						if ($nuoviPF <= 0) {
-							
-							return "$nome uccide $nemicoNome";die();
+						if ($resultPGs[0]['giocatore'] !== 'npc') {
 							
 							
-							$Query = "DELETE from attacco_tmp where id = :id_nemico";
-				
-							$stmt = $this->db->prepare($Query);
-							
-							$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
-							
-							$stmt->execute();
+							$result = 'Stai attaccando un tuo compagno!';
 							
 							
 						} else {
 							
+							// id arma del nemico (sempre singola)
+							$nemicoArmaID = preg_replace("/[^0-9]+/", "", $resultPGs[0]['armi']);
+							$nemicoNome = $resultPGs[0]['nome'];
 							
-							return "$nemicoNome subisce $danni punti di danno da $nome";die();
+							// preleva armi/incantesimi/oggetti
+							$nemicoGittata = $nemicoBonus = $gittata = $bonus = ''; $danno = $nemicoDanno = array();
 							
-							
-							/* // copia dati riga 1 in ultima riga e cancella riga 1 da attacco_tmp
-							$Query = "SELECT id from attacco_tmp ORDER BY id DESC LIMIT 1;";
-							
-							$stmt = $this->db->prepare($Query);
-							
-							$stmt->execute();
-							
-							if ($stmt->rowCount() > 0) {
-					
-								$lastID = $stmt->fetch(PDO::FETCH_ASSOC);
-							
-							} */
-							
-							// aggiorna statistiche attaccato in attacco_tmp
-							$Query = "UPDATE attacco_tmp SET pf = :pf where id = :id_nemico;";
+							$QueryOggetti = 'SELECT * from oggetti';
+							$stmtOggetti = $this->db->prepare($QueryOggetti);
+							$stmtOggetti->execute();
+
+							$resultOggetti = $stmtOggetti->fetchAll(PDO::FETCH_ASSOC);
 							
 							
-							// $Query .= "UPDATE attacco_tmp SET id = :id where id_giocatore = :id_giocatore;";
+							// dati giocatore da SESSIONE per armi/incantesimi/oggetti impugnati
+							$giocatoreID = $_SESSION['data']['giocatore']['id'];
+							$nome = $_SESSION['data']['giocatore']['nome'];
 							
-							$stmt = $this->db->prepare($Query);
+							// player di riga 1 fa TIRO PER COLPIRE 1d20 (nemici comandati da DM)
+							$giocatoreArmaDX = $_SESSION['data']['giocatore']['manoDestra'];
+
 							
-							$stmt->bindParam(":pf", $nuoviPF, PDO::PARAM_STR);
-							$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
-							// $stmt->bindParam(":id", $nemicoID, PDO::PARAM_STR);
-							// $stmt->bindParam(":id_giocatore", $$giocatoreID, PDO::PARAM_STR);
+							foreach ($resultOggetti as $index => $value) {
+								
+								// preleva dati arma nemico
+								if ($value['id'] == $nemicoArmaID) {
+									
+									$nemicoGittata = $value['gittata'];
+									$nemicoBonus = $value['bonus_tiro'];
+									$nemicoDanno = json_decode($value['danno']);
+									
+								}
+								
+								// preleva dati arma giocatore
+								if ($value['id'] == $giocatoreArmaDX) {
+									
+									$gittata = $value['gittata'];
+									$bonus = $value['bonus_tiro'];
+									$danno = json_decode($value['danno']);
+									
+								}
+								
+							}
 							
-							$stmt->execute();
+
+							// TIRO PER COLPIRE NON SERVE CON INCANTESIMI
+
+							// calcola TIRO X COLPIRE (TxC)
+							$carattObject = json_decode($_SESSION['data']['giocatore']['caratteristiche']);
+							
+							
+							// arma da mischia (mod FOR) o a distanza (mod DES)
+							$carattMod = ($gittata == '') ? $carattObject->for->bonus : $desMod = $carattObject->des->bonus;
+
+							$tiroPerColpire = $this->diceroll(20) + $_SESSION['data']['giocatore']['attacco_base'] + $carattMod;
+			
+							$nemicoCA = (int)$resultPGs[0]['ca'];
+
+							$compar = ($tiroPerColpire >= (int)$nemicoCA) ? "maggiore" : "minore";
 							
 							
 							
-							
-							
-						}	
+							// TxC andato a segno
+							if ($tiroPerColpire >= (int)$nemicoCA) {
+								
+
+								// COLPITO!
+								$danni = $this->diceroll($danno->dado, $danno->quantita) + (int)$carattMod;
+								
+								$nuoviPF = $resultPGs[0]['pf'] - $danni;
+								
+								
+								// se pf nemico <= 0 elimina riga altrimenti diminuisci pf
+								if ($nuoviPF <= 0) {
+									
+									return "$nome uccide $nemicoNome";die();
+									
+									
+									$Query = "DELETE from attacco_tmp where id = :id_nemico";
 						
-						
-						// aggiorna giro di iniziativa su schermo in tempo reale
-						
-						
-					} else {
-						
-						$result = "<b>Mancato!</b><br>$tiroPerColpire $compar di $nemicoCA";
-						
-					}
+									$stmt = $this->db->prepare($Query);
+									
+									$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
+									
+									$stmt->execute();
+									
+									
+								} else {
+									
+									
+									return "$nemicoNome subisce $danni punti di danno da $nome";die();
+									
+									
+									// copia dati riga 1 in ultima riga e cancella riga 1 da attacco_tmp
+									$Query = "SELECT id from attacco_tmp ORDER BY id DESC LIMIT 1;";
+									
+									$stmt = $this->db->prepare($Query);
+									
+									$stmt->execute();
+									
+									if ($stmt->rowCount() > 0) {
+							
+										$lastID = $stmt->fetch(PDO::FETCH_ASSOC);
+									
+									}
+									
+									// aggiorna statistiche attaccato in attacco_tmp
+									$Query = "UPDATE attacco_tmp SET pf = :pf where id = :id_nemico;";
+									
+									
+									// $Query .= "UPDATE attacco_tmp SET id = :id where id_giocatore = :id_giocatore;";
+									
+									$stmt = $this->db->prepare($Query);
+									
+									$stmt->bindParam(":pf", $nuoviPF, PDO::PARAM_STR);
+									$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
+									// $stmt->bindParam(":id", $nemicoID, PDO::PARAM_STR);
+									// $stmt->bindParam(":id_giocatore", $$giocatoreID, PDO::PARAM_STR);
+									
+									$stmt->execute();
+									
+									
+									
+									
+									
+								}	
+								
+								
+								// aggiorna giro di iniziativa su schermo in tempo reale
+								
+								
+							} else {
+								
+								$result = "<b>Mancato!</b><br>$tiroPerColpire $compar di $nemicoCA";
+								
+							}
+
+						}
+
+			
+					} else $result = 'Combattimento non in esecuzione';
 					
 					
-					
-					
-					
-					
-				} else $result = 'Combattimento non in esecuzione';
-				
-				
+				}
+
+
 			}
 
 
