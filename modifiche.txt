@@ -1,0 +1,8 @@
+alter table my_mollymillion.personaggi add column attacco_base varchar(10) default "0" after pe;
+
+update my_mollymillion.personaggi set attacco_base = "3" where id = 1;
+update my_mollymillion.personaggi set attacco_base = "1" where id = 2;
+update my_mollymillion.personaggi set attacco_base = "1" where id = 3;
+update my_mollymillion.personaggi set attacco_base = "1" where id = 4;
+update my_mollymillion.personaggi set attacco_base = "2" where id = 5;
+

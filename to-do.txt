@@ -28,6 +28,7 @@ danno (1d6 + 2) round corrente + (1d6 + 2) round successivo
 	E se lo facessi con un pulsante tipo "FINE TURNO"?
 [ ] INCANTESIMI, EQUIPAGGIAMENTO, ABILITA' da rendere disponibili durante l'attacco 
 
+
 [ ] TEST
 
 
@@ -46,5 +47,8 @@ danno (1d6 + 2) round corrente + (1d6 + 2) round successivo
 		VARIE
 -----------------------------------------
 
+
 [ ] tabella oggetti: a cosa serve bonus_tiro?
 [ ] INCANTESIMI, ABILITA', EQUIPAGGIAMENTO da rendere disponibili in home
+[ ] tabella oggetti: a cosa serve bonus_tiro?
+
