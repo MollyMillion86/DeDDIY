@@ -16,4 +16,35 @@ ignora armatura magica
 danno (1d6 + 2) round corrente + (1d6 + 2) round successivo
 
 
+
+------------------------------------------------------------------------
+		COMBATTIMENTO
+-----------------------------------------
+
 [ ] eliminare in sessione le armi disponibili per l'utente, meglio prenderle dal DB e alleggerire le sessioni
+[ ] COMBATTIMENTO: oltre ad armi, inserire INCANTESIMI, ABILITA' ed EQUIPAGGIAMENTO
+[ ] buttons "ATTACCA" e "FAI..." inutili per adesso, commentare
+[ ] da inserire un aggiornamento in tempo reale che peschi dalla tabella di combattimento ad ogni turno? 
+	E se lo facessi con un pulsante tipo "FINE TURNO"?
+[ ] INCANTESIMI, EQUIPAGGIAMENTO, ABILITA' da rendere disponibili durante l'attacco 
+
+[ ] TEST
+
+
+
+------------------------------------------------------------------------
+		ADMIN
+-----------------------------------------
+
+[ ] pulsante INSERISCI da finire
+[ ] pulsante MODIFICA da finire
+
+
+
+
+------------------------------------------------------------------------
+		VARIE
+-----------------------------------------
+
+[ ] tabella oggetti: a cosa serve bonus_tiro?
+[ ] INCANTESIMI, ABILITA', EQUIPAGGIAMENTO da rendere disponibili in home
