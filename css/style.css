@@ -72,6 +72,10 @@ div[id^='modal-'] {
 	box-shadow: 4px 4px 4px grey;
 }
 
+#modal-abilita {
+	width: unset;
+}
+
 #modal-modifica, #modal-inserisci, div[id^='modal-lista'] {
 	left: 5%;
 	font-size: 13px;

@@ -49,6 +49,6 @@ danno (1d6 + 2) round corrente + (1d6 + 2) round successivo
 
 
 [ ] tabella oggetti: a cosa serve bonus_tiro?
-[ ] INCANTESIMI, ABILITA', EQUIPAGGIAMENTO da rendere disponibili in home
+[0] INCANTESIMI, ABILITA', EQUIPAGGIAMENTO da rendere disponibili in home
 [ ] tabella oggetti: a cosa serve bonus_tiro?
 

@@ -91,3 +91,75 @@ SESSIONE DI ESEMPIO:
 
     [ID] => 7a93a0991cb2cee4415e762d5a18b5ccaa4ffecc733b08986f9d92497fab73093e53e2d716ef0cf682e84f3efa9d23b7f45f05a4802e0d5594bad6cdb0fde6a0
 )
+
+
+
+
+
+
+
+
+
+Array ( 
+	[0] => Array ( 
+		[id] => 4 
+		[nome] => Concentrazione 
+		[proprietario] => 1 
+		[azione] => abilita 
+		[descrizione] => Viene effettuata una prova di concentrazione quando rischia di essere distratto mentre è impegnato in un'azione che richiede attenzione. 
+		[modificatore_caratteristica] => cos 
+		[prova_contrapposta] => 
+		[cd] => [
+			{"cd":"5","azione":"Tempo atmosferico vigoroso"},
+			{"cd":"10","azione":"Subire un danno o tempo atmosferico violento"},
+			{"cd":"10","azione":"Subire un danno ripetuto"},
+			{"cd":"10","azione":"Movimento vigoroso es. su una cavalcatura in movimento"},
+			{"cd":"15","azione":"Movimento violento es. su una cavalcatura al galoppo, intralciato"},
+			{"cd":"20","azione":"In lotta o immobilizzato"},
+			{"cd":"0","azione":"Lottatore (prova contrapposta)"}
+		] 
+		[condizioni_aggiuntive] => 
+			[{"cd":"x","azione":"Danno subito"},
+			{"cd":"x\/2","azione":"Danni subiti"}
+		] ) 
+	[1] => Array ( 
+		[id] => 5 
+		[nome] => Osservare 
+		[proprietario] => 1 
+		[azione] => abilita 
+		[descrizione] => Individuare personaggi e creature che si nascondono 
+		[modificatore_caratteristica] => sag 
+		[prova_contrapposta] => 
+			["Nascondersi", "Camuffare"] 
+		[cd] => [
+			{"cd":"-1","azione":"Ogni 3 metri di distanza"},
+			{"cd":"-5","azione":"Osservatore distratto"}
+		] 
+		[condizioni_aggiuntive] => ) )
+		
+		
+		
+		
+		
+	Array ( 
+		[0] => Array 
+			( 
+				[cd] => x 
+				[azione] => Danno subito 
+			) 
+		[1] => Array 
+			( 
+				[cd] => x/2 
+				[azione] => Danni subiti 
+			) 
+		[2] =>
+			x
+			:
+			Danno subito
+
+		[3] =>
+			x/2
+			:
+			Danni subiti
+
+		)

@@ -2,38 +2,7 @@
 
 	class INTERAGIRE {
 		
-		
-		/* print_r(json_encode(array(
-				
-			'for' => array(
-				'base' => '17',
-				'bonus' => '3'
-			),
-			'des' => array(
-				'base' => '15',
-				'bonus' => '2'
-			),
-			'cos' => array(
-				'base' => '14',
-				'bonus' => '2'
-			),
-			'car' => array(
-				'base' => '15',
-				'bonus' => '2'
-			),
-			'int' => array(
-				'base' => '14',
-				'bonus' => '2'
-			),
-			'sag' => array(
-				'base' => '13',
-				'bonus' => '1'
-			),
-			'iniziativa' => 0
-		))); */
-		
-		
-		
+
 		
 		private $db;
 		public $giocatore;
@@ -54,13 +23,8 @@
 		
 		public function logout() {
 			
-			// session_start();
 			if (session_status() !== "0") {
-				
-				
-				// $this->resetAttaccoBuffer();
-				
-				
+
 				session_unset();	
 				
 				ob_end_flush();
@@ -89,7 +53,6 @@
 	
 			$tmp = json_decode($typeArray, JSON_OBJECT_AS_ARRAY);
 
-			// $oggetti = !empty($giocatore) ? $this->caricaOggetto($tmp['data']['id']) : $this->caricaOggetto($this->giocatore);
 			$oggetti = $this->caricaOggettiDaProprietario($tmp['data']['id']);
 			$abilita = $this->caricaAbilitaDaGiocatore($tmp['data']['id']);
 			$tmp['data']['armi'] = $oggetti;
@@ -99,13 +62,8 @@
 			
 			$_SESSION['ID'] = $tmp['ID'];
 			$_SESSION['data']['giocatore'] = $tmp['data'];
-			
-			// $_SESSION['data']['oggetti'] = $oggetti;
-			
 
 			return $typeArray;
-			// return $oggetti;
-			
 
 			
 		}
@@ -318,14 +276,13 @@
 			}
 
 			return $prova;
-			// return $return;
+
 		}
 
 		
 		/**
 		* attacca: attaccante VS attaccato 
 		*/
-		// public function attacca($attacked) {
 		public function attacca($nemicoID) {
 			
 			$result = '';
@@ -478,17 +435,12 @@
 									
 									// aggiorna statistiche attaccato in attacco_tmp
 									$Query = "UPDATE attacco_tmp SET pf = :pf where id = :id_nemico;";
-									
-									
-									// $Query .= "UPDATE attacco_tmp SET id = :id where id_giocatore = :id_giocatore;";
-									
+
 									$stmt = $this->db->prepare($Query);
 									
 									$stmt->bindParam(":pf", $nuoviPF, PDO::PARAM_STR);
 									$stmt->bindParam(":id_nemico", $nemicoID, PDO::PARAM_STR);
-									// $stmt->bindParam(":id", $nemicoID, PDO::PARAM_STR);
-									// $stmt->bindParam(":id_giocatore", $$giocatoreID, PDO::PARAM_STR);
-									
+
 									$stmt->execute();
 									
 									
@@ -589,24 +541,7 @@
 			$return = array(); $name = array(); $danno = ''; 
 			$armi = ''; $incantesimi = ''; $abilita = '';$equipaggiamento = ''; $razza = array(); $classe = array();
 			$caratteristiche = array();
-			/* $caratteristiche = array(
-				'for' => array(
-					'base' => '','bonus' => ''
-				),'des' => array(
-					'base' => '','bonus' => ''
-				),'cos' => array(
-					'base' => '','bonus' => ''
-				),'car' => array(
-					'base' => '','bonus' => ''
-				),'int' => array(
-					'base' => '','bonus' => ''
-				),'sag' => array(
-					'base' => '','bonus' => ''
-				)
-			);  */
 
-			
-			
 			foreach ($param as $index2 => $value2) {
 	
 				foreach ($value2 as $index3 => $value3) {
@@ -737,8 +672,6 @@
 			$risultato = $this->aggiungiDM($tipo, $return);
 
 			return $risultato;
-			// return $return;
-			// return $param;
 
 			
 		}
@@ -799,29 +732,7 @@
 
 		}
 		
-		
-		/**
-		* abilityScore: preleva punteggio abilità (base || bonus)
-		
-		private function abilityScore($json, $name, $type) {
-			
-			$output = array();
-			
-			
-			$abilityScoreInArray = json_decode($json, true);
-			
-			function getScore($key, $value, $values) {
-				
-				echo "key is $key and vlaue is $value and $values is $values";
-				
-			}
-			
-			array_walk_recursive($abilityScoreInArray, "getScore($name, $type)", $output);
-			
-			
-			return $output;
-			
-		}*/
+
 		
 		/**
 		* typeArray: costruzione ritorno per ogni chiamata
@@ -878,12 +789,16 @@
 							<th scope="col">ABILITA</th>
 							<th scope="col">EQUIPAGGIAMENTO</th>' 
 							 : 
+							'';
+				$stringa .= array_key_exists("oggetti", $param)
+							 ?
 							'<th scope="col">PROPRIETARIO</th>
 							<th scope="col">PRESENTE</th>
 							<th scope="col">TIPO</th>
 							<th scope="col">BONUS TIRO</th>
 							<th scope="col">DANNO</th>
-							<th scope="col">GITTATA</th>';
+							<th scope="col">GITTATA</th>'
+							: '';
 				
 				$stringa .= array_key_exists("abilita", $param)
 							?
@@ -899,7 +814,7 @@
 			
 
 			if (!is_string($param)) {
-				// print_r($param);die();
+				
 				foreach ($param as $index => $value) {
 
 					
@@ -942,14 +857,14 @@
 						break;
 						
 						case 'abilita':
-							$stringa .= "ABILITA";
+
 							$nome = $id = $descrizione = $modCaratt = $contrapp = $cd = $difficolta = $azione = $difficoltaAltre = $azioneAltre = $altreCond = array();
-							// $tmpCpd = $tmpCdAltre = "";
-							
+
+							$altreCond = array();
 							foreach ($value as $index2 => $value2) {
 								
 								foreach ($value2 as $index3 => $value3) {
-									$stringa .= "DENTRO";
+
 									if ($index3 == 'id') $id[] = $value3;
 									if ($index3 == 'nome') $nome[] = $value3;
 									if ($index3 == 'descrizione') $descrizione[] = $value3;
@@ -966,7 +881,7 @@
 											}
 											
 											
-											$cd[] = "<b>" . $difficolta[x] . "</b>: <p>" . $azione[x] . "</p>";
+											$cd[] = "<b>" . $difficolta[$x] . "</b>: <p>" . $azione[$x] . "</p>";
 											
 										}
 										
@@ -974,48 +889,56 @@
 										
 									}
 									if ($index3 == 'condizioni_aggiuntive') {
-										
-										$altreCond = json_decode($value3, JSON_OBJECT_AS_ARRAY);
-										
-										$tmp = json_decode($value3, JSON_OBJECT_AS_ARRAY);
-										
-										foreach ($tmp as $x => $y) {
-											foreach ($y as $x2 => $y2) {
-												if ($x2 == 'cd') $difficoltaAltre[] = $y2;
-												if ($x2 == 'azione') $azioneAltre[] = $y2;
+										if (!empty($value3)) {
+											
+											$altreCond = json_decode($value3, JSON_OBJECT_AS_ARRAY);
+											
+											$tmp = json_decode($value3, JSON_OBJECT_AS_ARRAY);
+											
+											foreach ($tmp as $x => $y) {
+												foreach ($y as $x2 => $y2) {
+													if ($x2 == 'cd') $difficoltaAltre[] = $y2;
+													if ($x2 == 'azione') $azioneAltre[] = $y2;
+												}
+												
+												
+												$altreCond[] = "<b>" . 
+												$difficoltaAltre[$x] . "</b>: <p>" . 
+												$azioneAltre[$x] . "</p>";
+												
 											}
-											
-											
-											$altreCond[] = "<b>" . $difficoltaAltre[x] . "</b>: <p>" . $azioneAltre[x] . "</p>";
-											
 										}
-										
 									}
 									
 								}
 								
 								
-								if ($tabella) {
+								// if ($tabella) {
 									
-									$stringa .= '<tr>
+									// altreCondizioni in condizione se vuota?????
+									// $condizioni = !empty($altreCond) ? '<td>' . $altreCond[$index2] . '</td>' : '';
+									
+									$stringaAbilita .= '<tr>
 													<td>' . $id[$index2] . '</td>
 													<td>' . $nome[$index2] . '</td>
 													<td>' . $descrizione[$index2] . '</td>
 													<td>' . $modCaratt[$index2] . '</td>
 													<td>' . $contrapp[$index2] . '</td>
-													<td>' . $cd[$index2] . '</td>
-													<td>' . $altreCond[$index2] . '</td>
-													
-													<td><button type="button" id="usa-abilita-' . $id[$index2] . '" onclick="usaAbilita(' . $id[$index2] . ');closeModal(\'abilita\');">USA</button></td>
+													<td>' . $cd[$index2] . '</td>'.
+													// '<td>' . $altreCond[$index2] . '</td>'
+													 // . $condizioni . 
+													'<td><button type="button" id="usa-abilita-' . $id[$index2] . '" onclick="usaAbilita(' . $id[$index2] . ');closeModal(\'abilita\');">USA</button></td>
 												
 												</tr>';
 									
 									
-								}
+								// }
 								
 								
 								
 							}
+						
+							$result = $stringaAbilita;
 						
 						break;
 						
@@ -1034,7 +957,6 @@
 									if ($index3 == 'id') $id = $value3;
 									
 									// se utente sceglie arma da impugnare
-									// if (($armaScelta) && ($index3 == 'id') && ($value3 == $armaScelta)) {
 									if (($armaScelta) && ($value3 == $armaScelta)) {
 
 										if ($index3 == 'id') $_SESSION['data']['giocatore']['manoDestra'] = $value3;
@@ -1071,9 +993,7 @@
 									
 									
 									if ($tabella) {
-										
-										// 'modifica-personaggio-' X TUTTI
-										
+
 										if ($index3 == 'id') $id[] = $value3;
 										if ($index3 == 'nome') $nome[] = $value3;
 										if ($index3 == 'giocatore') $giocatore[] = $value3;
@@ -1127,7 +1047,7 @@
 										}
 										
 										if ($index3 == 'incantesimi') {
-											// $incantesimi[] = json_decode($value3, JSON_OBJECT_AS_ARRAY);
+											
 											$tmp = json_decode($value3, JSON_OBJECT_AS_ARRAY); $tmpText = '';
 											
 								
@@ -1141,7 +1061,7 @@
 											
 										}
 										if ($index3 == 'abilita') {
-											// $abilita[] = json_decode($value3, JSON_OBJECT_AS_ARRAY);
+											
 											$tmp = json_decode($value3, JSON_OBJECT_AS_ARRAY); $tmpText = '';
 											
 								
@@ -1155,7 +1075,7 @@
 											
 										}
 										if ($index3 == 'equipaggiamento') {
-											// $equipaggiamento[] = json_decode($value3, JSON_OBJECT_AS_ARRAY);
+											
 											$tmp = json_decode($value3, JSON_OBJECT_AS_ARRAY); $tmpText = '';
 											
 								
@@ -1326,9 +1246,7 @@
 				foreach ($param['giro'] as $index4 => $value4) {
 						
 					$count++;
-					
-// 					$htmlPlayer .= $index4 . " " . $value4;					
-					
+	
 					// 'attacca' al posto di 'nemico'
 					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="selezionaPG(' . $id[$count] . ', \'attacca\');closeModal(\'nemico\');">
 							<label for="' . $index4 . '">' . $nome[$count] . '</label>
@@ -1337,19 +1255,12 @@
 				}
 				
 			}
-			
-			
-			// return $param['giro'];die();
-			
-			
+
 			if ($htmlPlayer) {
 				return $htmlPlayer;
 			} else {
 				return $result;
 			}
-			
-			
-
 
 		}
 		
@@ -1371,37 +1282,7 @@
 				
 				
 				$_SESSION['data']['giocatore'][$data] = $value;
-				
-				
-				/* switch ($data) {
-					
-					
-					case 'manoDestra':
-					
-						$_SESSION['data']['giocatore']['manoDestra'] = $value;
-					
-					break;
-					
-					case 'tipoManoDestra':
-					
-						$_SESSION['data']['giocatore']['tipoManoDestra'] = $value;
-						
-					break;	
-					
-					case 'manoSinistra':
-					
-						$_SESSION['data']['giocatore']['manoSinistra'] = $value;
-					
-					break;
-					
-					default:
-					
-						$_SESSION['data']['giocatore'][$data] = $value;
-					
-					break;
-					
-					
-				} */
+
 				
 				$return = 'OK';
 				
@@ -1440,7 +1321,6 @@
 			if ($stmt->rowCount() > 0) {
 
 				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				// $return = 'true';
 				
 			} else $result = 'Combattimento non in esecuzione';
 			
@@ -1653,12 +1533,7 @@
 				$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			}
-			
-			
-			/* $tmp = json_decode($result['danno'], JSON_OBJECT_AS_ARRAY);
-			
-			$result['danno'] = $tmp; */
-			
+
 			$return = json_encode($result);
 			
 			return $return;
@@ -1690,17 +1565,15 @@
 				
 	
 				$result = (($stringa) && ($tipoOggetto)) ? array($tipoOggetto => $stmt->fetchAll(PDO::FETCH_ASSOC)) : $stmt->fetchAll(PDO::FETCH_ASSOC);
-					
 
 				if ($stringa) {
 				
-					$risultato = ($armaScelta) ? $this->creaOggettiHTML($result, $armaScelta) : $this->creaOggettiHTML($result);
+					// $risultato = ($armaScelta) ? $this->creaOggettiHTML($result, $armaScelta) : $this->creaOggettiHTML($result);
 				
 					$risultato = $this->creaOggettiHTML($result);
 				
 				
 				} else $risultato = $result;
-				
 				
 			} catch (Exception $e) {
 				
@@ -1708,28 +1581,7 @@
 				
 				
 			}
-			
-			/* if ($stmt->rowCount() == 0) {
 
-				$result = "Oggetti non trovati";
-				
-			} else {
-
-				$result = (($stringa) && ($tipoOggetto)) ? array($tipoOggetto => $stmt->fetchAll(PDO::FETCH_ASSOC)) : $stmt->fetchAll(PDO::FETCH_ASSOC);
-			}
-			
-
-			if ($stringa) {
-				
-				$risultato = ($armaScelta) ? $this->creaOggettiHTML($result, $armaScelta) : $this->creaOggettiHTML($result);
-				
-				$risultato = $this->creaOggettiHTML($result);
-				
-				
-			} else $risultato = $result;
-			 */
-
-			
 			return $risultato;
 			
 
@@ -1812,11 +1664,7 @@
 
 			}
 			
-			
-			/* $tmp = json_decode($result['danno'], JSON_OBJECT_AS_ARRAY);
-			
-			$result['danno'] = $tmp; */
-			
+
 			$return = json_encode($result);
 			
 			return $return;
@@ -1835,8 +1683,8 @@
 		*/
 		public function caricaAbilitaDaGiocatore($id, $stringa = false, $tipoOggetto = false, $armaScelta = false) {
 			
-			// $oggettoQuery = ($tipoOggetto) && ($stringa) ? ' and azione = "' . $tipoOggetto . '"' : '';
-			$Query = 'SELECT * FROM abilita WHERE proprietario = :id';
+			$oggettoQuery = ($tipoOggetto) && ($stringa) ? ' and azione = "' . $tipoOggetto . '"' : '';
+			$Query = 'SELECT * FROM abilita WHERE proprietario = :id' . $oggettoQuery;
 			$risultato = '';
 			
 			
@@ -1849,19 +1697,16 @@
 				$query = $this->db->query($Query);
 				
 	
-				// $result = (($stringa) && ($tipoOggetto)) ? array($tipoOggetto => $stmt->fetchAll(PDO::FETCH_ASSOC)) : $stmt->fetchAll(PDO::FETCH_ASSOC);
-				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			
+				$result = (($stringa) && ($tipoOggetto)) ? array($tipoOggetto => $stmt->fetchAll(PDO::FETCH_ASSOC)) : $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 				if ($stringa) {
 				
 					// $risultato = ($armaScelta) ? $this->creaOggettiHTML($result, $armaScelta) : $this->creaOggettiHTML($result);
 				
-					$risultato = $this->creaOggettiHTML($result, false, true);
+					$risultato = $this->creaOggettiHTML($result);
 				
 				
 				} else $risultato = $result;
-				
 				
 			} catch (Exception $e) {
 				
@@ -1905,14 +1750,7 @@
 		* 
 		*/ 
 		public function test() {
-            
-            
-            
-            
-//             $return = $this->start();
-            
-            
-            
+           
             return "PROVA";
             
 		}

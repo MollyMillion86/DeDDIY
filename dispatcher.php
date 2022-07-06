@@ -68,13 +68,12 @@
 			
 			
 			case 'scegliAbilita':
-			// session_start();
-				// $abilitaStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, $_POST['data']);
-				$abilitaStats = $action->caricaAbilitaDaGiocatore($_SESSION['data']['giocatore']['id'], true, $tipoOggetto = false, $armaScelta = false);
+			session_start();
+				$abilitaStats = $action->caricaAbilitaDaGiocatore($_SESSION['data']['giocatore']['id'], true, $_POST['data']);
 				print_r($abilitaStats);
-				// print_r($_POST['data']);
+				// print_r($_SESSION);
 				break;
-				
+		
 			
 			case 'caricaArmi':
 			// case 'caricaArmi':
@@ -82,7 +81,7 @@
 				$oggettoStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, false, $_POST['data']);
 				// print_r($_SESSION);
 				break;
-				
+		
 			case 'scegliArma':
 				session_start();
 				// $oggettoStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, false, $_POST['data']);
@@ -93,9 +92,8 @@
 				
 				print_r($oggettoStats);
 				
-			
 				break;
-					
+		
 			case 'inserisciOggetto':
 				session_start();
 				$oggettoStats = $action->inserisciDM("oggetto", $_POST['data']);

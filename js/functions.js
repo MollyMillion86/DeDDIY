@@ -264,7 +264,8 @@ $(document).ready(function() {
 				
 				$.post("../dispatcher.php", {
 					
-					"action" : 'scegliAbilita'
+					"action" : 'scegliAbilita',
+					'data' : 'abilita'
 					
 				}, function(ret) {
 					
