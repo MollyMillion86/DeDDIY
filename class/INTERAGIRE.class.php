@@ -858,9 +858,8 @@
 						
 						case 'abilita':
 
-							$nome = $id = $descrizione = $modCaratt = $contrapp = $cd = $difficolta = $azione = $difficoltaAltre = $azioneAltre = $altreCond = array();
-
-							$altreCond = array();
+							$nome = $id = $descrizione = $modCaratt = $contrapp = $altreCond = $cdTmp = $altreCondTmp = array();
+							
 							foreach ($value as $index2 => $value2) {
 								
 								foreach ($value2 as $index3 => $value3) {
@@ -868,72 +867,57 @@
 									if ($index3 == 'id') $id[] = $value3;
 									if ($index3 == 'nome') $nome[] = $value3;
 									if ($index3 == 'descrizione') $descrizione[] = $value3;
-									if ($index3 == 'modificatore_caratteristica') $modCaratt[] = $value3;
-									if ($index3 == 'prova_contrapposta') $contrapp[] = $value3;
-									if ($index3 == 'cd') {
-										
-										$tmp = json_decode($value3, JSON_OBJECT_AS_ARRAY);
-										
-										foreach ($tmp as $x => $y) {
-											foreach ($y as $x2 => $y2) {
-												if ($x2 == 'cd') $difficolta[] = $y2;
-												if ($x2 == 'azione') $azione[] = $y2;
-											}
-											
-											
-											$cd[] = "<b>" . $difficolta[$x] . "</b>: <p>" . $azione[$x] . "</p>";
-											
-										}
-										
-										
-										
+									if ($index3 == 'modificatore_caratteristica') $modCaratt[] = ucfirst($value3);
+									if ($index3 == 'prova_contrapposta') {
+										// elimimina caratteri di punteggiatura
+										$contrapp[] = ($value3 !== null) ? preg_replace("/[[:punct:]]/", "", $value3) : "Nessuna";
 									}
+									
+									if ($index3 == 'cd') {
+										$cdTmp = ($value3 !== null) ? $value3 : 'Nessuna';
+									} 
+									
 									if ($index3 == 'condizioni_aggiuntive') {
-										if (!empty($value3)) {
-											
-											$altreCond = json_decode($value3, JSON_OBJECT_AS_ARRAY);
-											
-											$tmp = json_decode($value3, JSON_OBJECT_AS_ARRAY);
-											
-											foreach ($tmp as $x => $y) {
-												foreach ($y as $x2 => $y2) {
-													if ($x2 == 'cd') $difficoltaAltre[] = $y2;
-													if ($x2 == 'azione') $azioneAltre[] = $y2;
-												}
-												
-												
-												$altreCond[] = "<b>" . 
-												$difficoltaAltre[$x] . "</b>: <p>" . 
-												$azioneAltre[$x] . "</p>";
-												
-											}
-										}
+										$altreCondTmp = ($value3 !== null) ? $value3 : "Nessuna";
 									}
 									
 								}
 								
+								$altreCond = $cd = '';
 								
-								// if ($tabella) {
-									
-									// altreCondizioni in condizione se vuota?????
-									// $condizioni = !empty($altreCond) ? '<td>' . $altreCond[$index2] . '</td>' : '';
-									
-									$stringaAbilita .= '<tr>
-													<td>' . $id[$index2] . '</td>
-													<td>' . $nome[$index2] . '</td>
-													<td>' . $descrizione[$index2] . '</td>
-													<td>' . $modCaratt[$index2] . '</td>
-													<td>' . $contrapp[$index2] . '</td>
-													<td>' . $cd[$index2] . '</td>'.
-													// '<td>' . $altreCond[$index2] . '</td>'
-													 // . $condizioni . 
-													'<td><button type="button" id="usa-abilita-' . $id[$index2] . '" onclick="usaAbilita(' . $id[$index2] . ');closeModal(\'abilita\');">USA</button></td>
-												
-												</tr>';
+								// classe difficoltà
+								if ($cdTmp !== "Nessuna") {
+									$tmp = json_decode($cdTmp, true);
 									
 									
-								// }
+									foreach ($tmp as $index3 => $index3) {
+										$cd .= 'CD: ' . $tmp[$index3]['cd'] . ', azione: ' . $tmp[$index3]['azione'] . '<br>';
+									}
+									
+								} else $cd = $cdTmp;
 								
+								
+								// condizioni aggiuntive
+								if ($altreCondTmp !== "Nessuna") {
+									$tmp = json_decode($altreCondTmp, true);
+									foreach ($tmp as $index3 => $index3) {
+										$altreCond .= 'CD: ' . $tmp[$index3]['cd'] . ', azione: ' . $tmp[$index3]['azione'] . '<br>';
+									}
+									
+								} else $altreCond = $altreCondTmp;
+								
+								
+								
+								$stringaAbilita .= '<span id="list-abilita-' . $id[$index2] . '">
+														<b>NOME: </b><p> ' . $nome[$index2] . '</p><br>
+														<b>DESCRIZIONE: </b><p>' . $descrizione[$index2] . '</p><br>
+														<b>CARATTERISTICA: </b><p>' . $modCaratt[$index2] . '</p><br>
+														<b>PROVA CONTRAPPOSTA: </b><p>' . $contrapp[$index2] . '</p><br>
+														<b>CLASSE DIFFICOLTA\': </b><p>' . $cd . '</p><br>
+														<b>CONDIZIONI AGGIUNTIVE: </b><p>' . $altreCond . '</p><br>
+														<hr><br>
+								
+								';
 								
 								
 							}
@@ -1698,7 +1682,7 @@
 				
 	
 				$result = (($stringa) && ($tipoOggetto)) ? array($tipoOggetto => $stmt->fetchAll(PDO::FETCH_ASSOC)) : $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+// return $result;die();
 				if ($stringa) {
 				
 					// $risultato = ($armaScelta) ? $this->creaOggettiHTML($result, $armaScelta) : $this->creaOggettiHTML($result);
