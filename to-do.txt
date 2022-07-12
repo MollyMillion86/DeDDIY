@@ -26,8 +26,10 @@ danno (1d6 + 2) round corrente + (1d6 + 2) round successivo
 [ ] buttons "ATTACCA" e "FAI..." inutili per adesso, commentare
 [ ] da inserire un aggiornamento in tempo reale che peschi dalla tabella di combattimento ad ogni turno? 
 	E se lo facessi con un pulsante tipo "FINE TURNO"?
-[ ] INCANTESIMI, EQUIPAGGIAMENTO, ABILITA' da rendere disponibili durante l'attacco 
-
+[X] INCANTESIMI e ABILITA' da rendere disponibili durante l'attacco 
+[ ] EQUIPAGGIAMENTO da rendere disponibile durante l'attacco
+[ ] prevedere la possibilità di COLPIRE PIU' AVVERSARI: magari con un click e la selezione deve essere
+	visibile
 
 [ ] TEST
 
@@ -49,6 +51,10 @@ danno (1d6 + 2) round corrente + (1d6 + 2) round successivo
 
 
 [ ] tabella oggetti: a cosa serve bonus_tiro?
-[0] INCANTESIMI, ABILITA', EQUIPAGGIAMENTO da rendere disponibili in home
+[X] INCANTESIMI e ABILITA' da rendere disponibili in home
+[ ] EQUIPAGGIAMENTO da rendere disponibile in home
+[ ] come far funzionare le ABILITA'????? dopo l'analisi procedere con il button
 [ ] tabella oggetti: a cosa serve bonus_tiro?
-
+[ ] per avere gli INCANTESIMI in attacco occorre prima poter usare l'abilità CONCENTRAZIONE
+[ ] oggetti (incantesimi): GITTATA per livello, DANNO per livello in tabella
+[ ] nuova mappa con elementi droppabili e draggabili (plugin candidato: jQuery UI)

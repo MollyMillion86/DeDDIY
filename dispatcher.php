@@ -76,7 +76,6 @@
 		
 			
 			case 'caricaArmi':
-			// case 'caricaArmi':
 				session_start();
 				$oggettoStats = $action->caricaOggettiDaProprietario($_SESSION['data']['giocatore']['id'], true, false, $_POST['data']);
 				// print_r($_SESSION);
