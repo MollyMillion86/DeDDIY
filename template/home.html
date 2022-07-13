@@ -8,7 +8,9 @@
 	<!-- <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"> -->
 	<link href="../css/style.css" rel="stylesheet" type="text/css">
 
-	<script src="../js/jquery-3.4.1.min.js"></script>
+	<!-- <script src="../js/jquery-3.4.1.min.js"></script> -->
+	<script src="../js/jquery.js"></script>
+	<script src="../js/jquery-ui.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
 	
@@ -135,41 +137,43 @@
 	</div>
 	
 	
+	<div id="player1" class="elem player">PG1</div>
 	
 	
 	
-	
-	<!-- PLAYER1 -->
+	<!-- PLAYER1
 	<a href="#" class="elem player" id="player1">
 		<label for="coord1">P1</label>
 		<input type="text" id="coord1" placeholder="casella?">
 		<button id="btn1" type="button" onclick="move(this, 'player');">OK</button>
-	</a>
+	</a> -->
 	
-	<!-- PLAYER2 -->
+	
+	
+	<!-- PLAYER2 
 	<a href="#" class="elem player" id="player2">
 		<label for="coord2">P2</label>
 		<input type="text" id="coord2" placeholder="casella?">
 		<button id="btn2" type="button" onclick="move(this, 'player');">OK</button>
-	</a>
+	</a>-->
 	
-	<!-- PLAYER3 -->
+	<!-- PLAYER3
 	<a href="#" class="elem player" id="player3">
 		<label for="coord3">P3</label>
 		<input type="text" id="coord3" placeholder="casella?">
 		<button id="btn3" type="button" onclick="move(this, 'player');">OK</button>
-	</a>
+	</a> -->
 	
-	<!-- PLAYER4 -->
+	<!-- PLAYER4
 	<a href="#" class="elem player" id="player4">
 		<label for="coord4">P4</label>
 		<input type="text" id="coord4" placeholder="casella?">
 		<button id="btn4" type="button" onclick="move(this, 'player');">OK</button>
-	</a>
+	</a> -->
 	
 	
 	
-	<!-- NPC -->
+	<!-- NPC 
 	<a href="#" class="elem npc enemy" id="npc5">
 		<label for="coord5">NPC1</label>
 		<input type="text" id="coord5" placeholder="casella?">
@@ -180,23 +184,44 @@
 		<label for="coord7">NPC2</label>
 		<input type="text" id="coord7" placeholder="casella?">
 		<button id="btn7" type="button" onclick="move(this, 'npc');">OK</button>
-	</a>
+	</a>-->
 	
 	
-	<!-- EXE -->
+	<!-- EXE
 	<a href="#" class="elem exe" id="exe6">
 		<label for="coord6">LEVA</label>
 		<input type="text" id="coord6" placeholder="casella?">
 		<button id="btn6" type="button" onclick="move(this, 'exe');">OK</button>
-	</a>
+	</a> -->
+	
+	<style>
+	
+		
+	
+	</style>
+	
+	<script>
+		
+		
+		
+		
+		/* $("#player1").draggable();
+		
+		$("area[alt='C10']").droppable({
+			drop: function() {
+				alert("dropped!");
+			}
+		}); */
 	
 	
-	
+	</script>
 	
 	<!-- mappa -->
 	<img id="map" src="../img/skull-entrance-map.jpg" alt="Workplace" usemap="#workmap">
-
-	<map name="workmap"> <!-- RIGA CORRETTA -->
+	
+	<!-- Misure della griglia: 16 x 20 quadrati
+		 Misure di un singolo quadrato: 60 x 60 px-->
+	<map name="workmap"> 
 		<area shape="rect" coords="0,0,60,60" alt="A1" href="#">
 		<area shape="rect" coords="60,0,120,60" alt="A2" href="#">
 		<area shape="rect" coords="120,0,180,60" alt="A3" href="#">
@@ -240,7 +265,7 @@
 		<area shape="rect" coords="360,120,420,180" alt="C7" href="#">
 		<area shape="rect" coords="420,120,480,180" alt="C8" href="#">
 		<area shape="rect" coords="540,120,600,180" alt="C9" href="#">
-		<area shape="rect" coords="600,120,660,180" alt="C10" href="#">
+		<area shape="rect" coords="600,120,660,180" alt="C10" href="#" id="C10">
 		<area shape="rect" coords="660,120,720,180" alt="C11" href="#">
 		<area shape="rect" coords="720,120,780,180" alt="C12" href="#">
 		<area shape="rect" coords="780,120,840,180" alt="C13" href="#">

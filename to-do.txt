@@ -1,3 +1,9 @@
+
+------------------------------------------------------------------------
+		INCANTESIMI DI TEST DA INSERIRE
+-----------------------------------------
+
+
 [ ] DISTRUGGERE NON MORTI
 iniziativa d20 + 2 (bonus des)
 danno 1d6
@@ -58,3 +64,15 @@ danno (1d6 + 2) round corrente + (1d6 + 2) round successivo
 [ ] per avere gli INCANTESIMI in attacco occorre prima poter usare l'abilità CONCENTRAZIONE
 [ ] oggetti (incantesimi): GITTATA per livello, DANNO per livello in tabella
 [ ] nuova mappa con elementi droppabili e draggabili (plugin candidato: jQuery UI)
+
+
+
+------------------------------------------------------------------------
+		jQUERY ui
+-----------------------------------------
+
+I moduli candidati  per il download sono:
+- draggable
+- droppable
+- selectable
+- dialog

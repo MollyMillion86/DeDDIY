@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Area css</title>
+  <script src="../js/jquery.js"></script>
+  <script src="../js/jquery-ui.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <style>
+		
+		body {
+			margin: 0;
+		}
+		
+		.box {
+			width: 60px;
+			height: 60px;
+			position: absolute;
+			z-index: 10;
+		}
+	
+		.borded {
+			position: unset;
+			border: 1px solid black;
+			z-index: 2;
+		}
+		
+		.unborded {
+			border: unset;
+		}
+		
+		#map {
+			top: 0;
+		}
+
+  </style>
+  
+</head>
+<body>
+
+<div class="box bg-danger position-absolute" id="player1"></div>
+
+
+<img id="map" src="../img/grey_180_180.jpg" alt="Workplace" usemap="#workmap">
+
+<div class="d-flex flex-column position-absolute" id="map">
+	<div class="d-flex flex-row">
+		<div class="box borded" id="A1"></div>
+		<div class="box borded" id="A2"></div>
+		<div class="box borded" id="A3"></div>
+	</div>
+	<div class="d-flex flex-row">
+		<div class="box borded" id="B1"></div>
+		<div class="box borded" id="B2"></div>
+		<div class="box borded" id="B3"></div>
+	</div>
+	<div class="d-flex flex-row">
+		<div class="box borded" id="C1"></div>
+		<div class="box borded" id="C2"></div>
+		<div class="box borded" id="C3"></div>
+	</div>
+</div>
+
+
+
+
+	
+<script>
+	
+
+	$(document).ready(function() {
+		
+		var minPos = $("#map").position();
+		
+		// posizioni di origine mappa
+		// LOCAL O SESSION ?????
+		sessionStorage.setItem("min_left_pos_grid", minPos.left);
+		sessionStorage.setItem("min_top_pos_grid", minPos.top);
+		
+
+		if (sessionStorage.getItem("left_pos_grid") == undefined) sessionStorage.setItem("left_pos_grid", "0");
+		if (sessionStorage.getItem("top_pos_grid") == undefined) sessionStorage.setItem("top_pos_grid", "0");
+		
+		
+		// griglia
+		 $("#map div.box.borded").droppable({
+			drop: function(event, ui) {
+				
+				// multipli di 60
+				var multipleBase = 60;
+				var multipleLeft = 0;
+				var multipleTop = 0;
+				
+				// ancora segnalino in base alla vicinanza con i bordi
+				while (Math.max(multipleLeft, ui.position.left) == ui.position.left) multipleLeft = multipleLeft + multipleBase;
+				while (Math.max(multipleTop, ui.position.top) == ui.position.top) multipleTop = multipleTop + multipleBase;
+
+				
+				var leftPos = (multipleLeft - ui.position.left) > (multipleBase / 2) ? (multipleLeft - multipleBase) : multipleLeft;
+				var topPos = (multipleTop - ui.position.top) > (multipleBase / 2) ? (multipleTop - multipleBase) : multipleTop;
+				
+
+				$("#player1").css("left", leftPos);
+				$("#player1").css("top", topPos);
+				
+				
+			}
+		});
+		
+		
+		
+		// giocatore
+		$("#player1").draggable();
+		
+		
+		$("#player1").on("mouseup", function() {
+			
+			// 
+			
+		});
+		
+		
+		
+		// ad ogni movimento invia posizioni a PHP
+		
+		// PHP salva posizioni di TUTTI i personaggi giocanti ad una tabella
+		
+			// Se personaggio già presente aggiorna posizioni
+		
+			// se personaggio muore elimina riga
+		
+		
+	})
+	
+</script>
+ 
+</body>
+</html>
