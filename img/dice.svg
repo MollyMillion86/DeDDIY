@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 66.4 68" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(-560.83 -144.08)" fill="#56330f" fill-rule="evenodd" stroke="#56330f" stroke-width="1.3333">
+  <path d="m587.76 152.08l21.084 10.699-4.417 20.586-19.656 4.519-11.945-17.449z"/>
+  <path d="m610.64 162.78l-3.366 20.586 11.016 11.098 7.69-13.504-4.628-19.558z"/>
+  <path d="m610.39 160.86l9.932-1.115-11.475-10.876-18.898-3.989-0.96 5.12z"/>
+  <path d="m586.76 150.34l1.003-4.765-16.333 11.132-9.215 13.733 8.579-1.104z"/>
+  <path d="m570.97 171.7l-9.254 1.19 4.17 20.024 11.383 10.4 5.645-14.379z"/>
+  <path d="m585.32 189.6l-6.322 15.279 20.75 4.644 17.168-13.097-10.898-11.438z"/>
+ </g>
+ <text transform="matrix(.97982 -.19988 .19988 .97982 23.454 35.851)" fill="white" font-family="Arial" font-size="21" font-weight="400">I2</text>
+ <text transform="matrix(-1.5022 .586 -.36341 -.93163 39.545 47.738)" fill="white" font-family="Arial" font-size="14" font-weight="400">8</text>
+ <text transform="matrix(-.36034 1.5708 -.97468 -.22359 52.856 22.544)" fill="white" font-family="Arial" font-size="14" font-weight="400">I0</text>
+ <text transform="matrix(-.97511 -2.0425 .90244 -.43083 14.884 46.195)" fill="white" font-family="Arial" font-size="9" font-weight="400">7</text>
+ <text transform="matrix(2.1767 -2.2462 .71813 .69591 11.458 19.714)" fill="white" font-family="Arial" font-size="6" font-weight="400">9.</text>
+ <text transform="matrix(1.6003 1.8585 -.75779 .6525 36.139 7.3599)" fill="white" font-family="Arial" font-size="8" font-weight="400">I</text>
+ <text transform="matrix(1.6003 1.8585 -.75779 .6525 41.207 10.121)" fill="white" font-family="Arial" font-size="8" font-weight="400">I</text>
+</svg>
