@@ -844,7 +844,7 @@
 								if (($nome) && ($bonusTiro) && ($danno) && ($id)) {
 									
 									$stringaIncantesimi .= '<span id="list-incantesimi-' . $id . '">
-												<button type="button" id="carica-incantesimi-' . $id . '" onclick="scegliIncantesimo(' . $id . ');closeModal(\'incantesimi\');">' . $nome . '</button>
+												<button type="button" class="btn btn-dark" id="carica-incantesimi-' . $id . '" onclick="scegliIncantesimo(' . $id . ');closeModal(\'incantesimi\');">' . $nome . '</button>
 												<p>ID: ' . $id . ' ' . $danno['quantita'] . 'd' . $danno['dado'] . ', bonus: ' . $bonusTiro . '</p>
 											</span>';
 						
@@ -954,7 +954,7 @@
 								}
 
 								$stringaArmi .= '<span id="list-armi-' . $id . '">
-													<button type="button" id="carica-armi-' . $id . '" onclick="scegliArma(' . $id . ');closeModal(\'armi\');">' . $nome . '</button>
+													<button type="button" class="btn btn-dark" id="carica-armi-' . $id . '" onclick="scegliArma(' . $id . ');" data-bs-target="#modal-attacca" data-bs-toggle="modal">' . $nome . '</button>
 													<p>ID: ' . $id . ' ' . $danno['quantita'] . 'd' . $danno['dado'] . ', bonus: ' . $bonusTiro . '</p>
 												</span>';
 
@@ -1081,12 +1081,12 @@
 											
 											if ($value3 !== 'npc') {
 												
-												$color[] = 'player bg-danger';
+												$color[] = 'btn btn-secondary';
 												$idTest = 'link-attacca-player';
 												
 											} else {
 												
-												$color[] = 'npc enemy bg-black';
+												$color[] = 'btn enemy btn-danger';
 												$idTest = 'link-attacca-npc';
 												
 											}
@@ -1232,7 +1232,7 @@
 					$count++;
 	
 					// 'attacca' al posto di 'nemico'
-					$htmlPlayer .= '<a href="javascript:void(0);" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="selezionaPG(' . $id[$count] . ', \'attacca\');closeModal(\'nemico\');">
+					$htmlPlayer .= '<a href="javascript:void(0);" role="button" class="' . $color[$count] . '" id="pg-' . $index4 . '" onclick="selezionaPG(' . $id[$count] . ', \'attacca\');closeModal(\'nemico\');">
 							<label for="' . $index4 . '">' . $nome[$count] . '</label>
 						</a>';
                     

@@ -14,8 +14,6 @@ $(document).ready(function() {
 			console.log(ret);
 		});
 		
-
-		
 	});
 	
 	
@@ -29,319 +27,320 @@ $(document).ready(function() {
 		var buttonID = $(this).attr("id");
 
 			
-		// console.log("pushed " + buttonID);
+		if (buttonID !== undefined) {
 			
-		// solo per i button di azione/riferimento
-		if (!buttonID.match("link|btn")) {
+			// solo per i button di azione/riferimento
+			if (!buttonID.match("link|btn")) {
 
-			var infoID = "";
+				var infoID = "";
 
-			// dati da inviare
-			if ($("#text-" + buttonID).val() != "") {
-				infoID = $("#text-" + buttonID).val();
-			} else {
-				infoID = $("span#nome").text();
-			}
-			
-			
-			
-			/* LOGOUT */
-			if (buttonID.match('logout')) {
+				// dati da inviare
+				if ($("#text-" + buttonID).val() != "") {
+					infoID = $("#text-" + buttonID).val();
+				} else {
+					infoID = $("span#nome").text();
+				}
 				
-				$.post("../dispatcher.php", {
-
-					"action" : buttonID
-					
-				}, function() {
-					
-					// location.href = 'http://localhost/mollymillion@ftp.mollymillion.altervista.org/dungeonsanddragonsdiy/template/home.html';
-					// location.href = 'https://mollymillion.altervista.org/dungeonsanddragonsdiy/template/home.html';
-					location.href = 'home.html';
-				});
 				
-			}
-			
-			
-			
-			/* LOGIN: carica le caratteristiche del giocatore */
-			if (buttonID.match('login')) {
 				
-				$.post("../dispatcher.php", {
+				/* LOGOUT */
+				if (buttonID.match('logout')) {
+					
+					$.post("../dispatcher.php", {
 
-					"action" : buttonID,
-					"data" : infoID
-					
-				}, function(ret) {
-				
-					// console.log("return LOGIN: " + ret);
-					
-					var decodedArray = JSON.parse(ret);
-					
-
-					// sitribuisci stats nella pagina
-					$.each(decodedArray['data'], function(i,v) {
+						"action" : buttonID
 						
-						if (i == 'caratteristiche') {
-							
-							var k = JSON.parse(v);
-	
-							$.each(k, function(l,m) {
-								
-								// console.log(l);
-								
-								$.each(m, function(p,q) {
-									if (p == 'base') $("#" + l).text(q);
-									if (p == 'bonus') $("#bonus-" + l).text(q);
-								})
+					}, function() {
+						
+						// location.href = 'http://localhost/mollymillion@ftp.mollymillion.altervista.org/dungeonsanddragonsdiy/template/home.html';
+						// location.href = 'https://mollymillion.altervista.org/dungeonsanddragonsdiy/template/home.html';
+						location.href = 'home.html';
+					});
+					
+				}
+				
+				
+				
+				/* LOGIN: carica le caratteristiche del giocatore */
+				if (buttonID.match('login')) {
+					
+					$.post("../dispatcher.php", {
 
-							});
+						"action" : buttonID,
+						"data" : infoID
+						
+					}, function(ret) {
+					
+						// console.log("return LOGIN: " + ret);
+						
+						var decodedArray = JSON.parse(ret);
+						
+
+						// sitribuisci stats nella pagina
+						$.each(decodedArray['data'], function(i,v) {
 							
-						} else {
+							if (i == 'caratteristiche') {
+								
+								var k = JSON.parse(v);
+		
+								$.each(k, function(l,m) {
+									
+									// console.log(l);
+									
+									$.each(m, function(p,q) {
+										if (p == 'base') $("#" + l).text(q);
+										if (p == 'bonus') $("#bonus-" + l).text(q);
+									})
+
+								});
+								
+							} else {
+								
+								// console.log("CASO NON ['caratteristiche']");
+								$("#" + i).text(v);
+							}
 							
-							// console.log("CASO NON ['caratteristiche']");
-							$("#" + i).text(v);
-						}
+						});
+
+					});
+					
+				}
+				
+				
+				
+				// BUTTON per SCEGLIERE ARMA
+				if (buttonID.match('carica-armi')) {
+
+					$.post("../dispatcher.php", {
+						
+						"action" : 'caricaArmi',
+						"data" : buttonID.replace("carica-armi-", "")
+						
+					}, function(ret) {
+						
+						// console.log(ret);
 						
 					});
-
-				});
+				}
 				
-			}
-			
-			
-			
-			// BUTTON per SCEGLIERE ARMA
-			if (buttonID.match('carica-armi')) {
-
-				$.post("../dispatcher.php", {
-					
-					"action" : 'caricaArmi',
-					"data" : buttonID.replace("carica-armi-", "")
-					
-				}, function(ret) {
-					
-					// console.log(ret);
-					
-				});
-			}
-			
-			
-			// BUTTON per SVUOTARE BUFFER COMBATTIMENTO
-			if (buttonID == 'attacca-annulla') {
 				
-				$.post("../dispatcher.php", {
-					"action" : 'annullaAttacco'
-				}, function() {
-					$("#container-icone-personaggi").empty();
+				// BUTTON per SVUOTARE BUFFER COMBATTIMENTO
+				if (buttonID == 'attacca-annulla') {
 					
-					//test
-					$('#attacca-risultato-text').empty();
-				});
+					$.post("../dispatcher.php", {
+						"action" : 'annullaAttacco'
+					}, function() {
+						$("#container-icone-personaggi").empty();
+						
+						//test
+						$('#attacca-risultato-text').empty();
+					});
+					
+				}
 				
-			}
-			
-			
-			
-			// BUTTON per INSERIRE OGGETTI/PERSONAGGI
-			if (buttonID.match('inserisci')) {
 				
-				var action = buttonID.replace('-ok', '').replace('inserisci-', '');
-				var modal = buttonID.replace('-ok', '');
+				
+				// BUTTON per INSERIRE OGGETTI/PERSONAGGI
+				if (buttonID.match('inserisci')) {
+					
+					var action = buttonID.replace('-ok', '').replace('inserisci-', '');
+					var modal = buttonID.replace('-ok', '');
 
 
-				$.post("../dispatcher.php", {
-					"action" : 'inserisci' + action,
-					"data" : $("#modal-" + modal + " input, #modal-" + modal + " select").serializeArray()
-				}, function(ret) {
-					$("#modal-inserisci-risultato").empty().html(ret);
-					// console.log(ret);
-				}, );
+					$.post("../dispatcher.php", {
+						"action" : 'inserisci' + action,
+						"data" : $("#modal-" + modal + " input, #modal-" + modal + " select").serializeArray()
+					}, function(ret) {
+						$("#modal-inserisci-risultato").empty().html(ret);
+						// console.log(ret);
+					}, );
+					
+				}
 				
-			}
-			
-			
-			// BUTTON per MODIFICARE OGGETTI/PERSONAGGI
-			if (buttonID.match('modifica')) {
 				
-				var action = buttonID.replace('-ok', '').replace('modifica-', '');
-				var modal = buttonID.replace('-ok', '');
+				// BUTTON per MODIFICARE OGGETTI/PERSONAGGI
+				if (buttonID.match('modifica')) {
+					
+					var action = buttonID.replace('-ok', '').replace('modifica-', '');
+					var modal = buttonID.replace('-ok', '');
 
 
-				$.post("../dispatcher.php", {
-					"action" : 'modifica' + action,
-					"data" : $("#modal-" + modal + " input, #modal-" + modal + " select").serializeArray()
-				}, function(ret) {
-					$("#modal-modifica-risultato").empty().html(ret);
-					// console.log(ret);
-				}, );
+					$.post("../dispatcher.php", {
+						"action" : 'modifica' + action,
+						"data" : $("#modal-" + modal + " input, #modal-" + modal + " select").serializeArray()
+					}, function(ret) {
+						$("#modal-modifica-risultato").empty().html(ret);
+						// console.log(ret);
+					}, );
+					
+				}
 				
-			}
-			
-			
-			// BUTTON ATTACCA
-			if (buttonID == 'attacca') {
 				
-				showModal("nemico");
+				// BUTTON ATTACCA
+				if (buttonID == 'attacca') {
+					
+					showModal("nemico");
 
-				/* $.post("../dispatcher.php", {
-					"action" : 'attacca',
-					"data" : ""
-				}, function(ret) {
+					/* $.post("../dispatcher.php", {
+						"action" : 'attacca',
+						"data" : ""
+					}, function(ret) {
+						
+						// mostra personaggi
+						
+						// attacco vero e proprio
+						$("#attacca-risultato-text").html(ret);
+						console.log(ret);
+					}); */
 					
-					// mostra personaggi
-					
-					// attacco vero e proprio
-					$("#attacca-risultato-text").html(ret);
-					console.log(ret);
-				}); */
+				}
 				
-			}
-			
-			
-			
-			
-		// button PERSONAGGI
-		} else {
-			
-			// console.log(buttonID);
-
-			// btn azione x ATTACCO
-			if ((buttonID == 'link-attacca-armi') | (buttonID == 'link-attacca-incantesimi')) {
 				
-				var tipo = buttonID.replace("link-attacca-", "");
-				// console.log(tipo);
-				$.post("../dispatcher.php", {
-
-				"action" : 'scegliOggetto',
-				// manca 'data' ???
-				"data" : tipo
 				
-				}, function(ret) {
-
-					$("#lista-" + tipo).html(ret);
-					
-				});
 				
-			} 
-			
-			
-			// btn ARMI nella DASHBOARD
-			if (buttonID == 'link-armi') {
-				
-				$.post("../dispatcher.php", {
-					
-					"action" : 'scegliOggetto',
-					"data" : 'armi'
-					
-				}, function(ret) {
-					
-					$("#lista-armi").html(ret);
-					
-				});
-				
-			}
-			
-			
-			// btn INCANTESIMI nella DASHBOARD
-			if (buttonID == 'link-incantesimi') {
-				
-				$.post("../dispatcher.php", {
-					
-					"action" : 'scegliOggetto',
-					"data" : 'incantesimi'
-					
-				}, function(ret) {
-					
-					$("#lista-incantesimi").html(ret);
-					
-				});
-				
-			}
-			
-			
-			// btn ABILITA' nella DASHBOARD
-			if (buttonID == 'link-abilita') {
-				
-				$.post("../dispatcher.php", {
-					
-					"action" : 'scegliAbilita',
-					'data' : 'abilita'
-					
-				}, function(ret) {
-					
-					$("#lista-abilita").html(ret);
-					
-				});
-				
-			}
-			
-			
-			// btn personaggio x ATTACCO
-			if (buttonID == 'link-attacca-npc') {
-				
-				$.post("../dispatcher.php", {
-
-				"action" : 'scegliNemico'
-				// manca 'data' ???
-				}, function(ret) {
-					// metti risultato visibile
-					$("#attacca-party-stats").text(ret);
-
-				});
-				
-			}
-			
-
-			// btn FINESTRA ATTACCA
-			if (buttonID == 'link-attacca') {
+			// button PERSONAGGI
+			} else {
 				
 				// console.log(buttonID);
-				
-				
-				$.post("../dispatcher.php", {
 
-				"action" : 'start'/* ,
-				"data" : infoID */
-				// manca 'data' ???
-				}, function(ret) {
-                    // console.log(ret);
-					// metti risultato visibile
-					$("#lista-nemico").html(ret);
-					$("#container-icone-personaggi").html(ret);
-		
-				});
-			
-			} 
-			
-			
-			// btn FINESTRA MODIFICA - DM
-			if (buttonID == 'link-modifica') {
-				
-				
-				
-				
-				$.post("../dispatcher.php", {
+				// btn azione x ATTACCO
+				if ((buttonID == 'link-attacca-armi') | (buttonID == 'link-attacca-incantesimi')) {
+					
+					var tipo = buttonID.replace("link-attacca-", "");
+					// console.log(tipo);
+					$.post("../dispatcher.php", {
 
-				"action" : 'modifica'
-				}, function(ret) {
-					// metti risultato visibile
+					"action" : 'scegliOggetto',
+					// manca 'data' ???
+					"data" : tipo
+					
+					}, function(ret) {
 
-					var decodedArray = JSON.parse(ret);
-
-					$.each(decodedArray, function(i, v) {
-						
-						if (i == 'personaggi') $("#modal-lista-modifica-Personaggio").html('<span class="chiudi" onclick="closeModal(\'lista-modifica-Personaggio\')">X</span>' + v).removeClass("hide");
-						if (i == 'oggetti') $("#modal-lista-modifica-Oggetto").html('<span class="chiudi" onclick="closeModal(\'lista-modifica-Oggetto\')">X</span>' + v).removeClass("hide");
+						$("#lista-" + tipo).html(ret);
 						
 					});
 					
-
+				} 
+				
+				
+				// btn ARMI nella DASHBOARD
+				if (buttonID == 'link-armi') {
 					
-				});
+					$.post("../dispatcher.php", {
+						
+						"action" : 'scegliOggetto',
+						"data" : 'armi'
+						
+					}, function(ret) {
+						
+						$("#lista-armi").html(ret);
+						
+					});
+					
+				}
 				
 				
-			} 
+				// btn INCANTESIMI nella DASHBOARD
+				if (buttonID == 'link-incantesimi') {
+					
+					$.post("../dispatcher.php", {
+						
+						"action" : 'scegliOggetto',
+						"data" : 'incantesimi'
+						
+					}, function(ret) {
+						
+						$("#lista-incantesimi").html(ret);
+						
+					});
+					
+				}
+				
+				
+				// btn ABILITA' nella DASHBOARD
+				if (buttonID == 'link-abilita') {
+					
+					$.post("../dispatcher.php", {
+						
+						"action" : 'scegliAbilita',
+						'data' : 'abilita'
+						
+					}, function(ret) {
+						
+						$("#lista-abilita").html(ret);
+						
+					});
+					
+				}
+				
+				
+				// btn personaggio x ATTACCO
+				if (buttonID == 'link-attacca-npc') {
+					
+					$.post("../dispatcher.php", {
+
+					"action" : 'scegliNemico'
+					// manca 'data' ???
+					}, function(ret) {
+						// metti risultato visibile
+						$("#attacca-party-stats").text(ret);
+
+					});
+					
+				}
+				
+
+				// btn FINESTRA ATTACCA
+				if (buttonID == 'link-attacca') {
+					
+					// console.log(buttonID);
+					
+					
+					$.post("../dispatcher.php", {
+
+					"action" : 'start'/* ,
+					"data" : infoID */
+					// manca 'data' ???
+					}, function(ret) {
+						// console.log(ret);
+						// metti risultato visibile
+						$("#lista-nemico").html(ret);
+						$("#container-icone-personaggi").html(ret);
 			
+					});
+				
+				} 
+				
+				
+				// btn FINESTRA MODIFICA - DM
+				if (buttonID == 'link-modifica') {
+					
+					
+					
+					
+					$.post("../dispatcher.php", {
+
+					"action" : 'modifica'
+					}, function(ret) {
+						// metti risultato visibile
+
+						var decodedArray = JSON.parse(ret);
+
+						$.each(decodedArray, function(i, v) {
+							
+							if (i == 'personaggi') $("#modal-lista-modifica-Personaggio").html('<span class="chiudi" onclick="closeModal(\'lista-modifica-Personaggio\')">X</span>' + v).removeClass("hide");
+							if (i == 'oggetti') $("#modal-lista-modifica-Oggetto").html('<span class="chiudi" onclick="closeModal(\'lista-modifica-Oggetto\')">X</span>' + v).removeClass("hide");
+							
+						});
+						
+
+						
+					});
+					
+					
+				} 
+				
+			}
 		}
 
 	})
