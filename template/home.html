@@ -22,8 +22,49 @@
 		.w33vw {
 			width: 33vw !important;
 		}
+		
+		.box {
+			width: 3.75rem;
+			height: 3.75rem;
+			position: absolute;
+			z-index: 10;
+		}
+
+		.borded {
+			position: unset;
+			border: 1px solid black;
+			z-index: 2;
+		}
+		
+		#map, #grid {
+			width: 1020px;
+			height: 1260px;
+			left: 0;
+			top: 220px;
+		}
 
 	</style>
+	
+	<script>
+		$(document).ready(function() {
+			
+			// al caricamento della pagina o quando cambia il viewport
+			
+			// preleva bottom e left di #dashboard per usarli per #map
+			var pos = $("#dashboard").position();
+			
+			$("#map, #grid").css({
+				"left" : pos.left,
+				"top" : pos.top + $("#dashboard").height()
+			})
+			
+			
+		});
+	
+	
+	
+	</script>
+	
 	
 </head>
 <body>
@@ -42,7 +83,7 @@
 	
 	<!-- DASHBOARD -->
 	
-<div id="dashboard" class="container-fluid">
+<div class="container-fluid">
 
 
 
@@ -76,7 +117,8 @@
 		
 		<div class="d-flex flex-row justify-content-between bg-secondary p-3">
 		
-			<div class="d-flex flex-column justify-content-around w33vw">
+			<!-- <div class="d-flex flex-column justify-content-around w33vw"> -->
+			<div class="d-flex flex-column justify-content-around">
 			
 				<div class="d-flex flex-row justify-content-between m-3 p-2">
 			
@@ -97,7 +139,8 @@
 			</div>
 			
 			
-			<div class="d-flex flex-row justify-content-end w33vw">
+			<!-- <div class="d-flex flex-row justify-content-end w33vw"> -->
+			<div class="d-flex flex-row justify-content-end">
 			
 				<div class="d-flex flex-column justify-content-between m-3 p-2">
 			
@@ -170,60 +213,6 @@
 	
 	<!-- <div id="player1" class="elem player">PG1</div> -->
 	<div class="box bg-danger borderd-danger position-absolute" id="player1"></div>
-	
-	
-	<!-- PLAYER1
-	<a href="#" class="elem player" id="player1">
-		<label for="coord1">P1</label>
-		<input type="text" id="coord1" placeholder="casella?">
-		<button id="btn1" type="button" onclick="move(this, 'player');">OK</button>
-	</a> -->
-	
-	
-	
-	<!-- PLAYER2 
-	<a href="#" class="elem player" id="player2">
-		<label for="coord2">P2</label>
-		<input type="text" id="coord2" placeholder="casella?">
-		<button id="btn2" type="button" onclick="move(this, 'player');">OK</button>
-	</a>-->
-	
-	<!-- PLAYER3
-	<a href="#" class="elem player" id="player3">
-		<label for="coord3">P3</label>
-		<input type="text" id="coord3" placeholder="casella?">
-		<button id="btn3" type="button" onclick="move(this, 'player');">OK</button>
-	</a> -->
-	
-	<!-- PLAYER4
-	<a href="#" class="elem player" id="player4">
-		<label for="coord4">P4</label>
-		<input type="text" id="coord4" placeholder="casella?">
-		<button id="btn4" type="button" onclick="move(this, 'player');">OK</button>
-	</a> -->
-	
-	
-	
-	<!-- NPC 
-	<a href="#" class="elem npc enemy" id="npc5">
-		<label for="coord5">NPC1</label>
-		<input type="text" id="coord5" placeholder="casella?">
-		<button id="btn5" type="button" onclick="move(this, 'npc');">OK</button>
-	</a>
-	
-	<a href="#" class="elem npc enemy" id="npc7">
-		<label for="coord7">NPC2</label>
-		<input type="text" id="coord7" placeholder="casella?">
-		<button id="btn7" type="button" onclick="move(this, 'npc');">OK</button>
-	</a>-->
-	
-	
-	<!-- EXE
-	<a href="#" class="elem exe" id="exe6">
-		<label for="coord6">LEVA</label>
-		<input type="text" id="coord6" placeholder="casella?">
-		<button id="btn6" type="button" onclick="move(this, 'exe');">OK</button>
-	</a> -->
 
 	<!-- mappa -->
 	<img id="map" src="../img/skull-entrance-map.jpg" alt="Workplace">
@@ -231,8 +220,8 @@
 	<!-- Misure della griglia: 16 x 20 quadrati
 		 Misure di un singolo quadrato: 60 x 60 px-->
 	<!-- <map name="workmap">  -->
-	<div class="column position-absolute" id="map">
-		<div class="row">
+	<div class="d-flex flex-column position-absolute" id="grid">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="A1"></div>
 			<div class="box borded" id="A2"></div>
 			<div class="box borded" id="A3"></div>
@@ -250,7 +239,7 @@
 			<div class="box borded" id="A15"></div>
 			<div class="box borded" id="A16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="B1"></div>
 			<div class="box borded" id="B2"></div>
 			<div class="box borded" id="B3"></div>
@@ -268,7 +257,7 @@
 			<div class="box borded" id="B15"></div>
 			<div class="box borded" id="B16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="C1"></div>
 			<div class="box borded" id="C2"></div>
 			<div class="box borded" id="C3"></div>
@@ -286,7 +275,7 @@
 			<div class="box borded" id="C15"></div>
 			<div class="box borded" id="C16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="D1"></div>
 			<div class="box borded" id="D2"></div>
 			<div class="box borded" id="D3"></div>
@@ -304,7 +293,7 @@
 			<div class="box borded" id="D15"></div>
 			<div class="box borded" id="D16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="E1"></div>
 			<div class="box borded" id="E2"></div>
 			<div class="box borded" id="E3"></div>
@@ -322,7 +311,7 @@
 			<div class="box borded" id="E15"></div>
 			<div class="box borded" id="E16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="F1"></div>
 			<div class="box borded" id="F2"></div>
 			<div class="box borded" id="F3"></div>
@@ -340,7 +329,7 @@
 			<div class="box borded" id="F15"></div>
 			<div class="box borded" id="F16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="G1"></div>
 			<div class="box borded" id="G2"></div>
 			<div class="box borded" id="G3"></div>
@@ -358,7 +347,7 @@
 			<div class="box borded" id="G15"></div>
 			<div class="box borded" id="G16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="H1"></div>
 			<div class="box borded" id="H2"></div>
 			<div class="box borded" id="H3"></div>
@@ -376,7 +365,7 @@
 			<div class="box borded" id="H15"></div>
 			<div class="box borded" id="H16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="I1"></div>
 			<div class="box borded" id="I2"></div>
 			<div class="box borded" id="I3"></div>
@@ -394,7 +383,7 @@
 			<div class="box borded" id="I15"></div>
 			<div class="box borded" id="I16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="L1"></div>
 			<div class="box borded" id="L2"></div>
 			<div class="box borded" id="L3"></div>
@@ -412,7 +401,7 @@
 			<div class="box borded" id="L15"></div>
 			<div class="box borded" id="L16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="M1"></div>
 			<div class="box borded" id="M2"></div>
 			<div class="box borded" id="M3"></div>
@@ -430,7 +419,7 @@
 			<div class="box borded" id="M15"></div>
 			<div class="box borded" id="M16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="N1"></div>
 			<div class="box borded" id="N2"></div>
 			<div class="box borded" id="N3"></div>
@@ -448,7 +437,7 @@
 			<div class="box borded" id="N15"></div>
 			<div class="box borded" id="N16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="O1"></div>
 			<div class="box borded" id="O2"></div>
 			<div class="box borded" id="O3"></div>
@@ -466,7 +455,7 @@
 			<div class="box borded" id="O15"></div>
 			<div class="box borded" id="O16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="P1"></div>
 			<div class="box borded" id="P2"></div>
 			<div class="box borded" id="P3"></div>
@@ -484,7 +473,7 @@
 			<div class="box borded" id="P15"></div>
 			<div class="box borded" id="P16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="Q1"></div>
 			<div class="box borded" id="Q2"></div>
 			<div class="box borded" id="Q3"></div>
@@ -502,7 +491,7 @@
 			<div class="box borded" id="Q15"></div>
 			<div class="box borded" id="Q16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="R1"></div>
 			<div class="box borded" id="R2"></div>
 			<div class="box borded" id="R3"></div>
@@ -520,7 +509,7 @@
 			<div class="box borded" id="R15"></div>
 			<div class="box borded" id="R16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="S1"></div>
 			<div class="box borded" id="S2"></div>
 			<div class="box borded" id="S3"></div>
@@ -538,7 +527,7 @@
 			<div class="box borded" id="S15"></div>
 			<div class="box borded" id="S16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="T1"></div>
 			<div class="box borded" id="T2"></div>
 			<div class="box borded" id="T3"></div>
@@ -556,7 +545,7 @@
 			<div class="box borded" id="T15"></div>
 			<div class="box borded" id="T16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="U1"></div>
 			<div class="box borded" id="U2"></div>
 			<div class="box borded" id="U3"></div>
@@ -574,7 +563,7 @@
 			<div class="box borded" id="U15"></div>
 			<div class="box borded" id="U16"></div>
 		</div>
-		<div class="row">
+		<div class="d-flex flex-row">
 			<div class="box borded" id="V1"></div>
 			<div class="box borded" id="V2"></div>
 			<div class="box borded" id="V3"></div>
@@ -601,14 +590,11 @@
 
 	$(document).ready(function() {
 		
-		var minPos = $("#map").position();
+		var minPos = $("#grid").position();
 		var pPos = $("#player1").position();
 		
-		
-		
-		
-		console.log("map left: "+minPos.left+" map right: "+minPos.top);
-		console.log("pPos left: "+pPos.left+" pPos right: "+pPos.top);
+		// console.log("map left: "+minPos.left+" map right: "+minPos.top);
+		// console.log("pPos left: "+pPos.left+" pPos right: "+pPos.top);
 		
 		// posizioni di origine mappa
 		// LOCAL O SESSION ?????
@@ -621,13 +607,13 @@
 		
 		
 		// griglia
-		 $("#map div.box.borded").droppable({
+		 $("#grid div.box.borded").droppable({
 			drop: function(event, ui) {
 				
 				// multipli di 60
 				var multipleBase = 60;
-				var multipleLeft = 0;
-				var multipleTop = 0;
+				var multipleLeft = 10;
+				var multipleTop = -6;
 				
 				// ancora segnalino in base alla vicinanza con i bordi
 				while (Math.max(multipleLeft, ui.position.left) == ui.position.left) multipleLeft = multipleLeft + multipleBase;
@@ -641,7 +627,7 @@
 				$("#player1").css("left", leftPos);
 				$("#player1").css("top", topPos);
 				
-				console.log("pPos left: "+leftPos+" pPos right: "+topPos);
+				// console.log("pPos left: "+leftPos+" pPos right: "+topPos);
 			}
 		});
 		
@@ -1714,6 +1700,63 @@
 		</form>
 	</div> -->
 	
+	
+	
+		
+	
+	<!-- PLAYER1
+	<a href="#" class="elem player" id="player1">
+		<label for="coord1">P1</label>
+		<input type="text" id="coord1" placeholder="casella?">
+		<button id="btn1" type="button" onclick="move(this, 'player');">OK</button>
+	</a> -->
+	
+	
+	
+	<!-- PLAYER2 
+	<a href="#" class="elem player" id="player2">
+		<label for="coord2">P2</label>
+		<input type="text" id="coord2" placeholder="casella?">
+		<button id="btn2" type="button" onclick="move(this, 'player');">OK</button>
+	</a>-->
+	
+	<!-- PLAYER3
+	<a href="#" class="elem player" id="player3">
+		<label for="coord3">P3</label>
+		<input type="text" id="coord3" placeholder="casella?">
+		<button id="btn3" type="button" onclick="move(this, 'player');">OK</button>
+	</a> -->
+	
+	<!-- PLAYER4
+	<a href="#" class="elem player" id="player4">
+		<label for="coord4">P4</label>
+		<input type="text" id="coord4" placeholder="casella?">
+		<button id="btn4" type="button" onclick="move(this, 'player');">OK</button>
+	</a> -->
+	
+	
+	
+	<!-- NPC 
+	<a href="#" class="elem npc enemy" id="npc5">
+		<label for="coord5">NPC1</label>
+		<input type="text" id="coord5" placeholder="casella?">
+		<button id="btn5" type="button" onclick="move(this, 'npc');">OK</button>
+	</a>
+	
+	<a href="#" class="elem npc enemy" id="npc7">
+		<label for="coord7">NPC2</label>
+		<input type="text" id="coord7" placeholder="casella?">
+		<button id="btn7" type="button" onclick="move(this, 'npc');">OK</button>
+	</a>-->
+	
+	
+	<!-- EXE
+	<a href="#" class="elem exe" id="exe6">
+		<label for="coord6">LEVA</label>
+		<input type="text" id="coord6" placeholder="casella?">
+		<button id="btn6" type="button" onclick="move(this, 'exe');">OK</button>
+	</a> -->
+
 
 </body>
 </html>
