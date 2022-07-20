@@ -81,6 +81,20 @@ input[id^='coord'] {
 
 
 
+/* COLORI */
+.bg-brown {
+	background-color: #654321 !important;
+}
+
+.bg-brick {
+	background-color: #8B4F39 !important;
+}
+
+.bg-stone {
+	background-color: #d3d3d3 !important;
+}
+
+
 
 /* MARGINI */
 

@@ -3,93 +3,43 @@
 
 $(document).ready(function() {
 	
+	// al caricamento della pagina o quando cambia il viewport
+	anchorMap("#dashboard", "#map, #grid");
+	window.addEventListener("resize", anchorMap("#dashboard", "#map, #grid"));
+	
+	
+	
+	
+	
 	// test
 	$("#test").click(function() {
-
 		$.post("../dispatcher.php", {
-
 			"action" : "test"
-			
 		}, function(ret) {
 			console.log(ret);
 		});
-		
 	});
 	
 	
 	
+
 	
-	/**
-	* Comportamento delle pedine nella mappa:
-	* pedine correttamente agganciate ai quadrati della griglia
-	*/
-	
-	
-	// al caricamento della pagina o quando cambia il viewport
-	
-	// preleva bottom e left di #dashboard per usarli per #map
-	var pos = $("#dashboard").position();
-	
-	$("#map, #grid").css({
-		"left" : pos.left,
-		"top" : pos.top + $("#dashboard").height()
+	// jQuery UI - Drag checkers
+	$(".checker").each(function(i, v) {
+		var id = $(v).attr("id");
+		$("#" + id).draggable();
 	});
 	
 	
 	
-	var minPos = $("#grid").position();
-	var pPos = $("#player1").position();
-	
-	// console.log("map left: "+minPos.left+" map right: "+minPos.top);
-	// console.log("pPos left: "+pPos.left+" pPos right: "+pPos.top);
-	
-	// posizioni di origine mappa
-	// LOCAL O SESSION ?????
-	sessionStorage.setItem("min_left_pos_grid", minPos.left);
-	sessionStorage.setItem("min_top_pos_grid", minPos.top);
-	
 
-	if (sessionStorage.getItem("left_pos_grid") == undefined) sessionStorage.setItem("left_pos_grid", "0");
-	if (sessionStorage.getItem("top_pos_grid") == undefined) sessionStorage.setItem("top_pos_grid", "0");
-	
-	
-	// griglia
-	 $("#grid div.box.borded").droppable({
-		drop: function(event, ui) {
-			
-			// multipli di 60
-			var multipleBase = 60;
-			var multipleLeft = 10;
-			var multipleTop = -6;
-			
-			// ancora segnalino in base alla vicinanza con i bordi
-			while (Math.max(multipleLeft, ui.position.left) == ui.position.left) multipleLeft = multipleLeft + multipleBase;
-			while (Math.max(multipleTop, ui.position.top) == ui.position.top) multipleTop = multipleTop + multipleBase;
-
-			
-			var leftPos = (multipleLeft - ui.position.left) > (multipleBase / 2) ? (multipleLeft - multipleBase) + 2 : multipleLeft + 2;
-			var topPos = (multipleTop - ui.position.top) > (multipleBase / 2) ? (multipleTop - multipleBase) + 2 : multipleTop + 2;
-			
-
-			$("#player1").css("left", leftPos);
-			$("#player1").css("top", topPos);
-			
-			// console.log("pPos left: "+leftPos+" pPos right: "+topPos);
-		}
-	});
-	
-	
-	
-	// giocatore
-	$("#player1").draggable();
-	
-	
+	/* 
 	$("#player1").on("mouseup", function() {
 		
 		// 
 		
 	});
-	
+	 */
 	
 	
 	// ad ogni movimento invia posizioni a PHP
@@ -487,7 +437,7 @@ function showHideMove(player) {
 * funzione move: cerca coordinate del nome casella inserito nell'input
 * e usale per sovrascrivere quelle relative al giocatore
 * 
-*/
+
 
 function move(player, type) {
 	
@@ -528,6 +478,41 @@ function move(player, type) {
 	}
 
 }
+*/
+
+
+
+
+
+
+
+
+
+/**
+* function anchorMap: ancora la mappa (con griglia) al bordo basso della dashboard
+* 
+* @param 			posFromItem
+* 					posToItem
+*/
+
+function anchorMap(posFromItem, posToItem) {
+	// preleva bottom e left di #dashboard per usarli per #map
+	var pos = $(posFromItem).position();
+	
+	$(posToItem).css({
+		"left" : pos.left,
+		"top" : pos.top + $(posFromItem).height()
+	});
+}
+
+
+	
+
+
+
+
+
+
 
 /**
 * funzione showModal: mostra finestra modale relativa al parametro
@@ -646,3 +631,68 @@ function scegliArma(id) {
 	
 };
 
+
+
+
+
+
+
+
+
+
+/**
+* posiziona le pedine al centro dei quadrati della griglia di battaglia
+*/
+
+function anchorChecker(checker) {
+	
+	var id = $(checker).attr("id");
+	var minPos = $("#grid").position();
+	var pPos = $("#" + id).position();
+	
+	// console.log("map left: "+minPos.left+" map right: "+minPos.top);
+	// console.log("pPos left: "+pPos.left+" pPos right: "+pPos.top);
+	
+	// posizioni di origine mappa
+	// LOCAL O SESSION ?????
+	sessionStorage.setItem("min_left_pos_grid", minPos.left);
+	sessionStorage.setItem("min_top_pos_grid", minPos.top);
+	
+
+	if (sessionStorage.getItem("left_pos_grid") == undefined) sessionStorage.setItem("left_pos_grid", "0");
+	if (sessionStorage.getItem("top_pos_grid") == undefined) sessionStorage.setItem("top_pos_grid", "0");
+	
+	
+	// griglia
+	 $("#grid div.box.borded").droppable({
+		drop: function(event, ui) {
+			
+			// multipli di 60
+			var multipleBase = 60;
+			var multipleLeft = 10;
+			var multipleTop = -6;
+			
+			// ancora segnalino in base alla vicinanza con i bordi
+			while (Math.max(multipleLeft, ui.position.left) == ui.position.left) multipleLeft = multipleLeft + multipleBase;
+			while (Math.max(multipleTop, ui.position.top) == ui.position.top) multipleTop = multipleTop + multipleBase;
+
+			
+			var leftPos = (multipleLeft - ui.position.left) > (multipleBase / 2) ? (multipleLeft - multipleBase) + 2 : multipleLeft + 2;
+			var topPos = (multipleTop - ui.position.top) > (multipleBase / 2) ? (multipleTop - multipleBase) + 2 : multipleTop + 2;
+			
+
+			$("#" + id).css({
+				"left" : leftPos,
+				"top" : topPos
+			});
+			
+			
+			// console.log("pPos left: "+leftPos+" pPos right: "+topPos);
+		}
+	});
+
+
+
+
+
+}
