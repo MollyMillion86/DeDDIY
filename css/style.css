@@ -1,44 +1,6 @@
-body {
-	margin: 0;
-}
-
-
-
-p {
-	margin: 0;
-}
-
-
-
-
-/* FLEXBOX */
-.column, .row {
-	display: flex !important;;
-}
-
-.column {
-	flex-direction: column !important;;
-}
-
-.row {
-	flex-direction: row !important;;
-}
-
-.justify-content-between {
-	justify-content: space-between !important;;
-}
-
-.justify-content-center {
-	justify-content: center !important;;
-}
-
-.justify-content-end {
-	justify-content: flex-end !important;
-}
-
 
 /* DASHBOARD */
-#dashboard span {
+/* #dashboard span {
 	color: white;
 }
 
@@ -73,7 +35,6 @@ div[id^='modal-'] {
 	top: 30%;
 	left: 20%;
 	width: 200px;
-	/* height: 200px; */
 	padding: 20px;
 	box-shadow: 4px 4px 4px grey;
 }
@@ -91,50 +52,27 @@ div[id^='modal-'] {
 div[id^='modal-lista'] {
 	left: 0;
 }
-
+ */
+ 
 /* MAPPA */ 
 .box {
-	width: 60px;
-	height: 60px;
+	width: 3.75rem;
+	height: 3.75rem;
 	position: absolute;
 	z-index: 10;
 }
 
 .borded {
 	position: unset;
-	border: 1px solid black;
+	border: 1px solid grey;
 	z-index: 2;
 }
 
-.unborded {
-	border: unset;
-}
-
-
-
-#map {
+#map, #grid {
 	width: 1020px;
 	height: 1260px;
 	left: 0;
 	top: 220px;
-}
-
-.elem {
-	color: white;
-	position: absolute;
-}
-
-.player, .npc, .exe {
-	width: 60px;
-	height: 60px;
-}
-
-.npc {
-	background-color: black;
-}
-
-.exe {
-	background-color: #6d3700;
 }
 
 input[id^='coord'] {
@@ -142,136 +80,28 @@ input[id^='coord'] {
 }
 
 
-.bg-danger {
-	background-color: #ff0000 !important;
-}
-
-.borderd-danger {
-	border: 1px solid #520202 !important;
-}
-
-.bg-black {
-	background-color: black !important;
-}
-
-
-/* PLAYER */
-/* aggiunti 220px al top per ognuno */
-/* #player1 {
-	background-color: red;
-	left: 8px;
-	top: 228px;
-}
-
-#player2 {
-	background-color: green;
-	left: 68px;
-	top: 228px;
-}
-
-#player3 {
-	background-color: blue;
-	left: 128px;
-	top: 228px;
-}
-
-#player4 {
-	background-color: orange;
-	left: 188px;
-	top: 228px;
-}
-
-#npc5 {
-	left: 728px;
-	top: 228px;
-}
-
-#exe6 {
-	left: 8px;
-	top: 408px;
-}
-#link-attacca-player1 {
-	background-color: red;
-}
- */
-
 
 
 /* MARGINI */
-.mb-10 {
-	margin-bottom: 10px;
-}
-
-.mb-20 {
-	margin-bottom: 20px;
-}
-
-.mr-10 {
-	margin-right: 10px;
-}
-
-.chiudi {
-	margin-left: 95%;
-	cursor: pointer;
-}
-
 
 
 
 /* WIDTH */
-.width-450 {
-	width: 450px !important;
+.w426 {
+	width: 26.625rem !important;
 }
 
-.width-200 {
-	width: 200px !important;
+.w33vw {
+	width: 33vw !important;
 }
 
-.w-100 {
-	width: 100% !important;
-}
-
-.w-80 {
-	width: 80% !important;
-}
-
-.w-90 {
-	width: 90% !important;
-}
-
-.w-60 {
-	width: 60% !important;
-}
 
 /* TESTO */
-.text-right, .text-right * {
-	text-align: right;
-}
-
-.text-center, .text-center * {
-	text-align: center;
-}
-
-.text-danger {
-	color: red !important;
-}
-
-.text-party {
-	color: blue !important;
-}
-
-.text-white {
-	color: white !important;
-}
-
-.font-weight-bold {
-	font-weight: bolder !important;
-}
 
 
 
 /* MISCELLANEA */
-.hide {
+/* .hide {
 	display: none !important;
 }
 
@@ -293,4 +123,4 @@ input[id^='coord'] {
 
 .position-absolute {
 	position: absolute !important;
-}
+} */

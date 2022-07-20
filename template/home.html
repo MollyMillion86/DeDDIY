@@ -6,65 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="../img/favicon.ico">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<!-- <link href="../css/style.css" rel="stylesheet" type="text/css"> -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"> <!-- Bootstrap Icons -->
+	<link href="../css/style.css" rel="stylesheet" type="text/css">
 	<script src="../js/jquery.js"></script>
 	<script src="../js/jquery-ui.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script> -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>	
 	<script src="../js/functions.js"></script>
-
-	<style>
-		.w426 {
-			width: 26.625rem !important;
-		}
-	
-		.w33vw {
-			width: 33vw !important;
-		}
-		
-		.box {
-			width: 3.75rem;
-			height: 3.75rem;
-			position: absolute;
-			z-index: 10;
-		}
-
-		.borded {
-			position: unset;
-			border: 1px solid black;
-			z-index: 2;
-		}
-		
-		#map, #grid {
-			width: 1020px;
-			height: 1260px;
-			left: 0;
-			top: 220px;
-		}
-
-	</style>
-	
-	<script>
-		$(document).ready(function() {
-			
-			// al caricamento della pagina o quando cambia il viewport
-			
-			// preleva bottom e left di #dashboard per usarli per #map
-			var pos = $("#dashboard").position();
-			
-			$("#map, #grid").css({
-				"left" : pos.left,
-				"top" : pos.top + $("#dashboard").height()
-			})
-			
-			
-		});
-	
-	
-	
-	</script>
-	
 	
 </head>
 <body>
@@ -81,12 +30,12 @@
 	
 	
 	
-	<!-- DASHBOARD -->
+	
 	
 <div class="container-fluid">
 
 
-
+	<!-- DASHBOARD -->
 	<div id="dashboard" class="d-flex flex-column">
 	
 		
@@ -122,8 +71,8 @@
 			
 				<div class="d-flex flex-row justify-content-between m-3 p-2">
 			
-					<button class="btn btn-danger" type="button" id="link-attacca" data-bs-toggle="modal" data-bs-target="#modal-attacca">ATTACCA</button>
-					<button class="btn btn-success" type="button" id="link-raccogli">RACCOGLI</button>
+					<button class="btn btn-danger me-2" type="button" id="link-attacca" data-bs-toggle="modal" data-bs-target="#modal-attacca">ATTACCA</button>
+					<button class="btn btn-success me-2" type="button" id="link-raccogli">RACCOGLI</button>
 					<button class="btn btn-info" type="button" id="link-interagisci">INTERAGISCI</button>
 				
 				</div>
@@ -139,7 +88,6 @@
 			</div>
 			
 			
-			<!-- <div class="d-flex flex-row justify-content-end w33vw"> -->
 			<div class="d-flex flex-row justify-content-end">
 			
 				<div class="d-flex flex-column justify-content-between m-3 p-2">
@@ -166,60 +114,19 @@
 			
 		
 		</div>
-		
-		<!-- BOTTONI INTERAZIONE
-		<div id="bottom" class="row justify-content-between"> -->
-		
-			
-			
-			
-			
-			<!-- STATISTICHE e OGGETTI
-			<div class="row right">
-			
-				<div class="row right">
-				
-					<div class="column right mr-10">
-					
-						<button type="button" id="link-armi" onclick="showModal('armi');">ARMI</button>
-						<button type="button" id="link-incantesimi" onclick="showModal('incantesimi');">INCANTESIMI</button>
-						<button type="button" id="link-abilita" onclick="showModal('abilita');">ABILITA'</button>
-						<button type="button" id="link-equipaggiamento" onclick="showModal('equipaggiamento');">EQUIPAGGIAMENTO</button>
-					
-					
-					</div>
-				
-					<div class="column right text-right">
-					
-						<p>FORZA <span id="for"></span> +<span id="bonus-for">0</span></p>
-						<p>DESTREZZA <span id="des"></span> +<span id="bonus-des">0</span></p>
-						<p>COSTITUZIONE <span id="cos"></span> +<span id="bonus-cos">0</span></p>
-						<p>CARISMA <span id="car"></span> +<span id="bonus-car">0</span></p>
-						<p>INTELLIGENZA <span id="int"></span> +<span id="bonus-int">0</span></p>
-						<p>SAGGEZZA <span id="sag"></span> +<span id="bonus-sag">0</span></p>
-					
-					
-					</div>
-					
-				</div>
-			
-			
-			</div>
-		
-		</div> -->
-	
+
 	</div>
 	
 	
-	<!-- <div id="player1" class="elem player">PG1</div> -->
-	<div class="box bg-danger borderd-danger position-absolute" id="player1"></div>
+	<div class="box rounded bg-danger bg-gradient position-absolute" id="player1">
+		<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M11.315 10.014a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.488 0c1.398-.864 3.544 1.838-.952 3.434-3.067-3.554.19-4.858.952-3.434z"/></svg>
+	</div>
 
 	<!-- mappa -->
 	<img id="map" src="../img/skull-entrance-map.jpg" alt="Workplace">
 	
 	<!-- Misure della griglia: 16 x 20 quadrati
 		 Misure di un singolo quadrato: 60 x 60 px-->
-	<!-- <map name="workmap">  -->
 	<div class="d-flex flex-column position-absolute" id="grid">
 		<div class="d-flex flex-row">
 			<div class="box borded" id="A1"></div>
@@ -238,6 +145,7 @@
 			<div class="box borded" id="A14"></div>
 			<div class="box borded" id="A15"></div>
 			<div class="box borded" id="A16"></div>
+			<div class="box borded" id="A17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="B1"></div>
@@ -256,6 +164,7 @@
 			<div class="box borded" id="B14"></div>
 			<div class="box borded" id="B15"></div>
 			<div class="box borded" id="B16"></div>
+			<div class="box borded" id="B17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="C1"></div>
@@ -274,6 +183,7 @@
 			<div class="box borded" id="C14"></div>
 			<div class="box borded" id="C15"></div>
 			<div class="box borded" id="C16"></div>
+			<div class="box borded" id="C17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="D1"></div>
@@ -292,6 +202,7 @@
 			<div class="box borded" id="D14"></div>
 			<div class="box borded" id="D15"></div>
 			<div class="box borded" id="D16"></div>
+			<div class="box borded" id="D17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="E1"></div>
@@ -310,6 +221,7 @@
 			<div class="box borded" id="E14"></div>
 			<div class="box borded" id="E15"></div>
 			<div class="box borded" id="E16"></div>
+			<div class="box borded" id="E17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="F1"></div>
@@ -328,6 +240,7 @@
 			<div class="box borded" id="F14"></div>
 			<div class="box borded" id="F15"></div>
 			<div class="box borded" id="F16"></div>
+			<div class="box borded" id="F17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="G1"></div>
@@ -346,6 +259,7 @@
 			<div class="box borded" id="G14"></div>
 			<div class="box borded" id="G15"></div>
 			<div class="box borded" id="G16"></div>
+			<div class="box borded" id="G17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="H1"></div>
@@ -364,6 +278,7 @@
 			<div class="box borded" id="H14"></div>
 			<div class="box borded" id="H15"></div>
 			<div class="box borded" id="H16"></div>
+			<div class="box borded" id="H17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="I1"></div>
@@ -382,6 +297,7 @@
 			<div class="box borded" id="I14"></div>
 			<div class="box borded" id="I15"></div>
 			<div class="box borded" id="I16"></div>
+			<div class="box borded" id="I17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="L1"></div>
@@ -400,6 +316,7 @@
 			<div class="box borded" id="L14"></div>
 			<div class="box borded" id="L15"></div>
 			<div class="box borded" id="L16"></div>
+			<div class="box borded" id="L17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="M1"></div>
@@ -418,6 +335,7 @@
 			<div class="box borded" id="M14"></div>
 			<div class="box borded" id="M15"></div>
 			<div class="box borded" id="M16"></div>
+			<div class="box borded" id="M17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="N1"></div>
@@ -436,6 +354,7 @@
 			<div class="box borded" id="N14"></div>
 			<div class="box borded" id="N15"></div>
 			<div class="box borded" id="N16"></div>
+			<div class="box borded" id="N17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="O1"></div>
@@ -454,6 +373,7 @@
 			<div class="box borded" id="O14"></div>
 			<div class="box borded" id="O15"></div>
 			<div class="box borded" id="O16"></div>
+			<div class="box borded" id="O17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="P1"></div>
@@ -472,6 +392,7 @@
 			<div class="box borded" id="P14"></div>
 			<div class="box borded" id="P15"></div>
 			<div class="box borded" id="P16"></div>
+			<div class="box borded" id="P17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="Q1"></div>
@@ -490,6 +411,7 @@
 			<div class="box borded" id="Q14"></div>
 			<div class="box borded" id="Q15"></div>
 			<div class="box borded" id="Q16"></div>
+			<div class="box borded" id="Q17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="R1"></div>
@@ -508,6 +430,7 @@
 			<div class="box borded" id="R14"></div>
 			<div class="box borded" id="R15"></div>
 			<div class="box borded" id="R16"></div>
+			<div class="box borded" id="R17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="S1"></div>
@@ -526,6 +449,7 @@
 			<div class="box borded" id="S14"></div>
 			<div class="box borded" id="S15"></div>
 			<div class="box borded" id="S16"></div>
+			<div class="box borded" id="S17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="T1"></div>
@@ -544,6 +468,7 @@
 			<div class="box borded" id="T14"></div>
 			<div class="box borded" id="T15"></div>
 			<div class="box borded" id="T16"></div>
+			<div class="box borded" id="T17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="U1"></div>
@@ -562,6 +487,7 @@
 			<div class="box borded" id="U14"></div>
 			<div class="box borded" id="U15"></div>
 			<div class="box borded" id="U16"></div>
+			<div class="box borded" id="U17"></div>
 		</div>
 		<div class="d-flex flex-row">
 			<div class="box borded" id="V1"></div>
@@ -580,855 +506,498 @@
 			<div class="box borded" id="V14"></div>
 			<div class="box borded" id="V15"></div>
 			<div class="box borded" id="V16"></div>
+			<div class="box borded" id="A17"></div>
+		</div>
+		<div class="d-flex flex-row">
+			<div class="box borded" id="Z1"></div>
+			<div class="box borded" id="Z2"></div>
+			<div class="box borded" id="Z3"></div>
+			<div class="box borded" id="Z4"></div>
+			<div class="box borded" id="Z5"></div>
+			<div class="box borded" id="Z6"></div>
+			<div class="box borded" id="Z7"></div>
+			<div class="box borded" id="Z8"></div>
+			<div class="box borded" id="Z9"></div>
+			<div class="box borded" id="Z10"></div>
+			<div class="box borded" id="Z11"></div>
+			<div class="box borded" id="Z12"></div>
+			<div class="box borded" id="Z13"></div>
+			<div class="box borded" id="Z14"></div>
+			<div class="box borded" id="Z15"></div>
+			<div class="box borded" id="Z16"></div>
 		</div>
 	<!-- </map> -->
 	</div>
-	
-	
-<script>
-	
 
-	$(document).ready(function() {
-		
-		var minPos = $("#grid").position();
-		var pPos = $("#player1").position();
-		
-		// console.log("map left: "+minPos.left+" map right: "+minPos.top);
-		// console.log("pPos left: "+pPos.left+" pPos right: "+pPos.top);
-		
-		// posizioni di origine mappa
-		// LOCAL O SESSION ?????
-		sessionStorage.setItem("min_left_pos_grid", minPos.left);
-		sessionStorage.setItem("min_top_pos_grid", minPos.top);
-		
-
-		if (sessionStorage.getItem("left_pos_grid") == undefined) sessionStorage.setItem("left_pos_grid", "0");
-		if (sessionStorage.getItem("top_pos_grid") == undefined) sessionStorage.setItem("top_pos_grid", "0");
-		
-		
-		// griglia
-		 $("#grid div.box.borded").droppable({
-			drop: function(event, ui) {
-				
-				// multipli di 60
-				var multipleBase = 60;
-				var multipleLeft = 10;
-				var multipleTop = -6;
-				
-				// ancora segnalino in base alla vicinanza con i bordi
-				while (Math.max(multipleLeft, ui.position.left) == ui.position.left) multipleLeft = multipleLeft + multipleBase;
-				while (Math.max(multipleTop, ui.position.top) == ui.position.top) multipleTop = multipleTop + multipleBase;
-
-				
-				var leftPos = (multipleLeft - ui.position.left) > (multipleBase / 2) ? (multipleLeft - multipleBase) + 2 : multipleLeft + 2;
-				var topPos = (multipleTop - ui.position.top) > (multipleBase / 2) ? (multipleTop - multipleBase) + 2 : multipleTop + 2;
-				
-
-				$("#player1").css("left", leftPos);
-				$("#player1").css("top", topPos);
-				
-				// console.log("pPos left: "+leftPos+" pPos right: "+topPos);
-			}
-		});
-		
-		
-		
-		// giocatore
-		$("#player1").draggable();
-		
-		
-		$("#player1").on("mouseup", function() {
-			
-			// 
-			
-		});
-		
-		
-		
-		// ad ogni movimento invia posizioni a PHP
-		
-		// PHP salva posizioni di TUTTI i personaggi giocanti ad una tabella
-		
-			// Se personaggio già presente aggiorna posizioni
-		
-			// se personaggio muore elimina riga
-		
-		
-	})
-	
-</script>	
-	
-	
-	
 </div>	
 	
 	
 	
 	
-	<!-- LOGIN -->
-	<div id="modal-login" class="modal fade" tabindex="-1" aria-labelledby="modal-loginLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
-				</div>				
-				<div class="modal-body">
-					<p>Nome giocatore</p>
-					<input type="text" id="text-login" name="login">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-success" id="login" data-bs-dismiss="modal">Entra</button>
-				</div>
+<!-- LOGIN -->
+<div id="modal-login" class="modal fade" tabindex="-1" aria-labelledby="modal-loginLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+			</div>				
+			<div class="modal-body">
+				<p>Nome giocatore</p>
+				<input type="text" id="text-login" name="login">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" id="login" data-bs-dismiss="modal">Entra</button>
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	<!-- ATTACCA -->
-	<div id="modal-attacca" class="modal fade" tabindex="-1" aria-labelledby="modal-attaccaLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modal-attaccaLabel">Attacca</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
-				</div>				
-				<div class="modal-body">
-					<div class="d-flex flex-column">
-						<div id="container-icone-personaggi" class="d-flex flex-row justify-content-between p-2 mb-4"></div>
-						<div class="d-flex flex-row justify-content-between p-2">
-							<div class="d-flex flex-column w33vw">
-								<button type="button" class="btn btn-outline-secondary mb-1" id="link-attacca-armi" data-bs-toggle="modal" data-bs-target="#modal-armi">ARMI</button>
-								<button type="button" class="btn btn-outline-secondary mb-1" id="link-attacca-incantesimi" data-bs-toggle="modal" data-bs-target="#modal-incantesimi">INCANTESIMI</button>
-								<button type="button" class="btn btn-outline-secondary mb-1" id="link-attacca-abilita" data-bs-toggle="modal" data-bs-target="#modal-abilita">ABILIT&Agrave;</button></button>
-								<button type="button" class="btn btn-outline-secondary mb-1" id="link-attacca-equipaggiamento" data-bs-toggle="modal" data-bs-target="#modal-equipaggiamento">EQUIPAGGIAMENTO</button></button>
-							</div>
-							<div class="d-flex flex-column w33vw">
-								<div id="attacca-party-stats" class="mx-2">
-									<p id="attacca-party-stats-text"></p>
-									<input type="hidden" id="attacca-party-stats-weapon">
-								</div>
-							</div>
-							<div class="d-flex flex-column w33vw">
-								<div>
-									<p class="text-danger text-center">RISULTATO</p>
-									<p id="attacca-risultato-text"></p>
-								</div>
+</div>
+
+
+
+<!-- ATTACCA -->
+<div id="modal-attacca" class="modal fade" tabindex="-1" aria-labelledby="modal-attaccaLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-attaccaLabel">Attacca</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+			</div>				
+			<div class="modal-body">
+				<div class="d-flex flex-column">
+					<div id="container-icone-personaggi" class="d-flex flex-row justify-content-between p-2 mb-4"></div>
+					<div class="d-flex flex-row justify-content-between p-2">
+						<div class="d-flex flex-column w33vw">
+							<button type="button" class="btn btn-outline-secondary mb-1" id="link-attacca-armi" data-bs-toggle="modal" data-bs-target="#modal-armi">ARMI</button>
+							<button type="button" class="btn btn-outline-secondary mb-1" id="link-attacca-incantesimi" data-bs-toggle="modal" data-bs-target="#modal-incantesimi">INCANTESIMI</button>
+							<button type="button" class="btn btn-outline-secondary mb-1" id="link-attacca-abilita" data-bs-toggle="modal" data-bs-target="#modal-abilita">ABILIT&Agrave;</button></button>
+							<button type="button" class="btn btn-outline-secondary mb-1" id="link-attacca-equipaggiamento" data-bs-toggle="modal" data-bs-target="#modal-equipaggiamento">EQUIPAGGIAMENTO</button></button>
+						</div>
+						<div class="d-flex flex-column w33vw">
+							<div id="attacca-party-stats" class="mx-2">
+								<p id="attacca-party-stats-text"></p>
+								<input type="hidden" id="attacca-party-stats-weapon">
 							</div>
 						</div>
-						<!-- <div class="d-flex flex-row justify-content-between">
-							<button type="button" class="text-white bg-danger width-200" id="attacca"><b>ATTACCA</b></button>
-							<button type="button" class="width-200" id="passa">FAI...</button>
-						</div> -->
-					</div>	
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger text-center font-weight-bold" id="attacca-annulla">ANNULLA ATTACCO</button>
-				</div>
+						<div class="d-flex flex-column w33vw">
+							<div>
+								<p class="text-danger text-center">RISULTATO</p>
+								<p id="attacca-risultato-text"></p>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="d-flex flex-row justify-content-between">
+						<button type="button" class="text-white bg-danger width-200" id="attacca"><b>ATTACCA</b></button>
+						<button type="button" class="width-200" id="passa">FAI...</button>
+					</div> -->
+				</div>	
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger text-center font-weight-bold" id="attacca-annulla">ANNULLA ATTACCO</button>
 			</div>
 		</div>
+	</div>
 
-		<div class="d-flex flex-row justify-content-end">
-			<span class="chiudi" onclick="closeModal('attacca')">X</span>
-			<p class="text-center text-danger mb-20">ATTACCA</p>
-			
-			<div id="container-icone-personaggi" class="row left mb-20"></div>
-			
-			<div class="row mb-20">
-			
-				<div class="column mr-10">
-					<button type="button" id="link-attacca-armi" onclick="showModal('armi');">ARMI</button>
-					<button type="button" id="link-attacca-incantesimi" onclick="showModal('incantesimi');">INCANTESIMI</button>
-					<button type="button" id="link-attacca-equipaggiamento" onclick="showModal('equipaggiamento');">EQUIPAGGIAMENTO</button></button>
-					<button type="button" id="link-attacca-abilita" onclick="showModal('abilita');">ABILITA'</button></button>
-				</div>
-				
-				<div class="column mr-10">
-					<div id="attacca-party-stats" class="mb-10">
-						<p id="attacca-party-stats-text"></p>
-						<input type="hidden" id="attacca-party-stats-weapon">
-					</div>
-				</div>
-				
-				<div class="column">
-					<div>
-						<p class="text-danger text-center">RISULTATO</p>
-						<p id="attacca-risultato-text"></p>
-					</div>
-				</div>
-			
+	<div class="d-flex flex-row justify-content-end">
+		<span class="chiudi" onclick="closeModal('attacca')">X</span>
+		<p class="text-center text-danger mb-20">ATTACCA</p>
+		
+		<div id="container-icone-personaggi" class="row left mb-20"></div>
+		
+		<div class="row mb-20">
+		
+			<div class="column mr-10">
+				<button type="button" id="link-attacca-armi" onclick="showModal('armi');">ARMI</button>
+				<button type="button" id="link-attacca-incantesimi" onclick="showModal('incantesimi');">INCANTESIMI</button>
+				<button type="button" id="link-attacca-equipaggiamento" onclick="showModal('equipaggiamento');">EQUIPAGGIAMENTO</button></button>
+				<button type="button" id="link-attacca-abilita" onclick="showModal('abilita');">ABILITA'</button></button>
 			</div>
 			
-			<div class="row justify-content-between mb-20">
-				<button type="button" class="text-white bg-danger width-200" id="attacca"><b>ATTACCA</b></button>
-				<button type="button" class="width-200" id="passa">FAI...</button>
+			<div class="column mr-10">
+				<div id="attacca-party-stats" class="mb-10">
+					<p id="attacca-party-stats-text"></p>
+					<input type="hidden" id="attacca-party-stats-weapon">
+				</div>
 			</div>
 			
-			<div class="row justify-content-center">
-				<button type="button" class="text-danger text-center font-weight-bold" id="attacca-annulla">ANNULLA ATTACCO</button>
+			<div class="column">
+				<div>
+					<p class="text-danger text-center">RISULTATO</p>
+					<p id="attacca-risultato-text"></p>
+				</div>
 			</div>
-			
+		
+		</div>
+		
+		<div class="row justify-content-between mb-20">
+			<button type="button" class="text-white bg-danger width-200" id="attacca"><b>ATTACCA</b></button>
+			<button type="button" class="width-200" id="passa">FAI...</button>
+		</div>
+		
+		<div class="row justify-content-center">
+			<button type="button" class="text-danger text-center font-weight-bold" id="attacca-annulla">ANNULLA ATTACCO</button>
 		</div>
 		
 	</div>
 	
-	
-	<!-- DIALOGO -->
-	<!-- <div id="modal-dialogo" class="hide">
-		<span class="chiudi" onclick="closeModal('dialogo')">X</span>
-		<p>DOMANDA DI PROVA</p>
-		<p>RISPOSTA DI PROVA</p>
-	</div> -->
-	
-	
-	<!-- ARMI -->
-	<!-- <div id="modal-armi" class="hide">
-		<span class="chiudi" onclick="closeModal('armi')">X</span>
-		<p class="text-danger">ARMI</p>
-		<div id ="lista-armi"></div>
-	</div> -->
-	<div id="modal-armi" class="modal fade" tabindex="-1" aria-labelledby="modal-armiLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modal-armiLabel">Armi</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
-				</div>				
-				<div class="modal-body">
-					<div id ="lista-armi"></div>
-				</div>
-				<div class="modal-footer">
-					<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
-				</div>
+</div>
+
+
+<!-- DIALOGO -->
+<!-- <div id="modal-dialogo" class="hide">
+	<span class="chiudi" onclick="closeModal('dialogo')">X</span>
+	<p>DOMANDA DI PROVA</p>
+	<p>RISPOSTA DI PROVA</p>
+</div> -->
+
+<div id="modal-armi" class="modal fade" tabindex="-1" aria-labelledby="modal-armiLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-armiLabel">Armi</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+			</div>				
+			<div class="modal-body">
+				<div id ="lista-armi"></div>
+			</div>
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
 			</div>
 		</div>
 	</div>
-	
-	<!-- INCANTESIMI -->
-	<!-- <div id="modal-incantesimi" class="hide">
-		<span class="chiudi" onclick="closeModal('incantesimi')">X</span>
-		<p class="text-danger">INCANTESIMI</p>
-		<div id="lista-incantesimi"></div>
-	</div> -->
-	<div id="modal-incantesimi" class="modal fade" tabindex="-1" aria-labelledby="modal-incantesimiLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modal-incantesimiLabel">Incantesimi</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
-				</div>				
-				<div class="modal-body">
-					<div id ="lista-incantesimi"></div>
-				</div>
-				<div class="modal-footer">
-					<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
-				</div>
+</div>
+
+
+<div id="modal-incantesimi" class="modal fade" tabindex="-1" aria-labelledby="modal-incantesimiLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-incantesimiLabel">Incantesimi</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+			</div>				
+			<div class="modal-body">
+				<div id ="lista-incantesimi"></div>
+			</div>
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
 			</div>
 		</div>
 	</div>
-	
-	<!-- ABILITA' -->
-	<!-- <div id="modal-abilita" class="hide">
-		<span class="chiudi" onclick="closeModal('abilita')">X</span>
-		<p class="text-danger">ABILITA'</p>
-		<div id="lista-abilita"></div>
-	</div> -->
-	<div id="modal-abilita" class="modal fade" tabindex="-1" aria-labelledby="modal-abilitaLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modal-abilitaLabel">Abilit&agrave;</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
-				</div>				
-				<div class="modal-body">
-					<div id ="lista-abilita"></div>
-				</div>
-				<div class="modal-footer">
-					<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
-				</div>
+</div>
+
+
+<div id="modal-abilita" class="modal fade" tabindex="-1" aria-labelledby="modal-abilitaLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-abilitaLabel">Abilit&agrave;</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+			</div>				
+			<div class="modal-body">
+				<div id ="lista-abilita"></div>
+			</div>
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
 			</div>
 		</div>
 	</div>
-	
-	<!-- EQUIPAGGIAMENTO -->
-	<!-- <div id="modal-equipaggiamento" class="hide">
-		<span class="chiudi" onclick="closeModal('equipaggiamento')">X</span>
-		<p class="text-danger">EQUIPAGGIAMENTO</p>
-		<div id="lista-equipaggiamento"></div>
-	</div> -->
-	<div id="modal-equipaggiamento" class="modal fade" tabindex="-1" aria-labelledby="modal-equipaggiamentoLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modal-equipaggiamentoLabel">Equipaggiamento</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
-				</div>				
-				<div class="modal-body">
-					<div id ="lista-equipaggiamento"></div>
-				</div>
-				<div class="modal-footer">
-					<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
-				</div>
+</div>
+
+
+<div id="modal-equipaggiamento" class="modal fade" tabindex="-1" aria-labelledby="modal-equipaggiamentoLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-equipaggiamentoLabel">Equipaggiamento</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+			</div>				
+			<div class="modal-body">
+				<div id ="lista-equipaggiamento"></div>
+			</div>
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
 			</div>
 		</div>
 	</div>
-	
-	<!-- SCHEGLI CHI ATTACCARE -->
-	<!-- <div id="modal-nemico" class="hide">
-		<span class="chiudi" onclick="closeModal('nemico')">X</span>
-		<p class="text-danger">CHI VUOI ATTACCARE?</p>
-		<div id="lista-nemico"></div>
-	</div> -->
-	
-	<!-- INSERISCI -->
-	<div id="modal-inserisci" class="modal fade" tabindex="-1" aria-labelledby="modal-inserisciLabel" aria-hidden="true">
-		<div class="modal-dialog modal-xl">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modal-inserisciLabel">Inserisci</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
-				</div>				
-				<div class="modal-body">
-					<!-- <div id ="lista-equipaggiamento"></div> -->
-					<form id="lista-inserisci" method="post">
-						<div class="d-flex column">
-						
-							<fieldset>
-								<legend>Cosa vuoi caricare?</legend>
+</div>
+
+<!-- INSERISCI -->
+<div id="modal-inserisci" class="modal fade" tabindex="-1" aria-labelledby="modal-inserisciLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-inserisciLabel">Inserisci</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+			</div>				
+			<div class="modal-body">
+				<form id="lista-inserisci" method="post">
+					<div class="d-flex column">
+					
+						<fieldset>
+							<legend>Cosa vuoi caricare?</legend>
+							<div class="row">
 								<div class="row">
-									<div class="row">
-										<label for="inserisci-tipo-Oggetti">Oggetti</label>
-										<input type="radio" name="inserisci-tipo" value="Oggetti" id="inserisci-tipo-Oggetti" onchange="showModal('inserisci-Oggetto');closeModal('inserisci-Personaggio');">
-									</div>
-									<div class="row">
-										<label for="inserisci-tipo-Personaggi">Personaggi</label>
-										<input type="radio" name="inserisci-tipo" value="Personaggi" id="inserisci-tipo-Personaggi" onchange="showModal('inserisci-Personaggio');closeModal('inserisci-Oggetto');">
-									</div>
+									<label for="inserisci-tipo-Oggetti">Oggetti</label>
+									<input type="radio" name="inserisci-tipo" value="Oggetti" id="inserisci-tipo-Oggetti" onchange="showModal('inserisci-Oggetto');closeModal('inserisci-Personaggio');">
+								</div>
+								<div class="row">
+									<label for="inserisci-tipo-Personaggi">Personaggi</label>
+									<input type="radio" name="inserisci-tipo" value="Personaggi" id="inserisci-tipo-Personaggi" onchange="showModal('inserisci-Personaggio');closeModal('inserisci-Oggetto');">
+								</div>
+							</div>
+						</fieldset>
+						
+						<fieldset id="modal-inserisci-Oggetto" class="hide">
+							<legend>Carica Oggetto</legend>
+							<p class="mb-10">* obbligatori.</p>
+							
+							<fieldset class="row mb-10">
+								<legend>Tipo di oggetto *</legend>
+								<div class="row">
+									<select name="inserisci-oggetto-azione" class="required">
+										<option value="arma">Arma</option>
+										<option value="incantesimo">Incantesimo</option>
+										<option value="pergamena">Pergamena</option>
+										<option value="pozione">Pozione</option>
+										<option value="libro">Libro</option>
+										<option value="abilita">Abilità</option>
+									</select>
 								</div>
 							</fieldset>
 							
-							<fieldset id="modal-inserisci-Oggetto" class="hide">
-								<legend>Carica Oggetto</legend>
-								<p class="mb-10">* obbligatori.</p>
-								
-								<fieldset class="row mb-10">
-									<legend>Tipo di oggetto *</legend>
+							<div class="mb-10">
+								<div class="row">
+									<label for="inserisci-Oggetti-nome">Nome *</label>
+									<input type="input" name="inserisci-oggetto-nome" class="required" id="inserisci-Oggetti-nome" maxlength="16">
+									
+								</div>
+								<div class="row">
+									<label for="inserisci-Oggetti-proprietario">Proprietario *</label>
+									<input type="number" name="inserisci-oggetto-proprietario" class="required" id="inserisci-Oggetti-proprietario" max="255">
+									
+								</div>
+							</div>	
+							
+							<div class="mb-10">
+								<p>Presente sulla mappa? *</p>
+								<div class="row">
 									<div class="row">
-										<select name="inserisci-oggetto-azione" class="required">
-											<option value="arma">Arma</option>
-											<option value="incantesimo">Incantesimo</option>
-											<option value="pergamena">Pergamena</option>
-											<option value="pozione">Pozione</option>
-											<option value="libro">Libro</option>
-											<option value="abilita">Abilità</option>
-										</select>
-									</div>
-								</fieldset>
-								
-								<div class="mb-10">
-									<div class="row">
-										<label for="inserisci-Oggetti-nome">Nome *</label>
-										<input type="input" name="inserisci-oggetto-nome" class="required" id="inserisci-Oggetti-nome" maxlength="16">
+										<label for="inserisci-Oggetti-presente-si">Sì</label>
+										<input type="radio" name="inserisci-oggetto-presente" class="required" id="inserisci-Oggetti-presente-si" value="1">
 										
 									</div>
 									<div class="row">
-										<label for="inserisci-Oggetti-proprietario">Proprietario *</label>
-										<input type="number" name="inserisci-oggetto-proprietario" class="required" id="inserisci-Oggetti-proprietario" max="255">
+										<label for="inserisci-Oggetti-presente-no">No</label>
+										<input type="radio" name="inserisci-oggetto-presente" class="required" id="inserisci-Oggetti-presente-no" value="0">
 										
 									</div>
-								</div>	
-								
-								<div class="mb-10">
-									<p>Presente sulla mappa? *</p>
-									<div class="row">
-										<div class="row">
-											<label for="inserisci-Oggetti-presente-si">Sì</label>
-											<input type="radio" name="inserisci-oggetto-presente" class="required" id="inserisci-Oggetti-presente-si" value="1">
-											
-										</div>
-										<div class="row">
-											<label for="inserisci-Oggetti-presente-no">No</label>
-											<input type="radio" name="inserisci-oggetto-presente" class="required" id="inserisci-Oggetti-presente-no" value="0">
-											
-										</div>
-									</div>
 								</div>
-								
-								
-								<fieldset class="column mb-10">
-									<legend>Danno</legend>
-									<div class="row">
-										<label for="inserisci-Oggetti-numero-quantita">Numero di dadi?</label>
-										<input type="number" name="inserisci-oggetto-numero-quantita" id="inserisci-Oggetti-numero-quantita" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Oggetti-numero-dadi">Facce del dado?</label>
-										<input type="number" name="inserisci-oggetto-numero-dadi" id="inserisci-Oggetti-numero-dadi" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Oggetti-bonus_tiro">Bonus tiro?</label>
-										<input type="number" name="inserisci-oggetto-bonus_tiro" id="inserisci-Oggetti-bonus_tiro" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Oggetti-gittata">Gittata?</label>
-										<input type="number" name="inserisci-oggetto-gittata" id="inserisci-Oggetti-gittata" max="100">
-									</div>
-								</fieldset>
-
-								<div class="row justify-content-between">
-									<button type="button" id="inserisci-Oggetto-svuota" onclick="emptyForm('modal-inserisci-Oggetto');">Svuota</button>
-									<button type="button" id="inserisci-Oggetto-ok">Inserisci</button>
-								</div>
-							</fieldset>
+							</div>
 							
-				
-							<fieldset id="modal-inserisci-Personaggio" class="hide">
-								<legend>Carica Personaggio</legend>
-								
-								<p class="mb-10">* obbligatori.</p>
-								<fieldset class="column mb-10">
-									<legend>Razza</legend>
-									<div class="row">
-										<select name="inserisci-personaggio-razza" class="required">
-											<option value="Umano" selected>Umano</option>
-											<option value="Elfo">Elfo</option>
-											<option value="Mezzelfo">Mezzelfo</option>
-											<option value="Mezzorco">Mezzorco</option>
-											<option value="Nano">Nano</option>
-											<option value="Gnomo">Gnomo</option>
-											<option value="Halfling">Umano</option>
-										</select>
-									</div>
-								</fieldset>
-								
-								<fieldset class="row mb-10">
-									<legend>Classe</legend>
-									<div class="row">
-										<select name="inserisci-personaggio-classe" class="required">
-											<option value="Barbaro">Barbaro</option>
-											<option value="Bardo">Bardo</option>
-											<option value="Chierico">Chierico</option>
-											<option value="Druido">Druido</option>
-											<option value="Druido">Druido</option>
-											<option value="Guerriero">Guerriero</option>
-											<option value="Ladro">Ladro</option>
-											<option value="Mago">Mago</option>
-											<option value="Monaco">Monaco</option>
-											<option value="Paladino">Paladino</option>
-											<option value="Ranger">Ranger</option>
-											<option value="Stregone">Stregone</option>
-											<option value="Altro">Altro</option>
-										</select>
-									</div>
-								</fieldset>
-								
-								<div class="column mb-10">
-									<div class="column mb-10">
-										<div class="row">
-											<label for="inserisci-Personaggi-giocatore">Username *</label>
-											<input type="input" name="inserisci-personaggio-giocatore" id="inserisci-Personaggi-Giocatore" max="16">
-										</div>
-										<p>Se inserisci <cite>npc</cite> creerai un PERSONAGGIO NON GIOCANTE</p>
-										<p>Se inserisci <cite>dm</cite> creerai un NUOVO DUNGEON MASTER</p>
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-nome">Nome *</label>
-										<input type="input" name="inserisci-personaggio-nome" id="inserisci-Personaggi-nome" max="16">
-									</div>
-								</div>
-								
-								<div class="mb-10">
-									<p>Presente sulla mappa? *</p>
-									<div class="row">
-										<div class="row">
-											<label for="inserisci-Personaggi-presente-si">Sì</label>
-											<input type="radio" name="inserisci-personaggio-presente" class="required" id="inserisci-Personaggi-presente-si" value="1">	
-										</div>
-										<div class="row">
-											<label for="inserisci-Personaggi-presente-no">No</label>
-											<input type="radio" name="inserisci-personaggio-presente" class="required" id="inserisci-Personaggi-presente-no" value="0">	
-										</div>
-									</div>
-								</div>
-								
+							
+							<fieldset class="column mb-10">
+								<legend>Danno</legend>
 								<div class="row">
-									<label for="inserisci-Personaggi-livello">Livello?</label>
-									<input type="number" name="inserisci-personaggio-livello" id="inserisci-Personaggi-livello" max="100">
+									<label for="inserisci-Oggetti-numero-quantita">Numero di dadi?</label>
+									<input type="number" name="inserisci-oggetto-numero-quantita" id="inserisci-Oggetti-numero-quantita" max="100">
 								</div>
-								
-								<fieldset class="column mb-10">
-									<legend>Caratteristiche</legend>
-									<div class="row">
-										<label for="inserisci-Personaggi-caratteristiche-forza">Forza</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-forza" id="inserisci-Personaggi-caratteristiche-Forza" max="100" >
-										<label for="inserisci-Personaggi-caratteristiche-bonus-forza">Bonus forza</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-bonus-forza" id="inserisci-Personaggi-caratteristiche-bonus-Forza" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-caratteristiche-destrezza">Destrezza</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-destrezza" id="inserisci-Personaggi-caratteristiche-Destrezza" max="100">
-										<label for="inserisci-Personaggi-caratteristiche-bonus-destrezza">Bonus destrezza</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-bonus-destrezza" id="inserisci-Personaggi-caratteristiche-bonus-Destrezza" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-caratteristiche-costituzione">Costituzione</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-costituzione" id="inserisci-Personaggi-caratteristiche-Costituzione" max="100">
-										<label for="inserisci-Personaggi-caratteristiche-bonus-costituzione">Bonus costituzione</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-bonus-costituzione" id="inserisci-Personaggi-caratteristiche-bonus-Costituzione" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-caratteristiche-carisma">Carisma</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-carisma" id="inserisci-Personaggi-caratteristiche-Carisma" max="100">
-										<label for="inserisci-Personaggi-caratteristiche-bonus-carisma">Bonus carisma</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-bonus-carisma" id="inserisci-Personaggi-caratteristiche-bonus-Carisma" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-caratteristiche-intelligenza">Intelligenza</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-intelligenza" id="inserisci-Personaggi-caratteristiche-Intelligenza" max="100">
-										<label for="inserisci-Personaggi-caratteristiche-bonus-intelligenza">Bonus intelligenza</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-bonus-intelligenza" id="inserisci-Personaggi-caratteristiche-bonus-Intelligenza" max="100">
-									</div>
-									<div class="row mb-10">
-										<label for="inserisci-Personaggi-caratteristiche-saggezza">Saggezza</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-saggezza" id="inserisci-Personaggi-caratteristiche-Saggezza" max="100">
-										<label for="inserisci-Personaggi-caratteristiche-bonus-saggezza">Bonus saggezza</label>
-										<input type="number" name="inserisci-personaggio-caratteristiche-bonus-saggezza" id="inserisci-Personaggi-caratteristiche-bonus-Saggezza" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-iniziativa">Iniziativa?</label>
-										<input type="number" name="inserisci-personaggio-iniziativa" id="inserisci-Personaggi-Iniziativa" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-ca">Classe Armatura? *</label>
-										<input type="number" name="inserisci-personaggio-ca" class="required" id="inserisci-Personaggi-CA" max="100">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-pf">Punti Ferita? *</label>
-										<input type="number" name="inserisci-personaggio-pf" class="required" id="inserisci-Personaggi-PF" maxlength="255">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-pe">Punti Esperienza?</label>
-										<input type="number" name="inserisci-personaggio-pe" id="inserisci-Personaggi-PE" maxlength="255">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-denaro">Denaro?</label>
-										<input type="number" name="inserisci-personaggio-denaro" id="inserisci-Personaggi-Denaro" maxlength="255">
-									</div>
+								<div class="row">
+									<label for="inserisci-Oggetti-numero-dadi">Facce del dado?</label>
+									<input type="number" name="inserisci-oggetto-numero-dadi" id="inserisci-Oggetti-numero-dadi" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Oggetti-bonus_tiro">Bonus tiro?</label>
+									<input type="number" name="inserisci-oggetto-bonus_tiro" id="inserisci-Oggetti-bonus_tiro" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Oggetti-gittata">Gittata?</label>
+									<input type="number" name="inserisci-oggetto-gittata" id="inserisci-Oggetti-gittata" max="100">
+								</div>
+							</fieldset>
 
-								</fieldset>
-								<fieldset class="mb-10">
-									<legend>Oggetti</legend>
-									<p class="mb-10">Inserire ID degli oggetti separati da virgole</p>
-									<div class="row">
-										<label for="inserisci-Personaggi-armi">Armi?</label>
-										<input type="input" name="inserisci-personaggio-armi" id="inserisci-Personaggi-Armi">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-incantesimi">Incantesimi?</label>
-										<input type="input" name="inserisci-personaggio-incantesimi" id="inserisci-Personaggi-Incantesimi">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-abilita">Abilità?</label>
-										<input type="input" name="inserisci-personaggio-abilita" id="inserisci-Personaggi-Abilita">
-									</div>
-									<div class="row">
-										<label for="inserisci-Personaggi-equipaggiamento">Equipaggiamento?</label>
-										<input type="input" name="inserisci-personaggio-equipaggiamento" id="inserisci-Personaggi-Equipaggiamento">
-									</div>
-								</fieldset>
-								<div class="row justify-content-between">
-									<button type="button" id="inserisci-Personaggio-svuota" onclick="emptyForm('modal-inserisci-Personaggio');">Svuota</button>
-									<button type="button" id="inserisci-Personaggio-ok">Inserisci</button>
-								</div>
-								
-							</fieldset>
+							<div class="row justify-content-between">
+								<button type="button" id="inserisci-Oggetto-svuota" onclick="emptyForm('modal-inserisci-Oggetto');">Svuota</button>
+								<button type="button" id="inserisci-Oggetto-ok">Inserisci</button>
+							</div>
+						</fieldset>
 						
-						
-							<fieldset id="modal-inserisci-risultato">
-								
-							</fieldset>
-							
-						</div>	
-						
-					</form>	
-				</div>
-				<div class="modal-footer">
-					<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-	
-	
-	<!-- <div id="modal-inserisci" class="w-60 hide">
-		<span class="chiudi" onclick="closeModal('inserisci')">X</span>
-		<p class="text-danger">INSERISCI</p>
-		<form id="lista-inserisci" method="post">
-			<div class="d-flex column">
 			
-				<fieldset>
-					<legend>Cosa vuoi caricare?</legend>
-					<div class="row">
-						<div class="row">
-							<label for="inserisci-tipo-Oggetti">Oggetti</label>
-							<input type="radio" name="inserisci-tipo" value="Oggetti" id="inserisci-tipo-Oggetti" onchange="showModal('inserisci-Oggetto');closeModal('inserisci-Personaggio');">
-						</div>
-						<div class="row">
-							<label for="inserisci-tipo-Personaggi">Personaggi</label>
-							<input type="radio" name="inserisci-tipo" value="Personaggi" id="inserisci-tipo-Personaggi" onchange="showModal('inserisci-Personaggio');closeModal('inserisci-Oggetto');">
-						</div>
-					</div>
-				</fieldset>
-				
-				<fieldset id="modal-inserisci-Oggetto" class="hide">
-					<legend>Carica Oggetto</legend>
-					<p class="mb-10">* obbligatori.</p>
-					
-					<fieldset class="row mb-10">
-						<legend>Tipo di oggetto *</legend>
-						<div class="row">
-							<select name="inserisci-oggetto-azione" class="required">
-								<option value="arma">Arma</option>
-								<option value="incantesimo">Incantesimo</option>
-								<option value="pergamena">Pergamena</option>
-								<option value="pozione">Pozione</option>
-								<option value="libro">Libro</option>
-								<option value="abilita">Abilità</option>
-							</select>
-						</div>
-					</fieldset>
-					
-					<div class="mb-10">
-						<div class="row">
-							<label for="inserisci-Oggetti-nome">Nome *</label>
-							<input type="input" name="inserisci-oggetto-nome" class="required" id="inserisci-Oggetti-nome" maxlength="16">
+						<fieldset id="modal-inserisci-Personaggio" class="hide">
+							<legend>Carica Personaggio</legend>
 							
-						</div>
-						<div class="row">
-							<label for="inserisci-Oggetti-proprietario">Proprietario *</label>
-							<input type="number" name="inserisci-oggetto-proprietario" class="required" id="inserisci-Oggetti-proprietario" max="255">
+							<p class="mb-10">* obbligatori.</p>
+							<fieldset class="column mb-10">
+								<legend>Razza</legend>
+								<div class="row">
+									<select name="inserisci-personaggio-razza" class="required">
+										<option value="Umano" selected>Umano</option>
+										<option value="Elfo">Elfo</option>
+										<option value="Mezzelfo">Mezzelfo</option>
+										<option value="Mezzorco">Mezzorco</option>
+										<option value="Nano">Nano</option>
+										<option value="Gnomo">Gnomo</option>
+										<option value="Halfling">Umano</option>
+									</select>
+								</div>
+							</fieldset>
 							
-						</div>
+							<fieldset class="row mb-10">
+								<legend>Classe</legend>
+								<div class="row">
+									<select name="inserisci-personaggio-classe" class="required">
+										<option value="Barbaro">Barbaro</option>
+										<option value="Bardo">Bardo</option>
+										<option value="Chierico">Chierico</option>
+										<option value="Druido">Druido</option>
+										<option value="Druido">Druido</option>
+										<option value="Guerriero">Guerriero</option>
+										<option value="Ladro">Ladro</option>
+										<option value="Mago">Mago</option>
+										<option value="Monaco">Monaco</option>
+										<option value="Paladino">Paladino</option>
+										<option value="Ranger">Ranger</option>
+										<option value="Stregone">Stregone</option>
+										<option value="Altro">Altro</option>
+									</select>
+								</div>
+							</fieldset>
+							
+							<div class="column mb-10">
+								<div class="column mb-10">
+									<div class="row">
+										<label for="inserisci-Personaggi-giocatore">Username *</label>
+										<input type="input" name="inserisci-personaggio-giocatore" id="inserisci-Personaggi-Giocatore" max="16">
+									</div>
+									<p>Se inserisci <cite>npc</cite> creerai un PERSONAGGIO NON GIOCANTE</p>
+									<p>Se inserisci <cite>dm</cite> creerai un NUOVO DUNGEON MASTER</p>
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-nome">Nome *</label>
+									<input type="input" name="inserisci-personaggio-nome" id="inserisci-Personaggi-nome" max="16">
+								</div>
+							</div>
+							
+							<div class="mb-10">
+								<p>Presente sulla mappa? *</p>
+								<div class="row">
+									<div class="row">
+										<label for="inserisci-Personaggi-presente-si">Sì</label>
+										<input type="radio" name="inserisci-personaggio-presente" class="required" id="inserisci-Personaggi-presente-si" value="1">	
+									</div>
+									<div class="row">
+										<label for="inserisci-Personaggi-presente-no">No</label>
+										<input type="radio" name="inserisci-personaggio-presente" class="required" id="inserisci-Personaggi-presente-no" value="0">	
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<label for="inserisci-Personaggi-livello">Livello?</label>
+								<input type="number" name="inserisci-personaggio-livello" id="inserisci-Personaggi-livello" max="100">
+							</div>
+							
+							<fieldset class="column mb-10">
+								<legend>Caratteristiche</legend>
+								<div class="row">
+									<label for="inserisci-Personaggi-caratteristiche-forza">Forza</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-forza" id="inserisci-Personaggi-caratteristiche-Forza" max="100" >
+									<label for="inserisci-Personaggi-caratteristiche-bonus-forza">Bonus forza</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-bonus-forza" id="inserisci-Personaggi-caratteristiche-bonus-Forza" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-caratteristiche-destrezza">Destrezza</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-destrezza" id="inserisci-Personaggi-caratteristiche-Destrezza" max="100">
+									<label for="inserisci-Personaggi-caratteristiche-bonus-destrezza">Bonus destrezza</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-bonus-destrezza" id="inserisci-Personaggi-caratteristiche-bonus-Destrezza" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-caratteristiche-costituzione">Costituzione</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-costituzione" id="inserisci-Personaggi-caratteristiche-Costituzione" max="100">
+									<label for="inserisci-Personaggi-caratteristiche-bonus-costituzione">Bonus costituzione</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-bonus-costituzione" id="inserisci-Personaggi-caratteristiche-bonus-Costituzione" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-caratteristiche-carisma">Carisma</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-carisma" id="inserisci-Personaggi-caratteristiche-Carisma" max="100">
+									<label for="inserisci-Personaggi-caratteristiche-bonus-carisma">Bonus carisma</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-bonus-carisma" id="inserisci-Personaggi-caratteristiche-bonus-Carisma" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-caratteristiche-intelligenza">Intelligenza</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-intelligenza" id="inserisci-Personaggi-caratteristiche-Intelligenza" max="100">
+									<label for="inserisci-Personaggi-caratteristiche-bonus-intelligenza">Bonus intelligenza</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-bonus-intelligenza" id="inserisci-Personaggi-caratteristiche-bonus-Intelligenza" max="100">
+								</div>
+								<div class="row mb-10">
+									<label for="inserisci-Personaggi-caratteristiche-saggezza">Saggezza</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-saggezza" id="inserisci-Personaggi-caratteristiche-Saggezza" max="100">
+									<label for="inserisci-Personaggi-caratteristiche-bonus-saggezza">Bonus saggezza</label>
+									<input type="number" name="inserisci-personaggio-caratteristiche-bonus-saggezza" id="inserisci-Personaggi-caratteristiche-bonus-Saggezza" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-iniziativa">Iniziativa?</label>
+									<input type="number" name="inserisci-personaggio-iniziativa" id="inserisci-Personaggi-Iniziativa" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-ca">Classe Armatura? *</label>
+									<input type="number" name="inserisci-personaggio-ca" class="required" id="inserisci-Personaggi-CA" max="100">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-pf">Punti Ferita? *</label>
+									<input type="number" name="inserisci-personaggio-pf" class="required" id="inserisci-Personaggi-PF" maxlength="255">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-pe">Punti Esperienza?</label>
+									<input type="number" name="inserisci-personaggio-pe" id="inserisci-Personaggi-PE" maxlength="255">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-denaro">Denaro?</label>
+									<input type="number" name="inserisci-personaggio-denaro" id="inserisci-Personaggi-Denaro" maxlength="255">
+								</div>
+
+							</fieldset>
+							<fieldset class="mb-10">
+								<legend>Oggetti</legend>
+								<p class="mb-10">Inserire ID degli oggetti separati da virgole</p>
+								<div class="row">
+									<label for="inserisci-Personaggi-armi">Armi?</label>
+									<input type="input" name="inserisci-personaggio-armi" id="inserisci-Personaggi-Armi">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-incantesimi">Incantesimi?</label>
+									<input type="input" name="inserisci-personaggio-incantesimi" id="inserisci-Personaggi-Incantesimi">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-abilita">Abilità?</label>
+									<input type="input" name="inserisci-personaggio-abilita" id="inserisci-Personaggi-Abilita">
+								</div>
+								<div class="row">
+									<label for="inserisci-Personaggi-equipaggiamento">Equipaggiamento?</label>
+									<input type="input" name="inserisci-personaggio-equipaggiamento" id="inserisci-Personaggi-Equipaggiamento">
+								</div>
+							</fieldset>
+							<div class="row justify-content-between">
+								<button type="button" id="inserisci-Personaggio-svuota" onclick="emptyForm('modal-inserisci-Personaggio');">Svuota</button>
+								<button type="button" id="inserisci-Personaggio-ok">Inserisci</button>
+							</div>
+							
+						</fieldset>
+					
+					
+						<fieldset id="modal-inserisci-risultato">
+							
+						</fieldset>
+						
 					</div>	
 					
-					<div class="mb-10">
-						<p>Presente sulla mappa? *</p>
-						<div class="row">
-							<div class="row">
-								<label for="inserisci-Oggetti-presente-si">Sì</label>
-								<input type="radio" name="inserisci-oggetto-presente" class="required" id="inserisci-Oggetti-presente-si" value="1">
-								
-							</div>
-							<div class="row">
-								<label for="inserisci-Oggetti-presente-no">No</label>
-								<input type="radio" name="inserisci-oggetto-presente" class="required" id="inserisci-Oggetti-presente-no" value="0">
-								
-							</div>
-						</div>
-					</div>
-					
-					
-					<fieldset class="column mb-10">
-						<legend>Danno</legend>
-						<div class="row">
-							<label for="inserisci-Oggetti-numero-quantita">Numero di dadi?</label>
-							<input type="number" name="inserisci-oggetto-numero-quantita" id="inserisci-Oggetti-numero-quantita" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Oggetti-numero-dadi">Facce del dado?</label>
-							<input type="number" name="inserisci-oggetto-numero-dadi" id="inserisci-Oggetti-numero-dadi" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Oggetti-bonus_tiro">Bonus tiro?</label>
-							<input type="number" name="inserisci-oggetto-bonus_tiro" id="inserisci-Oggetti-bonus_tiro" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Oggetti-gittata">Gittata?</label>
-							<input type="number" name="inserisci-oggetto-gittata" id="inserisci-Oggetti-gittata" max="100">
-						</div>
-					</fieldset>
+				</form>	
+			</div>
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-primary" data-bs-target="#modal-attacca" data-bs-toggle="modal">Indietro</button> -->
+			</div>
+		</div>
+	</div>
+</div>
 
-					<div class="row justify-content-between">
-						<button type="button" id="inserisci-Oggetto-svuota" onclick="emptyForm('modal-inserisci-Oggetto');">Svuota</button>
-						<button type="button" id="inserisci-Oggetto-ok">Inserisci</button>
-					</div>
-				</fieldset>
-				
-	
-				<fieldset id="modal-inserisci-Personaggio" class="hide">
-					<legend>Carica Personaggio</legend>
-					
-					<p class="mb-10">* obbligatori.</p>
-					<fieldset class="column mb-10">
-						<legend>Razza</legend>
-						<div class="row">
-							<select name="inserisci-personaggio-razza" class="required">
-								<option value="Umano" selected>Umano</option>
-								<option value="Elfo">Elfo</option>
-								<option value="Mezzelfo">Mezzelfo</option>
-								<option value="Mezzorco">Mezzorco</option>
-								<option value="Nano">Nano</option>
-								<option value="Gnomo">Gnomo</option>
-								<option value="Halfling">Umano</option>
-							</select>
-						</div>
-					</fieldset>
-					
-					<fieldset class="row mb-10">
-						<legend>Classe</legend>
-						<div class="row">
-							<select name="inserisci-personaggio-classe" class="required">
-								<option value="Barbaro">Barbaro</option>
-								<option value="Bardo">Bardo</option>
-								<option value="Chierico">Chierico</option>
-								<option value="Druido">Druido</option>
-								<option value="Druido">Druido</option>
-								<option value="Guerriero">Guerriero</option>
-								<option value="Ladro">Ladro</option>
-								<option value="Mago">Mago</option>
-								<option value="Monaco">Monaco</option>
-								<option value="Paladino">Paladino</option>
-								<option value="Ranger">Ranger</option>
-								<option value="Stregone">Stregone</option>
-								<option value="Altro">Altro</option>
-							</select>
-						</div>
-					</fieldset>
-					
-					<div class="column mb-10">
-						<div class="column mb-10">
-							<div class="row">
-								<label for="inserisci-Personaggi-giocatore">Username *</label>
-								<input type="input" name="inserisci-personaggio-giocatore" id="inserisci-Personaggi-Giocatore" max="16">
-							</div>
-							<p>Se inserisci <cite>npc</cite> creerai un PERSONAGGIO NON GIOCANTE</p>
-							<p>Se inserisci <cite>dm</cite> creerai un NUOVO DUNGEON MASTER</p>
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-nome">Nome *</label>
-							<input type="input" name="inserisci-personaggio-nome" id="inserisci-Personaggi-nome" max="16">
-						</div>
-					</div>
-					
-					<div class="mb-10">
-						<p>Presente sulla mappa? *</p>
-						<div class="row">
-							<div class="row">
-								<label for="inserisci-Personaggi-presente-si">Sì</label>
-								<input type="radio" name="inserisci-personaggio-presente" class="required" id="inserisci-Personaggi-presente-si" value="1">	
-							</div>
-							<div class="row">
-								<label for="inserisci-Personaggi-presente-no">No</label>
-								<input type="radio" name="inserisci-personaggio-presente" class="required" id="inserisci-Personaggi-presente-no" value="0">	
-							</div>
-						</div>
-					</div>
-					
-					<div class="row">
-						<label for="inserisci-Personaggi-livello">Livello?</label>
-						<input type="number" name="inserisci-personaggio-livello" id="inserisci-Personaggi-livello" max="100">
-					</div>
-					
-					<fieldset class="column mb-10">
-						<legend>Caratteristiche</legend>
-						<div class="row">
-							<label for="inserisci-Personaggi-caratteristiche-forza">Forza</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-forza" id="inserisci-Personaggi-caratteristiche-Forza" max="100" >
-							<label for="inserisci-Personaggi-caratteristiche-bonus-forza">Bonus forza</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-forza" id="inserisci-Personaggi-caratteristiche-bonus-Forza" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-caratteristiche-destrezza">Destrezza</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-destrezza" id="inserisci-Personaggi-caratteristiche-Destrezza" max="100">
-							<label for="inserisci-Personaggi-caratteristiche-bonus-destrezza">Bonus destrezza</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-destrezza" id="inserisci-Personaggi-caratteristiche-bonus-Destrezza" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-caratteristiche-costituzione">Costituzione</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-costituzione" id="inserisci-Personaggi-caratteristiche-Costituzione" max="100">
-							<label for="inserisci-Personaggi-caratteristiche-bonus-costituzione">Bonus costituzione</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-costituzione" id="inserisci-Personaggi-caratteristiche-bonus-Costituzione" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-caratteristiche-carisma">Carisma</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-carisma" id="inserisci-Personaggi-caratteristiche-Carisma" max="100">
-							<label for="inserisci-Personaggi-caratteristiche-bonus-carisma">Bonus carisma</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-carisma" id="inserisci-Personaggi-caratteristiche-bonus-Carisma" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-caratteristiche-intelligenza">Intelligenza</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-intelligenza" id="inserisci-Personaggi-caratteristiche-Intelligenza" max="100">
-							<label for="inserisci-Personaggi-caratteristiche-bonus-intelligenza">Bonus intelligenza</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-intelligenza" id="inserisci-Personaggi-caratteristiche-bonus-Intelligenza" max="100">
-						</div>
-						<div class="row mb-10">
-							<label for="inserisci-Personaggi-caratteristiche-saggezza">Saggezza</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-saggezza" id="inserisci-Personaggi-caratteristiche-Saggezza" max="100">
-							<label for="inserisci-Personaggi-caratteristiche-bonus-saggezza">Bonus saggezza</label>
-							<input type="number" name="inserisci-personaggio-caratteristiche-bonus-saggezza" id="inserisci-Personaggi-caratteristiche-bonus-Saggezza" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-iniziativa">Iniziativa?</label>
-							<input type="number" name="inserisci-personaggio-iniziativa" id="inserisci-Personaggi-Iniziativa" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-ca">Classe Armatura? *</label>
-							<input type="number" name="inserisci-personaggio-ca" class="required" id="inserisci-Personaggi-CA" max="100">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-pf">Punti Ferita? *</label>
-							<input type="number" name="inserisci-personaggio-pf" class="required" id="inserisci-Personaggi-PF" maxlength="255">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-pe">Punti Esperienza?</label>
-							<input type="number" name="inserisci-personaggio-pe" id="inserisci-Personaggi-PE" maxlength="255">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-denaro">Denaro?</label>
-							<input type="number" name="inserisci-personaggio-denaro" id="inserisci-Personaggi-Denaro" maxlength="255">
-						</div>
-
-					</fieldset>
-					<fieldset class="mb-10">
-						<legend>Oggetti</legend>
-						<p class="mb-10">Inserire ID degli oggetti separati da virgole</p>
-						<div class="row">
-							<label for="inserisci-Personaggi-armi">Armi?</label>
-							<input type="input" name="inserisci-personaggio-armi" id="inserisci-Personaggi-Armi">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-incantesimi">Incantesimi?</label>
-							<input type="input" name="inserisci-personaggio-incantesimi" id="inserisci-Personaggi-Incantesimi">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-abilita">Abilità?</label>
-							<input type="input" name="inserisci-personaggio-abilita" id="inserisci-Personaggi-Abilita">
-						</div>
-						<div class="row">
-							<label for="inserisci-Personaggi-equipaggiamento">Equipaggiamento?</label>
-							<input type="input" name="inserisci-personaggio-equipaggiamento" id="inserisci-Personaggi-Equipaggiamento">
-						</div>
-					</fieldset>
-					<div class="row justify-content-between">
-						<button type="button" id="inserisci-Personaggio-svuota" onclick="emptyForm('modal-inserisci-Personaggio');">Svuota</button>
-						<button type="button" id="inserisci-Personaggio-ok">Inserisci</button>
-					</div>
-					
-				</fieldset>
-			
-			
-				<fieldset id="modal-inserisci-risultato">
-					
-				</fieldset>
-				
-			</div>	
-			
-		</form>
-	</div> -->
 	
 	<!-- MODIFICA -->
 	<!-- <div id="modal-modifica" class="w-80 hide">
@@ -1702,61 +1271,6 @@
 	
 	
 	
-		
-	
-	<!-- PLAYER1
-	<a href="#" class="elem player" id="player1">
-		<label for="coord1">P1</label>
-		<input type="text" id="coord1" placeholder="casella?">
-		<button id="btn1" type="button" onclick="move(this, 'player');">OK</button>
-	</a> -->
-	
-	
-	
-	<!-- PLAYER2 
-	<a href="#" class="elem player" id="player2">
-		<label for="coord2">P2</label>
-		<input type="text" id="coord2" placeholder="casella?">
-		<button id="btn2" type="button" onclick="move(this, 'player');">OK</button>
-	</a>-->
-	
-	<!-- PLAYER3
-	<a href="#" class="elem player" id="player3">
-		<label for="coord3">P3</label>
-		<input type="text" id="coord3" placeholder="casella?">
-		<button id="btn3" type="button" onclick="move(this, 'player');">OK</button>
-	</a> -->
-	
-	<!-- PLAYER4
-	<a href="#" class="elem player" id="player4">
-		<label for="coord4">P4</label>
-		<input type="text" id="coord4" placeholder="casella?">
-		<button id="btn4" type="button" onclick="move(this, 'player');">OK</button>
-	</a> -->
-	
-	
-	
-	<!-- NPC 
-	<a href="#" class="elem npc enemy" id="npc5">
-		<label for="coord5">NPC1</label>
-		<input type="text" id="coord5" placeholder="casella?">
-		<button id="btn5" type="button" onclick="move(this, 'npc');">OK</button>
-	</a>
-	
-	<a href="#" class="elem npc enemy" id="npc7">
-		<label for="coord7">NPC2</label>
-		<input type="text" id="coord7" placeholder="casella?">
-		<button id="btn7" type="button" onclick="move(this, 'npc');">OK</button>
-	</a>-->
-	
-	
-	<!-- EXE
-	<a href="#" class="elem exe" id="exe6">
-		<label for="coord6">LEVA</label>
-		<input type="text" id="coord6" placeholder="casella?">
-		<button id="btn6" type="button" onclick="move(this, 'exe');">OK</button>
-	</a> -->
-
 
 </body>
 </html>
