@@ -20,47 +20,73 @@ $(document).ready(function() {
 		});
 	});
 	
-	
+
 	
 
 	
 	// jQuery UI - Drag checkers
 	$(".checker").each(function(i, v) {
+		
 		var id = $(v).attr("id");
 		$("#" + id).draggable();
+		
+		
+		// posizioni già presenti...
+		if ((sessionStorage.getItem(id + " left") == undefined) || (sessionStorage.getItem(id + " top") == undefined)) {
+			
+			// in tabella
+			action = 'get';
+			
+			battlegridPos('get', id);
+			
+			// console.log("sessionStorage undefined");
+			
+		} else {
+			
+			
+			
+			// console.log("sessionStorage full");
+			// console.log(sessionStorage.getItem(id + " left"));
+			
+			// ... in sessione
+			$("#" + id).css({
+				"left" : sessionStorage.getItem(id + " left") + "px",
+				"top" : sessionStorage.getItem(id + " top") + "px"
+			});
+			
+		}
+
 	});
 	
 	
 	
+	
+	
+	
 
-	/* 
-	$("#player1").on("mouseup", function() {
+	// al rilascio del click su un segnalino -> pedina presente nella griglia di battaglia
+	// $("#player1").on("mouseup", function() {
+	$(".checker").on("mouseup", function() {
 		
-		// 
+		var id = $(this).attr("id");
+		
+		// Se personaggio già presente aggiorna posizioni (da sessione o da tabella)
+		if ((sessionStorage.getItem(id + " left") !== undefined) || 
+			(sessionStorage.getItem(id + " top") !== undefined)) {
+			
+			var action = 'update';
+			
+			// personaggio eliminato
+			var pos_x = $("#" + id).css("left");
+			var pos_y = $("#" + id).css("top");
+			
+			battlegridPos(action, id, pos_x, pos_y);
+			
+		}
 		
 	});
-	 */
-	
-	
-	// ad ogni movimento invia posizioni a PHP
-	
-	// PHP salva posizioni di TUTTI i personaggi giocanti ad una tabella
-	
-		// Se personaggio già presente aggiorna posizioni
-	
-		// se personaggio muore elimina riga
-	
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	$("button, a").click(function() {
@@ -634,7 +660,48 @@ function scegliArma(id) {
 
 
 
+function battlegridPos(action, html_id, pos_x, pos_y) {
+		
+	var posObj = {
+		'html_id' : html_id,
+		'pos_x' : pos_x.replace("px", ""),
+		'pos_y' : pos_y.replace("px", "")
+	};
+	
+	
+	
+	var data = JSON.stringify(posObj);
 
+	$.post("../battlegrid_dispatcher.php", {
+		
+		"action" : action,
+		"data" : data
+		
+	}, function(ret) {
+		
+		// console.log(ret);
+		// console.log(action);
+		var result = JSON.parse(ret);
+		
+		if (result.error) {
+			alert(result.error);
+		} else if (result.status) {
+			console.log(result.status);
+		} else if ((result.pos_x) && (result.pos_y)) {
+			
+			$("#" + id).css({
+				"left" : result.pos_x,
+				"top" : result.pos_y
+			});
+			
+			sessionStorage.setItem(id + " left", result.pos_x);
+			sessionStorage.setItem(id + " top", result.pos_y);
+			
+		}
+		
+	});
+	
+}
 
 
 
@@ -655,12 +722,12 @@ function anchorChecker(checker) {
 	
 	// posizioni di origine mappa
 	// LOCAL O SESSION ?????
-	sessionStorage.setItem("min_left_pos_grid", minPos.left);
+	/* sessionStorage.setItem("min_left_pos_grid", minPos.left);
 	sessionStorage.setItem("min_top_pos_grid", minPos.top);
 	
 
 	if (sessionStorage.getItem("left_pos_grid") == undefined) sessionStorage.setItem("left_pos_grid", "0");
-	if (sessionStorage.getItem("top_pos_grid") == undefined) sessionStorage.setItem("top_pos_grid", "0");
+	if (sessionStorage.getItem("top_pos_grid") == undefined) sessionStorage.setItem("top_pos_grid", "0"); */
 	
 	
 	// griglia
@@ -685,6 +752,12 @@ function anchorChecker(checker) {
 				"left" : leftPos,
 				"top" : topPos
 			});
+			
+			
+			sessionStorage.setItem(id + " left", leftPos);
+			sessionStorage.setItem(id + " top", topPos);
+			// if (sessionStorage.getItem("left_pos_grid") == undefined) sessionStorage.setItem("left_pos_grid", "0");
+			// if (sessionStorage.getItem("top_pos_grid") == undefined) sessionStorage.setItem("top_pos_grid", "0");
 			
 			
 			// console.log("pPos left: "+leftPos+" pPos right: "+topPos);
