@@ -6,6 +6,7 @@
 		
 		
 		private $db;
+		private $stmt;
 		
 		public function __construct($param) {
 			
@@ -62,6 +63,7 @@
 			
 			$result = $stmt->rowCount();
 			
+			$this->stmt = $stmt;
 			
 			return $result;
 			
@@ -76,7 +78,7 @@
 
 
 			if ($present == 1) {
-				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 			} else {
 				
 				$result = array('pos_x' => '', 'pos_y' => '');

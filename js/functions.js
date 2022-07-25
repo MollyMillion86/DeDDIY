@@ -664,8 +664,8 @@ function battlegridPos(action, html_id, pos_x, pos_y) {
 		
 	var posObj = {
 		'html_id' : html_id,
-		'pos_x' : pos_x.replace("px", ""),
-		'pos_y' : pos_y.replace("px", "")
+		'pos_x' : (pos_x !== undefined) ? pos_x.replace("px", "") : '',
+		'pos_y' : (pos_y !== undefined) ? pos_y.replace("px", "") : ''
 	};
 	
 	
@@ -684,7 +684,7 @@ function battlegridPos(action, html_id, pos_x, pos_y) {
 		var result = JSON.parse(ret);
 		
 		if (result.error) {
-			alert(result.error);
+			console.log(result.error);
 		} else if (result.status) {
 			console.log(result.status);
 		} else if ((result.pos_x) && (result.pos_y)) {
