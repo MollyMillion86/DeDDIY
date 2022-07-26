@@ -28,8 +28,8 @@
 		
 		// print_r($pos_x . " " . $pos_y);die();
 		
-		if ((preg_match('/[0-9]+/', $pos_x)) && 
-			preg_match('/[0-9]+/', $pos_y)) {
+		// if ((preg_match('/[0-9]+/', $pos_x)) && 
+			// preg_match('/[0-9]+/', $pos_y)) {
 				
 			// action:
 			switch ($_POST['action']) {
@@ -55,13 +55,13 @@
 				break;
 			}
 				
-		} else {
+		// } else {
 			
-			$return = array("error" => "Posizione errata");
+			// $return = array("error" => "Posizione errata");
 			
 			
 			
-		}
+		// }
 		
 		
 		
