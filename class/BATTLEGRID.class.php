@@ -19,10 +19,10 @@
 	
 	
 		
-		public function get($id) {
+		public function get($html_id) {
 			
 
-			$result = (!empty($id)) ? $this->getPosFromId($id) : array();
+			$result = (!empty($html_id)) ? $this->getPosFromId($html_id) : array();
 			
 			return $result;
 		}
@@ -43,9 +43,9 @@
 		}
 		
 		
-		public function remove($id) {
+		public function remove($html_id, $pos_x, $pos_y) {
 			
-			$result = (!empty($id)) ? $this->deletePosFromId($id) : array();
+			$result = (!empty($html_id) && !empty($pos_x) && !empty($pos_y)) ? $this->deletePosFromId($html_id, $pos_x, $pos_y) : array();
 			
 			return $result;
 		}
@@ -78,14 +78,17 @@
 
 
 			if ($present == 1) {
-				$result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+				
+				$tmpRes = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+				$result = $tmpRes[0];
+				
 			} else {
 				
 				$result = array('pos_x' => '', 'pos_y' => '');
 			}
 			
 			
-			return $result[0];
+			return $result;
 			
 		}
 		
@@ -139,17 +142,36 @@
 		}
 		
 		
-		private function deletePosFromId($html_id) {
+		/* private function deletePosFromId($html_id) {
 			
-			$Query = 'DELETE grid_pos WHERE html_id = :html_id';
+			$Query = 'DELETE FROM grid_pos WHERE html_id = :html_id';
 
 			$stmt = $this->db->prepare($Query);
 			$stmt->bindParam(":html_id", $html_id, PDO::PARAM_STR);
+			// $return = $stmt->execute();
+			
+			$return = ($stmt->execute() == true) ? array("status" => "ok") : array("error" => "impossibile eliminare $html_id");
+			
+			// return array("status" => 'ok');
+		} */
+		
+		private function deletePosFromId($html_id, $posX, $posY) {
+			
+			$Query = 'UPDATE grid_pos SET pos_x = :pos_x, pos_y = :pos_y, deleted = 1 WHERE html_id = :html_id';
+
+			$stmt = $this->db->prepare($Query);
+			$stmt->bindParam(":html_id", $html_id, PDO::PARAM_STR);
+			$stmt->bindParam(":pos_x", $posX, PDO::PARAM_STR);
+			$stmt->bindParam(":pos_y", $posY, PDO::PARAM_STR);
 			$stmt->execute();
 			
-			return array("status" => 'ok');
-		}
+			$result = ($stmt->execute() == true) ? array("status" => "ok") : array("error" => "impossibile eliminare $html_id");
+			
+			return $result;
+			// $result = array("status" => 'ok');
 		
+		
+		}
 	}
 	
 	

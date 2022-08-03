@@ -79,6 +79,10 @@ input[id^='coord'] {
 	width: 56px;
 }
 
+.deleted {
+	opacity: 0.25 !important;
+}
+
 
 
 /* COLORI */
@@ -103,6 +107,10 @@ input[id^='coord'] {
 /* WIDTH */
 .w426 {
 	width: 26.625rem !important;
+}
+
+.w100min {
+	min-width: 6.25rem !important;
 }
 
 .w33vw {
@@ -138,3 +146,8 @@ input[id^='coord'] {
 .position-absolute {
 	position: absolute !important;
 } */
+
+
+.opacity-25 {
+	opacity: 0.25 !important;
+}

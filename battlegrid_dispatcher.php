@@ -47,7 +47,8 @@
 				break;
 				
 				case 'delete': // pedina eliminata
-					$return = $grid->remove($html_id);
+				// $return = $pos_x . " " . $pos_y . " " . $html_id;
+					$return = $grid->remove($html_id, $pos_x, $pos_y);
 				break;
 				
 				default:

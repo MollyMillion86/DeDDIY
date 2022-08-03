@@ -38,6 +38,26 @@ $(document).ready(function() {
 	
 	
 	
+	// elimina pedine
+	$("#checkerRemover").droppable({
+		drop: function(evt, ui) {
+			
+			var pos = $("#" + ui.draggable[0].id).position();
+			var posX = pos.left;
+			var posY = pos.top;
+
+			
+			// AJAX remove
+			battlegridPos("delete", ui.draggable[0].id, posX.toString(), posY.toString());
+			
+			
+			// rendi la pedina opaca e trattienila nell'area di cancellazione
+			$("#" + ui.draggable[0].id).addClass("deleted");
+			
+		}
+	});
+	
+	
 	
 	
 /* 
@@ -635,8 +655,8 @@ function scegliArma(id) {
 
 function battlegridPos(action, html_id, pos_x, pos_y) {
 
-	console.log(action + " PRIMA DI AJAX: " + pos_x);
-	console.log(action + " PRIMA DI AJAX: " + pos_y);
+	// console.log(action + " PRIMA DI AJAX: " + pos_x);
+	// console.log(action + " PRIMA DI AJAX: " + pos_y);
 
 
 	var posObj = {
@@ -656,7 +676,7 @@ function battlegridPos(action, html_id, pos_x, pos_y) {
 	}, function(ret) {
 
 		var result = JSON.parse(ret);
-		
+		// if (action = 'delete') console.log(ret);
 
 		if ((result.pos_x) && (result.pos_y)) {
 			
@@ -667,8 +687,14 @@ function battlegridPos(action, html_id, pos_x, pos_y) {
 			
 		}
 		
-		console.log(action + " DOPO AJAX: " + result.pos_x);
-		console.log(action + " DOPO AJAX: " + result.pos_y);
+		if (result.deleted == '1') $("#" + html_id).addClass("deleted");
+		
+		// if (result.status) return result.status;
+		
+		if (result.error) console.log(result.error);
+		
+		// console.log(action + " DOPO AJAX: " + result.pos_x);
+		// console.log(action + " DOPO AJAX: " + result.pos_y);
 		
 	});
 	
@@ -685,39 +711,50 @@ function battlegridPos(action, html_id, pos_x, pos_y) {
 function anchorChecker(checker) {
 	
 	var id = $(checker).attr("id");
-	var minPos = $("#grid").position();
+	// var minPos = $("#grid").position();
 	var pPos = $("#" + id).position();
+	
+	
+	if (!($("#" + id).hasClass("deleted"))) {
+		
+		
+	
+		// griglia
+		 $("#grid div.box.borded").droppable({
+			drop: function(event, ui) {
+				
+				// multipli di 60
+				var multipleBase = 60;
+				var multipleLeft = 10;
+				var multipleTop = -6;
+				
+				// ancora segnalino in base alla vicinanza con i bordi
+				while (Math.max(multipleLeft, ui.position.left) == ui.position.left) multipleLeft = multipleLeft + multipleBase;
+				while (Math.max(multipleTop, ui.position.top) == ui.position.top) multipleTop = multipleTop + multipleBase;
+
+				
+				var leftPos = (multipleLeft - ui.position.left) > (multipleBase / 2) ? (multipleLeft - multipleBase) + 2 : multipleLeft + 2;
+				var topPos = (multipleTop - ui.position.top) > (multipleBase / 2) ? (multipleTop - multipleBase) + 2 : multipleTop + 2;
+				
+				// console.log("leftPos: " + leftPos);
+				// console.log("topPos: " + topPos);
+
+				$("#" + id).css({
+					"left" : leftPos,
+					"top" : topPos
+				});
+
+				battlegridPos('update', id, leftPos.toString(), topPos.toString());
+
+			}
+		});
+		
+		
+	}
+	
 
 	
-	// griglia
-	 $("#grid div.box.borded").droppable({
-		drop: function(event, ui) {
-			
-			// multipli di 60
-			var multipleBase = 60;
-			var multipleLeft = 10;
-			var multipleTop = -6;
-			
-			// ancora segnalino in base alla vicinanza con i bordi
-			while (Math.max(multipleLeft, ui.position.left) == ui.position.left) multipleLeft = multipleLeft + multipleBase;
-			while (Math.max(multipleTop, ui.position.top) == ui.position.top) multipleTop = multipleTop + multipleBase;
 
-			
-			var leftPos = (multipleLeft - ui.position.left) > (multipleBase / 2) ? (multipleLeft - multipleBase) + 2 : multipleLeft + 2;
-			var topPos = (multipleTop - ui.position.top) > (multipleBase / 2) ? (multipleTop - multipleBase) + 2 : multipleTop + 2;
-			
-			console.log("leftPos: " + leftPos);
-			console.log("topPos: " + topPos);
-
-			$("#" + id).css({
-				"left" : leftPos,
-				"top" : topPos
-			});
-
-			battlegridPos('update', id, leftPos.toString(), topPos.toString());
-
-		}
-	});
 
 
 
