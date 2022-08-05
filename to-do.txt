@@ -76,3 +76,8 @@ I moduli candidati  per il download sono:
 - droppable
 - selectable
 - dialog
+
+
+------------------------------------------------------------------------
+		Bootstrap Icons
+-----------------------------------------
